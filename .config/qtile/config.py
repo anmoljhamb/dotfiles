@@ -85,6 +85,10 @@ keys = [
     Key([MOD, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # COmmands to control stuff on laptop
+    Key([MOD], "x", lazy.spawn("playerctl next")),
+    Key([MOD], "z", lazy.spawn("playerctl previous")),
+    Key([MOD], "space", lazy.spawn("playerctl play-pause")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
