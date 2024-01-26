@@ -3,7 +3,7 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-mod = "mod4"
+MOD = "mod4"
 terminal = guess_terminal()
 
 keys = [
@@ -11,7 +11,8 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(),
+        desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -24,7 +25,7 @@ keys = [
     # Moving out of range in Columns layout will create new column.
     # Grow windows. If current window is on the edge of screen and direction
     KeyChord(
-        [mod],
+        [MOD],
         "Return",
         [
             Key(
@@ -50,35 +51,30 @@ keys = [
         name="Resize",
     ),
     # will be to screen edge - window would shrink.
-    # Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    # Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    # Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    # Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    # Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "t", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
-        [mod],
+        [MOD],
         "f",
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
     # Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([MOD, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -89,7 +85,8 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(
+                func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
@@ -102,17 +99,18 @@ for i in groups:
         [
             # mod1 + group number = switch to group
             Key(
-                [mod],
+                [MOD],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
             # mod1 + shift + group number = switch to & move focused window to group
             Key(
-                [mod, "shift"],
+                [MOD, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                desc="Switch to & move focused window to group {}".format(
+                    i.name),
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + group number = move focused window to group
@@ -159,7 +157,8 @@ screens = [
                     name_transform=lambda name: name.upper(),
                 ),
                 widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                widget.TextBox("Press &lt;M-r&gt; to spawn",
+                               foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
@@ -170,25 +169,21 @@ screens = [
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
     ),
 ]
 
 # Drag floating layouts.
 mouse = [
     Drag(
-        [mod],
+        [MOD],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([MOD], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
@@ -219,13 +214,3 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
