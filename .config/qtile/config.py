@@ -6,7 +6,6 @@ from libqtile.utils import guess_terminal
 MOD = "mod4"
 terminal = guess_terminal()
 
-
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -91,8 +90,8 @@ keys = [
     Key([MOD], "z", lazy.spawn("playerctl previous")),
     Key([MOD], "space", lazy.spawn("playerctl play-pause")),
     # Groups.
-    Key([MOD, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
-    Key([MOD, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
+    Key([MOD, "shift"], "s", lazy.screen.next_group(skip_empty=True)),
+    Key([MOD, "shift"], "w", lazy.screen.prev_group(skip_empty=True)),
 ]
 
 # Add key bindings to switch VTs in Wayland.
