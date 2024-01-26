@@ -88,6 +88,11 @@ keys = [
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # COmmands to control stuff on laptop
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
+    # Decrease volume
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
+    # Toggle mute
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
     Key([MOD], "x", lazy.spawn("playerctl next")),
     Key([MOD], "z", lazy.spawn("playerctl previous")),
     Key([MOD], "space", lazy.spawn("playerctl play-pause")),
