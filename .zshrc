@@ -109,5 +109,6 @@ alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
 alias cd="z"
+alias sdi="sudo dnf install"
 
 eval "$(zoxide init zsh)"
