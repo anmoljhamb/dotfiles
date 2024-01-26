@@ -92,6 +92,10 @@ keys = [
     # Groups.
     Key([MOD, "shift"], "s", lazy.screen.next_group(skip_empty=True)),
     Key([MOD, "shift"], "w", lazy.screen.prev_group(skip_empty=True)),
+    # rofi
+    Key([MOD], "tab", lazy.spawn("rofi -show window")),
+    Key([MOD], "r", lazy.spawn("rofi -show drun")),
+    Key([MOD, "shift"], "r", lazy.spawn("rofi -show run")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -115,7 +119,7 @@ temp_groups = [
     ["2", "󱃖", "monadtall"],
     ["3", "󱃖", "monadtall"],
     ["4", "", "monadtall"],
-    ["5", "󰎆", "monadtall"],
+    ["5", "󰎆", "stack"],
 ]
 
 for name, label, _layout in temp_groups:
@@ -151,11 +155,11 @@ for i in groups:
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.Max(),
+    layout.Stack(num_stacks=1),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
