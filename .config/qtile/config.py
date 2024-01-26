@@ -1,4 +1,6 @@
-from libqtile import bar, layout, qtile, widget
+import subprocess
+
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -89,6 +91,7 @@ keys = [
     Key([MOD], "x", lazy.spawn("playerctl next")),
     Key([MOD], "z", lazy.spawn("playerctl previous")),
     Key([MOD], "space", lazy.spawn("playerctl play-pause")),
+    Key(["mod1", "shift"], "w", lazy.spawn("rofi_wifi_menu.sh")),
     # Groups.
     Key([MOD, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
     Key([MOD, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
@@ -246,3 +249,8 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+
+
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen(["dunst"])
