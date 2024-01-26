@@ -105,31 +105,66 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123456789"]
+# groups = list(map(Group, [":1", ":2", ":3", ":4", ":5"]))
+
+groups = []
+group_names = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+]
+
+group_labels = [
+    "",
+    "󱃖",
+    "󱃖",
+    "",
+    "󰎆",
+]
+
+group_layouts = [
+    "monadtall",
+    "monadtall",
+    "tile",
+    "tile",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+]
+
+for i in range(len(group_names)):
+    groups.append(
+        Group(
+            name=group_names[i],
+            layout=group_layouts[i].lower(),
+            label=group_labels[i],
+        )
+    )
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + group number = switch to group
+            # mod1 + letter of group = switch to group
             Key(
                 [MOD],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # mod1 + shift + group number = switch to & move focused window to group
+            # MOD1 + shift + letter of group = move focused window to group
             Key(
                 [MOD, "shift"],
                 i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                lazy.window.togroup(i.name, switch_group=False),
+                desc="Move focused window to group {}".format(i.name),
             ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
