@@ -105,3 +105,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias vim="nvim"
+alias editzsh="vim ~/.zshrc"
+alias editvim="cd ~/.config/nvim && vim ."
+alias soz="source ~/.zshrc"
+alias cd="z"
+
+eval "$(zoxide init zsh)"
