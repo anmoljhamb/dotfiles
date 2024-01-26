@@ -108,40 +108,21 @@ for vt in range(1, 8):
 # groups = list(map(Group, [":1", ":2", ":3", ":4", ":5"]))
 
 groups = []
-group_names = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
+
+temp_groups = [
+    ["1", "", "monadtall"],
+    ["2", "󱃖", "monadtall"],
+    ["3", "󱃖", "monadtall"],
+    ["4", "", "monadtall"],
+    ["5", "󰎆", "monadtall"],
 ]
 
-group_labels = [
-    "",
-    "󱃖",
-    "󱃖",
-    "",
-    "󰎆",
-]
-
-group_layouts = [
-    "monadtall",
-    "monadtall",
-    "tile",
-    "tile",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-]
-
-for i in range(len(group_names)):
+for name, label, _layout in temp_groups:
     groups.append(
         Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
+            name=name,
+            layout=_layout.lower(),
+            label=label,
         )
     )
 
