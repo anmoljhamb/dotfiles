@@ -66,6 +66,12 @@ keys = [
     Key(["mod1"], "1", lazy.spawn("google-chrome --profile-directory=Default")),
     Key(["mod1"], "2", lazy.spawn('google-chrome --profile-directory="Profile 3"')),
     Key(["mod1"], "3", lazy.spawn('google-chrome --profile-directory="Profile 2"')),
+    Key(["mod1"], "m", lazy.spawn("flatpak run com.spotify.Client")),
+    Key(
+        ["mod1", "shift"],
+        "m",
+        lazy.spawn('google-chrome --profile-directory="Profile 2" music.youtube.com'),
+    ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
