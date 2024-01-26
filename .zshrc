@@ -110,5 +110,6 @@ alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
 alias cd="z"
 alias sdi="sudo dnf install"
+alias gac="git add . && git commit -am "
 
 eval "$(zoxide init zsh)"
