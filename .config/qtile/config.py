@@ -91,7 +91,7 @@ keys = [
     Key([MOD], "x", lazy.spawn("playerctl next")),
     Key([MOD], "z", lazy.spawn("playerctl previous")),
     Key([MOD], "space", lazy.spawn("playerctl play-pause")),
-    Key(["mod1", "shift"], "w", lazy.spawn("rofi_wifi_menu.sh")),
+    # Key(["mod1", "shift"], "w", lazy.spawn("echo Hello World!")),
     # Groups.
     Key([MOD, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
     Key([MOD, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
