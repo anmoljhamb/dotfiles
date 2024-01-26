@@ -1,5 +1,5 @@
 from libqtile import bar, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -14,22 +14,41 @@ keys = [
     Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
-    Key(["control", "shift"], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key(
+        ["control", "shift"],
+        "space",
+        lazy.layout.next(),
+        desc="Move window focus to other window",
+    ),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
-    KeyChord([mod], "Return", [
-        Key([], "l", lazy.layout.grow_left()),
-        Key([], "h", lazy.layout.grow_right()),
-        Key([], "j", lazy.layout.grow_down()),
-        Key([], "k", lazy.layout.grow_up()),
-        Key([], "n", lazy.layout.normalize()),
+    KeyChord(
+        [mod],
+        "Return",
+        [
+            Key(
+                [],
+                "h",
+                lazy.layout.shuffle_left(),
+            ),
+            Key(
+                [],
+                "l",
+                lazy.layout.shuffle_right(),
+            ),
+            Key([], "j", lazy.layout.shuffle_down()),
+            Key([], "k", lazy.layout.shuffle_up()),
+            Key([], "q", lazy.window.kill()),
+            Key(["shift"], "l", lazy.layout.grow_left()),
+            Key(["shift"], "h", lazy.layout.grow_right()),
+            Key(["shift"], "j", lazy.layout.grow_down()),
+            Key(["shift"], "k", lazy.layout.grow_up()),
+            Key(["shift"], "n", lazy.layout.normalize()),
         ],
-             mode=True,name="Resize"),
+        mode=True,
+        name="Resize",
+    ),
     # will be to screen edge - window would shrink.
     # Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     # Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
@@ -119,15 +138,15 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
+    font="CaskayiaCove Nerd Font",
+    fontsize=16,
+    padding=6,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
@@ -160,8 +179,15 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
