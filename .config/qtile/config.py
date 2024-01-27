@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 from libqtile import bar, hook, layout, qtile, widget
@@ -98,6 +99,21 @@ keys = [
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # COmmands to control stuff on laptop
+    Key(
+        [],
+        "XF86MonBrightnessUp",
+        lazy.spawn("brightnessctl set +3%"),
+        desc="Raise brightness level by 3%",
+    ),
+    Key(
+        [],
+        "XF86MonBrightnessDown",
+        lazy.spawn("brightnessctl set 3-% "),
+        desc="Lower brightness level by 3%",
+    ),
+    # Key(
+    #     [MOD], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
+    # ),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
@@ -258,4 +274,6 @@ wl_input_rules = None
 
 @hook.subscribe.startup_once
 def autostart():
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
     subprocess.Popen(["dunst"])
