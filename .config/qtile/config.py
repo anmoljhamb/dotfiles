@@ -358,12 +358,12 @@ screens = [
                 WindowName(background=nord_fox["bg"], foreground=nord_fox["fg"]),
                 left_half_circle(nord_fox["black"], nord_fox["bg"]),
                 CPU(
-                    format=" {freq_current}GHz {load_percent}%",
+                    format="  {freq_current}GHz {load_percent}%",
                     background=nord_fox["black"],
                     foreground=nord_fox["pink"],
                 ),
                 Memory(
-                    format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    format="  {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
                     background=nord_fox["black"],
                     foreground=nord_fox["cyan"],
                 ),
