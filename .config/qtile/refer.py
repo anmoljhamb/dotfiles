@@ -1,141 +1,132 @@
-# title: qtile           #
-# tags: config.py        #
-# author: thelinuxfraud  #
-##########################
-
-
 import os
 import subprocess
 
-from libqtile import bar, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from bar1 import bar
+from colors import nord_fox
+from libqtile import hook
+from libqtile.config import Click, Drag, DropDown, Group, Key, Match, ScratchPad, Screen
+from libqtile.layout.columns import Columns
+from libqtile.layout.floating import Floating
+from libqtile.layout.stack import Stack
+from libqtile.layout.verticaltile import VerticalTile
+from libqtile.layout.xmonad import MonadTall
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 
 mod = "mod4"
 terminal = "kitty"
-home = os.path.expanduser("~")
+
+#  _  _________   ______ ___ _   _ ____  ____
+# | |/ / ____\ \ / / __ )_ _| \ | |  _ \/ ___|
+# | ' /|  _|  \ V /|  _ \| ||  \| | | | \___ \
+# | . \| |___  | | | |_) | || |\  | |_| |___) |
+# |_|\_\_____| |_| |____/___|_| \_|____/|____/
 
 keys = [
-    # ESSENTIALS #
-    # Important keys
-    Key([mod, "shift"], "m", lazy.spawn("dmenu_run -i"), desc="Dmenu app"),
-    Key([mod, "shift"], "d", lazy.spawn("rofi -show drun"), desc="App launcher"),
-    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "1", lazy.to_screen(0)),
+    Key([mod, "control"], "2", lazy.to_screen(1)),
+    # Launch applications
+    Key([mod], "w", lazy.spawn("firefox"), desc="Launch browser"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "p", lazy.spawn("rofi -show run"), desc="Run rofi"),
+    # Toggle floating and fullscreen
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen mode"),
+    Key(
+        [mod, "shift"],
+        "space",
+        lazy.window.toggle_floating(),
+        desc="Toggle fullscreen mode",
+    ),
+    # Keybindings for resizing windows in MonadTall layout
+    Key([mod], "i", lazy.layout.grow()),
+    Key([mod], "m", lazy.layout.shrink()),
+    Key([mod], "n", lazy.layout.normalize()),
+    Key([mod], "o", lazy.layout.maximize()),
+    Key([mod, "control"], "space", lazy.layout.flip()),
+    # Switch between windows
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    Key(
+        [mod, "shift"],
+        "Return",
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack",
+    ),
+    # Toggle between different layouts as defined below
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "m",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn prompt widget"),
-    # Multimedia keys
-    Key(
-        [],
-        "XF86MonBrightnessUp",
-        lazy.spawn("brightnessctl set +3%"),
-        desc="Raise brightness level by 3%",
-    ),
-    Key(
-        [],
-        "XF86MonBrightnessDown",
-        lazy.spawn("brightnessctl set 3-%"),
-        desc="Lower brightness level by 3%",
-    ),
-    Key(
-        [],
-        "XF86AudioRaiseVolume",
-        lazy.spawn("amixer sset Master 3%+"),
-        desc="Raise volume level by 3%",
-    ),
-    Key(
-        [],
-        "XF86AudioLowerVolume",
-        lazy.spawn("amixer sset Master 3%-"),
-        desc="Lower volume level by 3%",
-    ),
-    Key(
-        [],
-        "XF86AudioMute",
-        lazy.spawn("amixer sset Master 1+ toggle"),
-        desc="Mute or unmute volume level",
-    ),
-    # Applications
-    Key([mod, "shift"], "l", lazy.spawn("spotify"), desc="Music player"),
-    Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="File manager"),
-    Key([mod, "shift"], "e", lazy.spawn("emacs"), desc="Doom Emacs"),
-    Key([mod], "Return", lazy.spawn("kitty"), desc="Terminal"),
-    Key([mod], "b", lazy.spawn("firefox"), desc="Web browser"),
-    Key([mod], "d", lazy.spawn("discord"), desc="Discord app"),
-    Key([mod], "p", lazy.spawn("xfce4-screenshooter"), desc="Screenshot tool"),
-    # WINDOW FOCUSING #
-    # Change Window Focus
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
-    # Resize Windows
-    Key(
-        [mod, "control"],
-        "Right",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-    ),
-    Key(
-        [mod, "control"],
-        "Left",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-    ),
-    Key(
-        [mod, "control"],
-        "Up",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-    ),
-    Key(
-        [mod, "control"],
-        "Down",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-    ),
-    # Shift focused window
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "Left", lazy.layout.swap_left()),
-    Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 ]
 
-groups = [Group(i) for i in "1234567890"]
+#   ____ ____   ___  _   _ ____  ____
+#  / ___|  _ \ / _ \| | | |  _ \/ ___|
+# | |  _| |_) | | | | | | | |_) \___ \
+# | |_| |  _ <| |_| | |_| |  __/ ___) |
+#  \____|_| \_\\___/ \___/|_|   |____/
+
+groups = [
+    Group(
+        "1",
+        label="一",
+        matches=[
+            Match(wm_class="firefox"),
+            Match(wm_class="brave"),
+            Match(wm_class="qutebrowser"),
+        ],
+        layout="stack",
+    ),
+    Group("2", label="二", layout="monadtall"),
+    Group("3", label="三", layout="columns"),
+    Group("4", label="四", matches=[Match(wm_class="whatsdesk")], layout="stack"),
+    Group("5", label="五", layout="stack"),
+    Group("6", label="六", matches=[Match(wm_class="thunderbird")], layout="monadtall"),
+    Group("7", label="七", layout="monadtall"),
+    Group("8", label="八", layout="monadtall"),
+    Group("9", label="九", layout="monadtall"),
+]
+
 
 for i in groups:
     keys.extend(
         [
-            # Change workspaces
-            Key([mod], i.name, lazy.group[i.name].toscreen()),
-            Key([mod], "Tab", lazy.screen.next_group()),
-            Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
-            # Move focused window to workspace 1-10 / follow
+            # mod1 + letter of group = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
             Key(
                 [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-            # Moved focused window to workspace 1-10 / stay
-            Key(
-                [mod, "control"],
                 i.name,
                 lazy.window.togroup(i.name),
                 desc="move focused window to group {}".format(i.name),
@@ -143,202 +134,110 @@ for i in groups:
         ]
     )
 
-
-def init_layout_theme():
-    return {
-        "margin": 8,
-        "border_width": 2,
-        "border_focus": "#81a1c1",
-        "border_normal": "#2e3440",
-    }
+#  ____   ____ ____      _  _____ ____ _   _ ____   _    ____  ____
+# / ___| / ___|  _ \    / \|_   _/ ___| | | |  _ \ / \  |  _ \/ ___|
+# \___ \| |   | |_) |  / _ \ | || |   | |_| | |_) / _ \ | | | \___ \
+#  ___) | |___|  _ <  / ___ \| || |___|  _  |  __/ ___ \| |_| |___) |
+# |____/ \____|_| \_\/_/   \_\_| \____|_| |_|_| /_/   \_\____/|____/
 
 
-layout_theme = init_layout_theme()
+groups.append(
+    ScratchPad(
+        "scratchpad",
+        [
+            DropDown("term", "kitty", width=0.4, height=0.5, x=0.3, y=0.1, opacity=1),
+            DropDown(
+                "mixer", "pavucontrol", width=0.4, height=0.6, x=0.3, y=0.1, opacity=1
+            ),
+            DropDown(
+                "pomodoro", "pomatez", width=0.05, height=0.6, x=0.35, y=0.1, opacity=1
+            ),
+            DropDown(
+                "blueman",
+                "blueman-manager",
+                width=0.05,
+                height=0.6,
+                x=0.35,
+                y=0.1,
+                opacity=1,
+            ),
+        ],
+    )
+)
+
+keys.extend(
+    [
+        Key(["control"], "1", lazy.group["scratchpad"].dropdown_toggle("term")),
+        Key(["control"], "2", lazy.group["scratchpad"].dropdown_toggle("mixer")),
+        Key(["control"], "3", lazy.group["scratchpad"].dropdown_toggle("pomodoro")),
+        Key(["control"], "4", lazy.group["scratchpad"].dropdown_toggle("blueman")),
+    ]
+)
+
+#  _        _ __   _____  _   _ _____ ____
+# | |      / \\ \ / / _ \| | | |_   _/ ___|
+# | |     / _ \\ V / | | | | | | | | \___ \
+# | |___ / ___ \| || |_| | |_| | | |  ___) |
+# |_____/_/   \_\_| \___/ \___/  |_| |____/
 
 layouts = [
-    layout.MonadTall(**layout_theme, new_client_position="top"),
-    layout.Max(),
-]
-
-
-widget_defaults = dict(
-    font="RobotoMono Nerd Font",
-    fontsize=12,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.CurrentLayoutIcon(
-                    padding=4, scale=0.7, foreground="#d8dee9", background="#2e3440"
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.GroupBox(
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    margin_y=2,
-                    margin_x=3,
-                    padding_y=2,
-                    padding_x=3,
-                    borderwidth=0,
-                    disable_drag=True,
-                    active="#4c566a",
-                    inactive="#2e3440",
-                    rounded=False,
-                    highlight_method="text",
-                    this_current_screen_border="#d8dee9",
-                    foreground="#4c566a",
-                    background="#2e3440",
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.Prompt(
-                    font="RobotoMono Nerd Font",
-                    fontsize=12,
-                    background="#2e3440",
-                    foreground="#d8dee9",
-                ),
-                widget.WindowName(
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    foreground="#d8dee9",
-                    background="#2e3440",
-                ),
-                widget.Sep(
-                    foreground="#4c566a", background="#2e3440", padding=5, linewidth=1
-                ),
-                widget.Net(
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    format="{down} ↓↑ {up}",
-                    interface="wlan0",
-                    decorations=[
-                        RectDecoration(
-                            colour="#8fbcbb", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.CPU(
-                    background="#2e3440",
-                    foreground="#2e3440",
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    decorations=[
-                        RectDecoration(
-                            colour="#ebcb8b", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="4c566a", background="#2e3440"
-                ),
-                widget.Memory(
-                    measure_mem="G",
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    decorations=[
-                        RectDecoration(
-                            colour="#88c0d0", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.DF(
-                    visible_on_warn=False,
-                    background="#2e3440",
-                    foreground="#2e3440",
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    decorations=[
-                        RectDecoration(
-                            colour="#a3be8c", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, background="#2e3440", foreground="#4c566a"
-                ),
-                widget.Clock(
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    format="%a %d %b %H:%M",
-                    decorations=[
-                        RectDecoration(
-                            colour="#81a1c1", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.UPowerWidget(
-                    background="#2e3440",
-                    border_colour="#d8dee9",
-                    border_critical_colour="#bf616a",
-                    border_charge_colour="#d8dee9",
-                    fill_low="#ebcb8b",
-                    fill_charge="#a3be8c",
-                    fill_critical="#bf616a",
-                    fill_normal="#d8dee9",
-                    percentage_low=0.4,
-                    percentage_critical=0.2,
-                    font="RobotoMono Nerd Font",
-                ),
-                widget.Systray(
-                    background="#2e3440",
-                    icon_size=20,
-                    padding=5,
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.OpenWeather(
-                    app_key="4cf3731a25d1d1f4e4a00207afd451a2",
-                    cityid="4997193",
-                    format="{main_temp}° {icon}",
-                    metric=False,
-                    font="RobotoMono Nerd Font Bold",
-                    fontsize=12,
-                    background="#2e3440",
-                    foreground="#d8dee9",
-                    decorations=[
-                        RectDecoration(
-                            colour="#2e3440", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, background="#2e3440", foreground="#4c566a"
-                ),
-            ],
-            # Sets bar height
-            24,
-        ),
-        # Set wallpaper
-        wallpaper="/home/beezy/Pictures/wallpapers/nord/nord-river.png",
-        wallpaper_mode="fill",
+    Stack(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        num_stacks=1,
+        margin=10,
+    ),
+    MonadTall(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        margin=10,
+        border_width=2,
+        single_border_width=2,
+        single_margin=10,
+    ),
+    Columns(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        border_normal_stack=nord_fox["black"],
+        border_focus_stack=nord_fox["cyan"],
+        border_on_single=2,
+        margin=8,
+        margin_on_single=10,
+    ),
+    VerticalTile(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        border_on_single=2,
+        margin=8,
+        margin_on_single=10,
     ),
 ]
+
+floating_layout = Floating(
+    border_normal=nord_fox["bg"],
+    border_focus=nord_fox["cyan"],
+    border_width=2,
+    float_rules=[
+        *Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+        # Match(wm_class="protonvpn"),
+        Match(title="AICOMS"),
+        Match(wm_class="blueman-manager"),
+        Match(wm_class="pavucontrol"),
+        Match(wm_class="zoom "),
+        Match(wm_class="bitwarden"),
+        Match(wm_class="nemo"),
+        Match(wm_class="xarchiver"),
+    ],
+)
 
 # Drag floating layouts.
 mouse = [
@@ -354,45 +253,30 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+widget_defaults = dict(
+    font="TerminessTTF Nerd Font",
+    fontsize=13,
+    padding=10,
+    bacgkround=nord_fox["bg"],
+)
 
-main = None
+extension_defaults = widget_defaults.copy()
+
+screens = [Screen(top=bar)]
+
+dgroups_key_binder = None
+dgroups_app_rules = []
+follow_mouse_focus = True
+bring_front_click = ""
+cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+auto_minimize = True
+wmname = "LG3D"
 
 
 @hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
-
-
-follow_mouse_focus = True
-bring_front_click = False
-floats_kept_above = True
-cursor_warp = False
-floating_layout = layout.Floating(
-    border_width=2,
-    border_focus="#5e81ac",
-    border_normal="#2e3440",
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        # ssh-askpass
-        Match(wm_class="ssh-askpass"),
-        Match(title="branchdialog"),  # gitk
-        # GPG key password entry
-        Match(title="pinentry"),
-    ],
-)
-auto_fullscreen = True
-focus_on_window_activation = "focus"
-reconfigure_screens = False
-
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# Something about java being dumb?
-wmname = "LG3D"
+def autostart():
+    home = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.run([home])

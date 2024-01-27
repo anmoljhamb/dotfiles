@@ -1,8 +1,16 @@
 import os
 import subprocess
 
-from libqtile import bar, hook, layout, qtile, widget
+# from colors import nord_fox
+from libqtile import bar, hook, layout, qtile
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
+from libqtile.layout.bsp import Bsp
+from libqtile.layout.columns import Columns
+from libqtile.layout.floating import Floating
+from libqtile.layout.max import Max
+from libqtile.layout.stack import Stack
+from libqtile.layout.verticaltile import VerticalTile
+from libqtile.layout.xmonad import MonadTall
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from qtile_extras import widget
@@ -10,6 +18,24 @@ from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 
 MOD = "mod4"
 terminal = guess_terminal()
+
+
+nord_fox = {
+    "bg": "#2e3440",
+    "fg": "#b9bfca",
+    "fg_gutter": "#4b5668",
+    "black": "#3b4252",
+    "red": "#bf616a",
+    "green": "#a3be8c",
+    "yellow": "#ebcb8b",
+    "blue": "#81a1c1",
+    "magenta": "#b48ead",
+    "cyan": "#88c0d0",
+    "white": "#e5e9f0",
+    "orange": "#c9826b",
+    "pink": "#bf88bc",
+}
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -194,29 +220,35 @@ for i in groups:
     )
 
 
-theme = {
-    "margin": 8,
-    "border_width": 2,
-    "border_focus": "#81a1c1",
-    "border_normal": "#2e3440",
-}
-
 layouts = [
-    layout.Stack(num_stacks=1, **theme),
-    layout.Bsp(**theme),
-    layout.Max(**theme),
-    layout.Floating(**theme),
-    layout.MonadTall(ratio=0.72, **theme),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    Stack(
+        num_stacks=1,
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=10,
+    ),
+    Bsp(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=10,
+    ),
+    Max(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=10,
+    ),
+    MonadTall(
+        ratio=0.72,
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        margin=10,
+        border_width=2,
+        single_border_width=2,
+        single_margin=10,
+    ),
 ]
 
 widget_defaults = dict(
@@ -390,18 +422,16 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = layout.Floating(
+floating_layout = Floating(
+    border_normal=nord_fox["bg"],
+    border_focus=nord_fox["cyan"],
+    border_width=2,
     float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
+        *Floating.default_float_rules,
+        Match(wm_class="nitrogen"),  # gitk
+    ],
 )
+# floating_layout.layout.confi
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
