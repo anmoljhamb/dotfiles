@@ -10,3 +10,4 @@ function run {
 
 run nm-applet &
 blueman-applet &
+~/dotfiles/scripts/change_wallpaper
