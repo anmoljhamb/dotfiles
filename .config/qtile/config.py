@@ -65,10 +65,20 @@ keys = [
     # Spawns
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
-    Key(["mod1"], "1", lazy.spawn("google-chrome --profile-directory=Default")),
-    Key(["mod1"], "2", lazy.spawn('google-chrome --profile-directory="Profile 3"')),
-    Key(["mod1"], "3", lazy.spawn('google-chrome --profile-directory="Profile 2"')),
-    Key(["mod1"], "m", lazy.spawn("flatpak run com.spotify.Client")),
+    Key(
+        ["mod1", "shift"], "1", lazy.spawn("google-chrome --profile-directory=Default")
+    ),
+    Key(
+        ["mod1", "shift"],
+        "2",
+        lazy.spawn('google-chrome --profile-directory="Profile 3"'),
+    ),
+    Key(
+        ["mod1", "shift"],
+        "3",
+        lazy.spawn('google-chrome --profile-directory="Profile 2"'),
+    ),
+    Key(["mod1", "shift"], "s", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
         ["mod1", "shift"],
         "m",
