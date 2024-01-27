@@ -270,10 +270,10 @@ screens = [
                 ),
                 widget.Net(
                     foreground="#2e3440",
-                    background="#ffffff",
+                    background="#2e3440",
                     font="CaskayiaCove Nerd Font Bold",
                     fontsize=12,
-                    format="{down} ↓↑ {up}",
+                    # format="{down} ↓↑ {up}",
                     interface="wlp3s0",
                     decorations=[
                         RectDecoration(
@@ -285,7 +285,7 @@ screens = [
                     linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
                 ),
                 widget.CPU(
-                    background="#ffffff",
+                    background="#2e3440",
                     foreground="#2e3440",
                     font="CaskayiaCove Nerd Font Bold",
                     fontsize=12,
@@ -301,7 +301,7 @@ screens = [
                 widget.Memory(
                     measure_mem="G",
                     foreground="#2e3440",
-                    background="#ffffff",
+                    background="#2e3440",
                     font="CaskayiaCove Nerd Font Bold",
                     fontsize=14,
                     decorations=[
@@ -312,21 +312,6 @@ screens = [
                 ),
                 widget.Sep(
                     linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.DF(
-                    visible_on_warn=False,
-                    background="#2e3440",
-                    foreground="#2e3440",
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=14,
-                    decorations=[
-                        RectDecoration(
-                            colour="#a3be8c", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, background="#2e3440", foreground="#4c566a"
                 ),
                 widget.Clock(
                     foreground="#2e3440",
@@ -360,6 +345,17 @@ screens = [
                     background="#2e3440",
                     icon_size=20,
                     padding=5,
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.QuickExit(
+                    background="#2e3440",
+                    font="CaskayiaCove Nerd Font",
+                    fontsize=16,
+                    default_text="󰿅",
+                    countdown_format="{}",
+                    padding_x=5,
                 ),
                 widget.Sep(
                     linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
