@@ -1,20 +1,32 @@
 import os
 import subprocess
+from typing import Optional
 
-# from colors import nord_fox
 from libqtile import bar, hook, layout, qtile
+from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.layout.bsp import Bsp
-from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 from libqtile.layout.max import Max
 from libqtile.layout.stack import Stack
-from libqtile.layout.verticaltile import VerticalTile
 from libqtile.layout.xmonad import MonadTall
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.widget.clock import Clock
+from libqtile.widget.cpu import CPU
+from libqtile.widget.currentlayout import CurrentLayout
+from libqtile.widget.groupbox import GroupBox
+from libqtile.widget.memory import Memory
+from libqtile.widget.net import Net
+from libqtile.widget.spacer import Spacer
+from libqtile.widget.systray import Systray
+from libqtile.widget.textbox import TextBox
+from libqtile.widget.window_count import WindowCount
+from libqtile.widget.windowname import WindowName
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
+
+# from ./unicodes.py import left_half_circle, right_half_circle
 
 MOD = "mod4"
 terminal = guess_terminal()
@@ -35,6 +47,62 @@ nord_fox = {
     "orange": "#c9826b",
     "pink": "#bf88bc",
 }
+
+gruvbox = {
+    "bg": "#282828",
+    "fg": "#d4be98",
+    "dark-red": "#ea6962",
+    "red": "#ea6962",
+    "dark-green": "#a9b665",
+    "green": "#a9b665",
+    "dark-yellow": "#e78a4e",
+    "yellow": "#d8a657",
+    "dark-blue": "#7daea3",
+    "blue": "#7daea3",
+    "dark-magenta": "#d3869b",
+    "magenta": "#d3869b",
+    "dark-cyan": "#89b482",
+    "cyan": "#89b482",
+    "dark-gray": "#665c54",
+    "gray": "#928374",
+    "fg4": "#766f64",
+    "fg3": "#665c54",
+    "fg2": "#504945",
+    "fg1": "#3c3836",
+    "bg0": "#32302f",
+    "fg0": "#1d2021",
+    "fg9": "#ebdbb2",
+}
+
+
+def left_half_circle(fg_color, bg_color):
+    return TextBox(
+        text="\uE0B6", fontsize=35, foreground=fg_color, background=bg_color, padding=0
+    )
+
+
+def right_half_circle(fg_color, bg_color: Optional["str"] = None):
+    return TextBox(
+        text="\uE0B4", fontsize=35, background=bg_color, foreground=fg_color, padding=0
+    )
+
+
+def lower_left_triangle(bg_color, fg_color):
+    return TextBox(
+        text="\u25e2", padding=0, fontsize=50, background=bg_color, foreground=fg_color
+    )
+
+
+def left_arrow(bg_color, fg_color):
+    return TextBox(
+        text="\uE0B2", padding=0, fontsize=25, background=bg_color, foreground=fg_color
+    )
+
+
+def right_arrow(bg_color, fg_color):
+    return TextBox(
+        text="\uE0B0", padding=0, fontsize=35, background=bg_color, foreground=fg_color
+    )
 
 
 keys = [
