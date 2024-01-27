@@ -286,34 +286,36 @@ for i in groups:
     )
 
 
+MARGIN = 6
+
 layouts = [
     Stack(
         num_stacks=1,
         border_normal=nord_fox["black"],
         border_focus=nord_fox["cyan"],
         border_width=2,
-        margin=10,
+        margin=MARGIN,
     ),
     Bsp(
         border_normal=nord_fox["black"],
         border_focus=nord_fox["cyan"],
         border_width=2,
-        margin=10,
+        margin=MARGIN,
     ),
     Max(
         border_normal=nord_fox["black"],
         border_focus=nord_fox["cyan"],
         border_width=2,
-        margin=10,
+        margin=MARGIN,
     ),
     MonadTall(
         ratio=0.72,
         border_normal=nord_fox["black"],
         border_focus=nord_fox["cyan"],
-        margin=10,
+        margin=MARGIN,
         border_width=2,
         single_border_width=2,
-        single_margin=10,
+        single_margin=MARGIN,
     ),
 ]
 
