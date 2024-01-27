@@ -116,3 +116,5 @@ alias sdi="sudo dnf install"
 alias gac="git add . && git commit -am "
 
 eval "$(zoxide init zsh)"
+
+export PATH=$PATH:/home/anmol/.spicetify
