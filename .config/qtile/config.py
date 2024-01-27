@@ -26,8 +26,6 @@ from libqtile.widget.windowname import WindowName
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 
-# from ./unicodes.py import left_half_circle, right_half_circle
-
 MOD = "mod4"
 terminal = guess_terminal()
 
@@ -75,7 +73,7 @@ gruvbox = {
 }
 
 
-def left_half_circle(fg_color, bg_color):
+def left_half_circle(fg_color, bg_color: Optional["str"] = None):
     return TextBox(
         text="\uE0B6", fontsize=35, foreground=fg_color, background=bg_color, padding=0
     )
@@ -87,19 +85,19 @@ def right_half_circle(fg_color, bg_color: Optional["str"] = None):
     )
 
 
-def lower_left_triangle(bg_color, fg_color):
+def lower_left_triangle(bg_color, fg_color: Optional["str"] = None):
     return TextBox(
         text="\u25e2", padding=0, fontsize=50, background=bg_color, foreground=fg_color
     )
 
 
-def left_arrow(bg_color, fg_color):
+def left_arrow(bg_color, fg_color: Optional["str"] = None):
     return TextBox(
         text="\uE0B2", padding=0, fontsize=25, background=bg_color, foreground=fg_color
     )
 
 
-def right_arrow(bg_color, fg_color):
+def right_arrow(bg_color, fg_color: Optional["str"] = None):
     return TextBox(
         text="\uE0B0", padding=0, fontsize=35, background=bg_color, foreground=fg_color
     )
@@ -328,145 +326,59 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        top=bar.Bar(
+        top=Bar(
             [
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.CurrentLayoutIcon(
-                    padding=4, scale=0.6, foreground="#d8dee9", background="#2e3440"
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.GroupBox(
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=20,
-                    margin_y=3,
-                    margin_x=3,
-                    padding_y=5,
-                    padding_x=5,
-                    borderwidth=0,
+                GroupBox(
                     disable_drag=True,
-                    active="#4c566a",
-                    inactive="#2e3440",
-                    rounded=False,
-                    highlight_method="text",
-                    this_current_screen_border="#d8dee9",
-                    foreground="#4c566a",
-                    background="#2e3440",
+                    active=nord_fox["white"],
+                    inactive=nord_fox["black"],
+                    highlight_method="line",
+                    block_highlight_text_color=nord_fox["magenta"],
+                    borderwidth=0,
+                    highlight_color=nord_fox["bg"],
+                    background=nord_fox["bg"],
+                    spacing=2,
                 ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                left_half_circle(nord_fox["red"], nord_fox["bg"]),
+                CurrentLayout(
+                    background=nord_fox["red"],
+                    foreground=nord_fox["white"],
+                    margin=10,
                 ),
-                widget.WindowName(
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=14,
-                    foreground="#d8dee9",
-                    background="#2e3440",
+                right_arrow(nord_fox["fg_gutter"], nord_fox["red"]),
+                WindowCount(
+                    text_format="    {num}",
+                    background=nord_fox["fg_gutter"],
+                    foreground=nord_fox["white"],
+                    show_zero=True,
                 ),
-                widget.Sep(
-                    foreground="#4c566a", background="#2e3440", padding=5, linewidth=1
+                right_half_circle(nord_fox["fg_gutter"], nord_fox["bg"]),
+                WindowName(background=nord_fox["bg"], foreground=nord_fox["fg"]),
+                left_half_circle(nord_fox["black"], nord_fox["bg"]),
+                CPU(
+                    format=" {freq_current}GHz {load_percent}%",
+                    background=nord_fox["black"],
+                    foreground=nord_fox["pink"],
                 ),
-                widget.Net(
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=12,
-                    # format="{down} ↓↑ {up}",
-                    interface="wlp3s0",
-                    decorations=[
-                        RectDecoration(
-                            colour="#8fbcbb", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
+                Memory(
+                    format=" {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    background=nord_fox["black"],
+                    foreground=nord_fox["cyan"],
                 ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.CPU(
-                    background="#2e3440",
-                    foreground="#2e3440",
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=12,
-                    decorations=[
-                        RectDecoration(
-                            colour="#ebcb8b", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="4c566a", background="#2e3440"
-                ),
-                widget.Memory(
-                    measure_mem="G",
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=14,
-                    decorations=[
-                        RectDecoration(
-                            colour="#88c0d0", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.Clock(
-                    foreground="#2e3440",
-                    background="#2e3440",
-                    font="CaskayiaCove Nerd Font Bold",
-                    fontsize=14,
-                    format="%a %d %b %H:%M",
-                    decorations=[
-                        RectDecoration(
-                            colour="#81a1c1", padding_y=3, radius=2, filled=True
-                        ),
-                    ],
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.UPowerWidget(
-                    background="#2e3440",
-                    border_colour="#d8dee9",
-                    border_critical_colour="#bf616a",
-                    border_charge_colour="#d8dee9",
-                    fill_low="#ebcb8b",
-                    fill_charge="#a3be8c",
-                    fill_critical="#bf616a",
-                    fill_normal="#d8dee9",
-                    percentage_low=0.4,
-                    percentage_critical=0.2,
-                    font="CaskayiaCove Nerd Font",
-                ),
-                widget.Systray(
-                    background="#2e3440",
-                    icon_size=20,
-                    padding=5,
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
-                ),
-                widget.QuickExit(
-                    background="#2e3440",
-                    font="CaskayiaCove Nerd Font",
-                    fontsize=16,
-                    default_text="󰿅",
-                    countdown_format="{}",
-                    padding_x=5,
-                ),
-                widget.Sep(
-                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                Net(background=nord_fox["black"], foreground=nord_fox["green"]),
+                left_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
+                Systray(background=nord_fox["fg_gutter"]),
+                right_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
+                Clock(
+                    background=nord_fox["black"],
+                    foreground=nord_fox["white"],
+                    format="     %Y-%m-%d %a %I:%M %p",
                 ),
             ],
-            # Sets bar height
-            32,
-        ),
-        # Set wallpaper
-        wallpaper="/home/beezy/Pictures/wallpapers/nord/nord-river.png",
-        wallpaper_mode="fill",
+            # background=nord_fox['bg'],
+            size=36,
+            margin=8,
+        )
     ),
 ]
 
