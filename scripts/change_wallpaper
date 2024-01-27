@@ -4,5 +4,5 @@
 WALLPAPER_DIR="$HOME/dotfiles/Wallpapers"
 
 # Command to set wallpaper using Nitrogen
-nitrogen --set-zoom-fill --random $WALLPAPER_DIR
+feh --bg-fill --randomize $WALLPAPER_DIR/*
 
