@@ -5,6 +5,8 @@ from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from qtile_extras import widget
+from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 
 MOD = "mod4"
 terminal = guess_terminal()
@@ -228,18 +230,147 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.WindowName(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-                widget.Battery(),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.CurrentLayoutIcon(
+                    padding=4, scale=0.6, foreground="#d8dee9", background="#2e3440"
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.GroupBox(
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=20,
+                    margin_y=3,
+                    margin_x=3,
+                    padding_y=5,
+                    padding_x=5,
+                    borderwidth=0,
+                    disable_drag=True,
+                    active="#4c566a",
+                    inactive="#2e3440",
+                    rounded=False,
+                    highlight_method="text",
+                    this_current_screen_border="#d8dee9",
+                    foreground="#4c566a",
+                    background="#2e3440",
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.WindowName(
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=14,
+                    foreground="#d8dee9",
+                    background="#2e3440",
+                ),
+                widget.Sep(
+                    foreground="#4c566a", background="#2e3440", padding=5, linewidth=1
+                ),
+                widget.Net(
+                    foreground="#2e3440",
+                    background="#ffffff",
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=12,
+                    format="{down} ↓↑ {up}",
+                    interface="wlp3s0",
+                    decorations=[
+                        RectDecoration(
+                            colour="#8fbcbb", padding_y=3, radius=2, filled=True
+                        ),
+                    ],
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.CPU(
+                    background="#ffffff",
+                    foreground="#2e3440",
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=12,
+                    decorations=[
+                        RectDecoration(
+                            colour="#ebcb8b", padding_y=3, radius=2, filled=True
+                        ),
+                    ],
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="4c566a", background="#2e3440"
+                ),
+                widget.Memory(
+                    measure_mem="G",
+                    foreground="#2e3440",
+                    background="#ffffff",
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=14,
+                    decorations=[
+                        RectDecoration(
+                            colour="#88c0d0", padding_y=3, radius=2, filled=True
+                        ),
+                    ],
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.DF(
+                    visible_on_warn=False,
+                    background="#2e3440",
+                    foreground="#2e3440",
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=14,
+                    decorations=[
+                        RectDecoration(
+                            colour="#a3be8c", padding_y=3, radius=2, filled=True
+                        ),
+                    ],
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, background="#2e3440", foreground="#4c566a"
+                ),
+                widget.Clock(
+                    foreground="#2e3440",
+                    background="#2e3440",
+                    font="CaskayiaCove Nerd Font Bold",
+                    fontsize=14,
+                    format="%a %d %b %H:%M",
+                    decorations=[
+                        RectDecoration(
+                            colour="#81a1c1", padding_y=3, radius=2, filled=True
+                        ),
+                    ],
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
+                widget.UPowerWidget(
+                    background="#2e3440",
+                    border_colour="#d8dee9",
+                    border_critical_colour="#bf616a",
+                    border_charge_colour="#d8dee9",
+                    fill_low="#ebcb8b",
+                    fill_charge="#a3be8c",
+                    fill_critical="#bf616a",
+                    fill_normal="#d8dee9",
+                    percentage_low=0.4,
+                    percentage_critical=0.2,
+                    font="CaskayiaCove Nerd Font",
+                ),
+                widget.Systray(
+                    background="#2e3440",
+                    icon_size=20,
+                    padding=5,
+                ),
+                widget.Sep(
+                    linewidth=1, padding=5, foreground="#4c566a", background="#2e3440"
+                ),
             ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            # Sets bar height
+            32,
         ),
+        # Set wallpaper
+        wallpaper="/home/beezy/Pictures/wallpapers/nord/nord-river.png",
+        wallpaper_mode="fill",
     ),
 ]
 
