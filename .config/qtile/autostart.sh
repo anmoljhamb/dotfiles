@@ -11,3 +11,4 @@ function run {
 run nm-applet &
 blueman-applet &
 ~/dotfiles/scripts/change_wallpaper
+picom --config $HOME/.config/picom/picom.conf &
