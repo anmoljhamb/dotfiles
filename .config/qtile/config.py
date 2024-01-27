@@ -202,6 +202,7 @@ theme = {
 layouts = [
     layout.Stack(num_stacks=1, **theme),
     layout.Bsp(**theme),
+    layout.Max(**theme),
     layout.Floating(**theme),
     layout.MonadTall(ratio=0.72, **theme),
     # Try more layouts by unleashing below layouts.
