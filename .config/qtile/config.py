@@ -374,6 +374,12 @@ screens = [
                     foreground=nord_fox["white"],
                     format="     %Y-%m-%d %a %I:%M %p",
                 ),
+                widget.QuickExit(
+                    background=nord_fox["black"],
+                    foreground=nord_fox["white"],
+                    default_text="󰿅  ",
+                    countdown_format="{} ",
+                ),
             ],
             # background=nord_fox['bg'],
             size=36,
