@@ -43,11 +43,16 @@ keys = [
             Key([], "j", lazy.layout.shuffle_down()),
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
-            Key(["shift"], "l", lazy.layout.grow_left()),
-            Key(["shift"], "h", lazy.layout.grow_right()),
+            Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
+            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
+            Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
+            Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
+            Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
+            Key(["shift"], "h", lazy.layout.grow_right(), lazy.layout.shrink()),
             Key(["shift"], "j", lazy.layout.grow_down()),
             Key(["shift"], "k", lazy.layout.grow_up()),
             Key(["shift"], "n", lazy.layout.normalize()),
+            Key([], "m", lazy.layout.maximize()),
         ],
         mode=True,
         name="Resize",
@@ -87,6 +92,7 @@ keys = [
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -149,10 +155,10 @@ for vt in range(1, 8):
 groups = []
 
 temp_groups = [
-    ["1", "", "monadtall"],
+    ["1", "", "stack"],
     ["2", "󱃖", "monadtall"],
-    ["3", "󱃖", "monadtall"],
-    ["4", "", "monadtall"],
+    ["3", "󱃖", "bsp"],
+    ["4", "", "floating"],
     ["5", "󰎆", "stack"],
 ]
 
@@ -187,9 +193,10 @@ for i in groups:
 
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    layout.Stack(num_stacks=1),
+    layout.Stack(num_stacks=1, margin=10),
+    layout.Bsp(),
+    layout.Floating(),
+    layout.MonadTall(ratio=0.72),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
