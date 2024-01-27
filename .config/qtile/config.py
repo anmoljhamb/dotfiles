@@ -192,11 +192,18 @@ for i in groups:
     )
 
 
+theme = {
+    "margin": 8,
+    "border_width": 2,
+    "border_focus": "#81a1c1",
+    "border_normal": "#2e3440",
+}
+
 layouts = [
-    layout.Stack(num_stacks=1, margin=10),
-    layout.Bsp(),
-    layout.Floating(),
-    layout.MonadTall(ratio=0.72),
+    layout.Stack(num_stacks=1, **theme),
+    layout.Bsp(**theme),
+    layout.Floating(**theme),
+    layout.MonadTall(ratio=0.72, **theme),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
