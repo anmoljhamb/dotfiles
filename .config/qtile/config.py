@@ -2,7 +2,7 @@ import os
 import subprocess
 from typing import Optional
 
-from libqtile import bar, hook, layout, qtile
+from libqtile import hook, qtile
 from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.layout.bsp import Bsp
@@ -18,13 +18,11 @@ from libqtile.widget.currentlayout import CurrentLayout
 from libqtile.widget.groupbox import GroupBox
 from libqtile.widget.memory import Memory
 from libqtile.widget.net import Net
-from libqtile.widget.spacer import Spacer
 from libqtile.widget.systray import Systray
 from libqtile.widget.textbox import TextBox
 from libqtile.widget.window_count import WindowCount
 from libqtile.widget.windowname import WindowName
 from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 
 MOD = "mod4"
 terminal = guess_terminal()
