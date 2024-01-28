@@ -320,12 +320,9 @@ decor_groups = {
         RectDecoration(
             colour=THEME["background"],
             filled=True,
-            radius=10,
             group=True,
-            # padding_x=10,
         )
     ],
-    "padding": 10,
 }
 
 controls_width = 40
@@ -370,6 +367,21 @@ screens = [
                     **decor_groups,
                     width=210,
                     empty_group_string="󰍹 Desktop",
+                ),
+                widget.Spacer(spacer_width),
+                CPU(
+                    format="  {freq_current}GHz {load_percent}%",
+                    **decor_groups,
+                ),
+                widget.TextBox("󰢑", fontsize=25, name="temp-text", **decor_groups),
+                widget.Spacer(-5, **decor_groups),
+                widget.ThermalSensor(update_interval=20, **decor_groups),
+                Memory(
+                    format="  {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    **decor_groups,
+                ),
+                Net(
+                    **decor_groups,
                 ),
             ],
             size=38,
