@@ -115,6 +115,7 @@ alias soz="source ~/.zshrc"
 alias cd="z"
 alias sdi="sudo dnf install"
 alias gac="git add . && git commit -am "
+alias tmux="tmux -u"
 
 eval "$(zoxide init zsh)"
 
