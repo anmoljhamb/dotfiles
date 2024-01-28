@@ -46,31 +46,19 @@ nord_fox = {
     "pink": "#bf88bc",
 }
 
-gruvbox = {
-    "bg": "#282828",
-    "fg": "#d4be98",
-    "dark-red": "#ea6962",
-    "red": "#ea6962",
-    "dark-green": "#a9b665",
-    "green": "#a9b665",
-    "dark-yellow": "#e78a4e",
-    "yellow": "#d8a657",
-    "dark-blue": "#7daea3",
-    "blue": "#7daea3",
-    "dark-magenta": "#d3869b",
-    "magenta": "#d3869b",
-    "dark-cyan": "#89b482",
-    "cyan": "#89b482",
-    "dark-gray": "#665c54",
-    "gray": "#928374",
-    "fg4": "#766f64",
-    "fg3": "#665c54",
-    "fg2": "#504945",
-    "fg1": "#3c3836",
-    "bg0": "#32302f",
-    "fg0": "#1d2021",
-    "fg9": "#ebdbb2",
-}
+
+THEME = dict(
+    black="#6E6C7E",
+    blue="#96CDFB",
+    cyan="#89DCEB",
+    green="#ABE9B3",
+    magenta="#F5C2E7",
+    red="#F28FAD",
+    white="#D9E0EE",
+    yellow="#FAE3B0",
+    background="#1E1D2F",
+    foreground="#D9E0EE",
+)
 
 
 def left_half_circle(fg_color, bg_color: Optional["str"] = None):
@@ -321,30 +309,31 @@ layouts = [
 
 widget_defaults = dict(
     font="CaskayiaCove Nerd Font",
-    fontsize=15,
+    fontsize=20,
+    colour=THEME["foreground"],
     padding=2,
 )
 extension_defaults = widget_defaults.copy()
 
-widget_background = "#324e52"
+# widget_background = "#324e52"
 
 decor_groups = {
     "decorations": [
         RectDecoration(
-            colour=widget_background,
+            colour=THEME["background"],
             filled=True,
             radius=10,
             group=True,
+            # padding_x=10,
         )
     ],
-    "padding": 9,
+    "padding": 10,
+    # "padding_x": 20,,
 }
-
-theme = dict(background=widget_background)
 
 controls_width = 40
 window_margin = 8
-spacer_width = 13
+spacer_width = 12
 
 screens = [
     Screen(
@@ -352,10 +341,22 @@ screens = [
             [
                 widget.CurrentLayoutIcon(scale=0.65, **decor_groups),
                 widget.Spacer(spacer_width),
+                widget.GroupBox(
+                    borderwidth=3,
+                    highlight_color=THEME["background"],
+                    highlight_method="line",
+                    inactive=THEME["black"],
+                    active=THEME["magenta"],
+                    this_current_screen_border=THEME["white"],
+                    **decor_groups,
+                    padding_x=4,
+                    margin_x=6,
+                    margin_y=2,
+                ),
             ],
             size=38,
             margin=window_margin,
-            background="#000000",
+            background="#ffffff00",
         ),
         bottom=Bar(
             [
