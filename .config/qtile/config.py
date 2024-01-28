@@ -364,6 +364,13 @@ screens = [
                     margin_x=6,
                     margin_y=2,
                 ),
+                widget.Spacer(spacer_width),
+                widget.WindowName(
+                    max_chars=20,
+                    **decor_groups,
+                    width=210,
+                    empty_group_string="󰍹 Desktop",
+                ),
             ],
             size=38,
             margin=window_margin,
