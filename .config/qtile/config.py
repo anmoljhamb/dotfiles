@@ -3,6 +3,7 @@ import subprocess
 from typing import Optional
 
 from libqtile import hook, qtile
+from libqtile import widget as _widget
 from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.layout.bsp import Bsp
@@ -23,6 +24,7 @@ from libqtile.widget.textbox import TextBox
 from libqtile.widget.window_count import WindowCount
 from libqtile.widget.windowname import WindowName
 from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration
 
 MOD = "mod4"
 terminal = guess_terminal()
@@ -319,14 +321,43 @@ layouts = [
 
 widget_defaults = dict(
     font="CaskayiaCove Nerd Font",
-    fontsize=16,
-    padding=6,
+    fontsize=15,
+    padding=2,
 )
 extension_defaults = widget_defaults.copy()
+
+widget_background = "#324e52"
+
+decor_groups = {
+    "decorations": [
+        RectDecoration(
+            colour=widget_background,
+            filled=True,
+            radius=10,
+            group=True,
+        )
+    ],
+    "padding": 9,
+}
+
+theme = dict(background=widget_background)
+
+controls_width = 40
+window_margin = 8
+spacer_width = 13
 
 screens = [
     Screen(
         top=Bar(
+            [
+                widget.CurrentLayoutIcon(scale=0.65, **decor_groups),
+                widget.Spacer(spacer_width),
+            ],
+            size=38,
+            margin=window_margin,
+            background="#000000",
+        ),
+        bottom=Bar(
             [
                 GroupBox(
                     disable_drag=True,
@@ -384,7 +415,7 @@ screens = [
             # background=nord_fox['bg'],
             size=36,
             margin=8,
-        )
+        ),
     ),
 ]
 
