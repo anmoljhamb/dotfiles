@@ -362,25 +362,44 @@ screens = [
                     margin_y=2,
                 ),
                 widget.Spacer(spacer_width),
+                Clock(
+                    background=nord_fox["black"],
+                    foreground=nord_fox["white"],
+                    format="     %Y-%m-%d %a %I:%M %p",
+                ),
+                # widget.Spacer(),
                 widget.WindowName(
                     max_chars=20,
                     **decor_groups,
-                    width=210,
+                    width=300,
                     empty_group_string="󰍹 Desktop",
                 ),
-                widget.Spacer(spacer_width),
-                CPU(
-                    format="  {freq_current}GHz {load_percent}%",
-                    **decor_groups,
-                ),
-                widget.TextBox("󰢑", fontsize=25, name="temp-text", **decor_groups),
-                widget.Spacer(-5, **decor_groups),
-                widget.ThermalSensor(update_interval=20, **decor_groups),
-                Memory(
-                    format="  {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
-                    **decor_groups,
-                ),
-                Net(
+                widget.Spacer(),
+                widget.WidgetBox(
+                    widgets=[
+                        CPU(
+                            format="  {freq_current}GHz {load_percent}%",
+                            **decor_groups,
+                        ),
+                        widget.TextBox(
+                            "󰢑", fontsize=25, name="temp-text", **decor_groups
+                        ),
+                        widget.Spacer(-5, **decor_groups),
+                        widget.ThermalSensor(update_interval=20, **decor_groups),
+                        Memory(
+                            format="  {MemPercent}%",
+                            **decor_groups,
+                        ),
+                        Net(
+                            **decor_groups,
+                        ),
+                    ],
+                    close_button_location="right",
+                    text_closed="󱕎",
+                    text_open="󰅘",
+                    fontsize=30,
+                    name="graphs",
+                    start_opened=True,
                     **decor_groups,
                 ),
                 widget.Systray(icon_size=22, **decor_groups),
@@ -423,11 +442,6 @@ screens = [
                     **decor_groups,
                 ),
                 widget.Spacer(spacer_width, **decor_groups),
-                Clock(
-                    background=nord_fox["black"],
-                    foreground=nord_fox["white"],
-                    format="     %Y-%m-%d %a %I:%M %p",
-                ),
                 widget.QuickExit(
                     background=nord_fox["black"],
                     foreground=nord_fox["white"],
@@ -437,7 +451,7 @@ screens = [
             ],
             size=38,
             margin=window_margin,
-            background="#00000000",
+            background=THEME["background"],
         ),
         bottom=Bar(
             [
