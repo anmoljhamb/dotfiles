@@ -107,7 +107,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias vim="nvim"
+alias nvim="nvim.appimage"
+alias vim="nvim.appimage"
 alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
@@ -118,4 +119,6 @@ alias gac="git add . && git commit -am "
 eval "$(zoxide init zsh)"
 
 export PATH=$PATH:/home/anmol/.spicetify
+export PATH=$PATH:/home/anmol/Applications
 export PATH=$PATH:/home/anmol/Android/Sdk/platform-tools
+export LC_ALL=C
