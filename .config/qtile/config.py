@@ -48,16 +48,16 @@ nord_fox = {
 
 
 THEME = dict(
-    black="#6E6C7E",
-    blue="#96CDFB",
-    cyan="#89DCEB",
-    green="#ABE9B3",
-    magenta="#F5C2E7",
-    red="#F28FAD",
-    white="#D9E0EE",
-    yellow="#FAE3B0",
-    background="#1E1D2F",
-    foreground="#D9E0EE",
+    background="#002b36",
+    foreground="#93a1a1",
+    black="#002b36",
+    red="#dc322f",
+    green="#859900",
+    yellow="#b58900",
+    blue="#268bd2",
+    magenta="#6c71c4",
+    cyan="#2aa198",
+    white="#93a1a1",
 )
 
 
@@ -309,13 +309,11 @@ layouts = [
 
 widget_defaults = dict(
     font="CaskayiaCove Nerd Font",
-    fontsize=20,
-    colour=THEME["foreground"],
+    fontsize=22,
+    colour=THEME["magenta"],
     padding=2,
 )
 extension_defaults = widget_defaults.copy()
-
-# widget_background = "#324e52"
 
 decor_groups = {
     "decorations": [
@@ -328,7 +326,6 @@ decor_groups = {
         )
     ],
     "padding": 10,
-    # "padding_x": 20,,
 }
 
 controls_width = 40
@@ -339,15 +336,20 @@ screens = [
     Screen(
         top=Bar(
             [
-                widget.CurrentLayoutIcon(scale=0.65, **decor_groups),
+                widget.CurrentLayoutIcon(
+                    scale=0.55,
+                    foreground=THEME["magenta"],
+                    use_mask=True,
+                    **decor_groups,
+                ),
                 widget.Spacer(spacer_width),
                 widget.GroupBox(
                     borderwidth=3,
                     highlight_color=THEME["background"],
                     highlight_method="line",
-                    inactive=THEME["black"],
+                    inactive=THEME["white"],
                     active=THEME["magenta"],
-                    this_current_screen_border=THEME["white"],
+                    this_current_screen_border=THEME["cyan"],
                     **decor_groups,
                     padding_x=4,
                     margin_x=6,
@@ -356,7 +358,7 @@ screens = [
             ],
             size=38,
             margin=window_margin,
-            background="#ffffff00",
+            background="#00000000",
         ),
         bottom=Bar(
             [
