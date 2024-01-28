@@ -12,4 +12,4 @@ run nm-applet &
 blueman-applet &
 ~/dotfiles/scripts/change_wallpaper
 picom --config $HOME/.config/picom/picom.conf &
-flatpak run org.jellyfin.JellyfinServer
+# flatpak run org.jellyfin.JellyfinServer
