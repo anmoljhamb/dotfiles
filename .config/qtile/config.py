@@ -355,6 +355,15 @@ screens = [
                     margin_x=6,
                     margin_y=2,
                 ),
+                widget.Spacer(spacer_width),
+                widget.WindowCount(
+                    text_format="󱂬  {num}",
+                    show_zero=True,
+                    **decor_groups,
+                    padding_x=4,
+                    margin_x=6,
+                    margin_y=2,
+                ),
             ],
             size=38,
             margin=window_margin,
@@ -362,24 +371,6 @@ screens = [
         ),
         bottom=Bar(
             [
-                GroupBox(
-                    disable_drag=True,
-                    active=nord_fox["white"],
-                    inactive=nord_fox["black"],
-                    highlight_method="line",
-                    block_highlight_text_color=nord_fox["magenta"],
-                    borderwidth=0,
-                    highlight_color=nord_fox["bg"],
-                    background=nord_fox["bg"],
-                    spacing=2,
-                ),
-                left_half_circle(nord_fox["red"], nord_fox["bg"]),
-                CurrentLayout(
-                    background=nord_fox["red"],
-                    foreground=nord_fox["white"],
-                    margin=10,
-                ),
-                right_arrow(nord_fox["fg_gutter"], nord_fox["red"]),
                 WindowCount(
                     text_format="    {num}",
                     background=nord_fox["fg_gutter"],
