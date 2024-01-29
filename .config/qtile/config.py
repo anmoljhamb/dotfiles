@@ -317,12 +317,16 @@ layouts = [
     ),
 ]
 
+font_size = 16
+
 widget_defaults = dict(
     font="CaskayiaCove Nerd Font",
-    fontsize=16,
-    padding=6,
+    fontsize=font_size,
+    padding=8,
 )
 extension_defaults = widget_defaults.copy()
+
+icon_size = int(font_size * 1.5)
 
 screens = [
     Screen(
@@ -337,6 +341,7 @@ screens = [
                     borderwidth=0,
                     highlight_color=nord_fox["bg"],
                     background=nord_fox["bg"],
+                    fontsize=icon_size,
                     spacing=2,
                 ),
                 left_half_circle(nord_fox["red"], nord_fox["bg"]),
