@@ -373,6 +373,11 @@ screens = [
                     background=nord_fox["fg_gutter"],
                     foreground=nord_fox["white"],
                     show_zero=True,
+                    # decorations=[PowerLineDecoration(path="rounded_left")],
+                ),
+                widget.Spacer(
+                    2,
+                    background=nord_fox["fg_gutter"],
                     decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
                 widget.WindowName(
