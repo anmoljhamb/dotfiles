@@ -23,6 +23,7 @@ from libqtile.widget.textbox import TextBox
 from libqtile.widget.window_count import WindowCount
 from libqtile.widget.windowname import WindowName
 from qtile_extras import widget
+from qtile_extras.widget.decorations import PowerLineDecoration
 
 MOD = "mod4"
 terminal = guess_terminal()
@@ -344,20 +345,35 @@ screens = [
                     fontsize=icon_size,
                     spacing=2,
                 ),
-                left_half_circle(nord_fox["red"], nord_fox["bg"]),
-                CurrentLayout(
+                widget.Spacer(
+                    8,
+                    background=nord_fox["bg"],
+                    decorations=[
+                        PowerLineDecoration(path="rounded_right"),
+                    ],
+                ),
+                widget.CurrentLayoutIcon(
                     background=nord_fox["red"],
                     foreground=nord_fox["white"],
                     margin=10,
+                    scale=0.6,
                 ),
-                right_arrow(nord_fox["fg_gutter"], nord_fox["red"]),
+                widget.Spacer(
+                    4, background=nord_fox["red"], decorations=[PowerLineDecoration()]
+                ),
+                widget.TextBox(
+                    "",
+                    background=nord_fox["fg_gutter"],
+                    foreground=nord_fox["white"],
+                    fontsize=icon_size,
+                ),
                 WindowCount(
-                    text_format="    {num}",
+                    text_format="{num}",
                     background=nord_fox["fg_gutter"],
                     foreground=nord_fox["white"],
                     show_zero=True,
+                    decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
-                right_half_circle(nord_fox["fg_gutter"], nord_fox["bg"]),
                 WindowName(background=nord_fox["bg"], foreground=nord_fox["fg"]),
                 left_half_circle(nord_fox["black"], nord_fox["bg"]),
                 CPU(
