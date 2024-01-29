@@ -357,7 +357,7 @@ screens = [
                     background=nord_fox["red"],
                     foreground=nord_fox["white"],
                     margin=10,
-                    scale=0.6,
+                    scale=0.5,
                 ),
                 widget.Spacer(
                     4, background=nord_fox["red"], decorations=[PowerLineDecoration()]
