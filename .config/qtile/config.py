@@ -386,10 +386,10 @@ screens = [
                     foreground=nord_fox["fg"],
                     decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
-                widget.Spacer(background=nord_fox["black"]),
+                widget.Spacer(),
                 widget.Spacer(
                     12,
-                    background=nord_fox["black"],
+                    # background=nord_fox["black"],
                     decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
                 Clock(
@@ -402,11 +402,11 @@ screens = [
                     background=nord_fox["bg"],
                     decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
-                widget.Spacer(background=nord_fox["black"]),
+                widget.Spacer(),
                 widget.Spacer(
                     4,
                     # foreground=nord_fox["bg"],
-                    background=nord_fox["black"],
+                    # background=nord_fox["black"],
                     decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
                 widget.ThermalSensor(
@@ -435,11 +435,6 @@ screens = [
                     background=nord_fox["bg"],
                     decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
-                Systray(
-                    background=nord_fox["fg_gutter"],
-                    icon_size=icon_size,
-                    # decorations=[PowerLineDecoration(path="rounded_left")],
-                ),
                 widget.Spacer(
                     8,
                     background=nord_fox["fg_gutter"],
@@ -455,7 +450,7 @@ screens = [
                 ),
                 widget.Spacer(16, background=nord_fox["black"]),
             ],
-            # background=nord_fox['bg'],
+            background="#00000000",
             size=36,
             margin=8,
         )
