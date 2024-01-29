@@ -327,7 +327,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-icon_size = int(font_size * 1.5)
+icon_size = int(font_size * 1.2)
 
 screens = [
     Screen(
@@ -375,18 +375,32 @@ screens = [
                     decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
                 WindowName(background=nord_fox["bg"], foreground=nord_fox["fg"]),
-                left_half_circle(nord_fox["black"], nord_fox["bg"]),
+                widget.Spacer(
+                    4,
+                    background=nord_fox["bg"],
+                    decorations=[PowerLineDecoration(path="rounded_right")],
+                ),
+                widget.ThermalSensor(
+                    background=nord_fox["black"],
+                    foreground=nord_fox["pink"],
+                ),
                 CPU(
-                    format="  {freq_current}GHz {load_percent}%",
+                    format="  {freq_current}GHz {load_percent:05.2f}%",
                     background=nord_fox["black"],
                     foreground=nord_fox["pink"],
                 ),
                 Memory(
-                    format="  {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}",
+                    format="  {MemUsed: .0f}{mm} {MemPercent:05.2f}%",
                     background=nord_fox["black"],
                     foreground=nord_fox["cyan"],
                 ),
-                Net(background=nord_fox["black"], foreground=nord_fox["green"]),
+                Net(
+                    format="{interface}: {down:6.2f}{down_suffix:<2}↓",
+                    prefix="M",
+                    interface="wlp3s0",
+                    background=nord_fox["black"],
+                    foreground=nord_fox["green"],
+                ),
                 left_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
                 Systray(background=nord_fox["fg_gutter"]),
                 right_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
