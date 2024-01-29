@@ -436,6 +436,12 @@ screens = [
                     background=nord_fox["bg"],
                     decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
+                widget.Wlan(
+                    interface="wlp3s0",
+                    background=nord_fox["fg_gutter"],
+                    format="󰤨     {essid}   {percent:03.0%}",
+                    disconnected_message="󰤭",
+                ),
                 widget.Spacer(
                     8,
                     background=nord_fox["fg_gutter"],
