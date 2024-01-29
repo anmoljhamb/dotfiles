@@ -333,6 +333,7 @@ screens = [
     Screen(
         top=Bar(
             [
+                widget.Spacer(8, background=nord_fox["bg"]),
                 GroupBox(
                     disable_drag=True,
                     active=nord_fox["white"],
@@ -374,47 +375,79 @@ screens = [
                     show_zero=True,
                     decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
-                WindowName(background=nord_fox["bg"], foreground=nord_fox["fg"]),
+                widget.WindowName(
+                    width=210,
+                    background=nord_fox["bg"],
+                    foreground=nord_fox["fg"],
+                    decorations=[PowerLineDecoration(path="rounded_left")],
+                ),
+                widget.Spacer(background=nord_fox["black"]),
+                widget.Spacer(
+                    12,
+                    background=nord_fox["black"],
+                    decorations=[PowerLineDecoration(path="rounded_right")],
+                ),
+                Clock(
+                    background=nord_fox["bg"],
+                    foreground=nord_fox["white"],
+                    format="     %d %b, %H:%M",
+                ),
+                widget.Spacer(
+                    12,
+                    background=nord_fox["bg"],
+                    decorations=[PowerLineDecoration(path="rounded_left")],
+                ),
+                widget.Spacer(background=nord_fox["black"]),
                 widget.Spacer(
                     4,
-                    background=nord_fox["bg"],
+                    # foreground=nord_fox["bg"],
+                    background=nord_fox["black"],
                     decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
                 widget.ThermalSensor(
-                    background=nord_fox["black"],
+                    background=nord_fox["bg"],
                     foreground=nord_fox["pink"],
                 ),
                 CPU(
                     format="  {freq_current}GHz {load_percent:05.2f}%",
-                    background=nord_fox["black"],
+                    background=nord_fox["bg"],
                     foreground=nord_fox["pink"],
                 ),
                 Memory(
                     format="  {MemUsed: .0f}{mm} {MemPercent:05.2f}%",
-                    background=nord_fox["black"],
+                    background=nord_fox["bg"],
                     foreground=nord_fox["cyan"],
                 ),
                 Net(
                     format="{interface}: {down:6.2f}{down_suffix:<2}↓",
                     prefix="M",
                     interface="wlp3s0",
-                    background=nord_fox["black"],
+                    background=nord_fox["bg"],
                     foreground=nord_fox["green"],
                 ),
-                left_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
-                Systray(background=nord_fox["fg_gutter"]),
-                right_half_circle(nord_fox["fg_gutter"], nord_fox["black"]),
-                Clock(
-                    background=nord_fox["black"],
-                    foreground=nord_fox["white"],
-                    format="     %Y-%m-%d %a %I:%M %p",
+                widget.Spacer(
+                    8,
+                    background=nord_fox["bg"],
+                    decorations=[PowerLineDecoration(path="rounded_right")],
                 ),
+                Systray(
+                    background=nord_fox["fg_gutter"],
+                    # decorations=[PowerLineDecoration(path="rounded_left")],
+                ),
+                widget.Spacer(
+                    8,
+                    background=nord_fox["fg_gutter"],
+                    decorations=[PowerLineDecoration(path="rounded_left")],
+                ),
+                widget.Spacer(10, background=nord_fox["black"]),
                 widget.QuickExit(
                     background=nord_fox["black"],
                     foreground=nord_fox["white"],
-                    default_text="󰿅  ",
-                    countdown_format="{} ",
+                    default_text="󰿅",
+                    countdown_format="{}",
+                    fontsize=icon_size,
                 ),
+                widget.Spacer(16, background=nord_fox["black"]),
             ],
             # background=nord_fox['bg'],
             size=36,
