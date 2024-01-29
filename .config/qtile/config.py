@@ -362,6 +362,7 @@ screens = [
                 widget.Spacer(
                     4, background=nord_fox["red"], decorations=[PowerLineDecoration()]
                 ),
+                widget.Spacer(4, background=nord_fox["fg_gutter"]),
                 widget.TextBox(
                     "",
                     background=nord_fox["fg_gutter"],
