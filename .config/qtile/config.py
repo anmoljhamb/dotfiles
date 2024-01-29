@@ -437,6 +437,7 @@ screens = [
                 ),
                 Systray(
                     background=nord_fox["fg_gutter"],
+                    icon_size=icon_size,
                     # decorations=[PowerLineDecoration(path="rounded_left")],
                 ),
                 widget.Spacer(
