@@ -127,15 +127,4 @@ export LC_ALL=C
 # Created by `pipx` on 2024-01-28 21:14:25
 export PATH="$PATH:/home/anmol/.local/bin"
 
-apt() { 
-  command nala "$@"
-}
-sudo() {
-  if [ "$1" = "apt" ]; then
-    shift
-    command sudo nala "$@"
-  else
-    command sudo "$@"
-  fi
-}
 . "$HOME/.cargo/env"
