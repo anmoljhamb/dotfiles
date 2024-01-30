@@ -107,7 +107,8 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(),
+        desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -137,7 +138,8 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(),
+                desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -165,12 +167,13 @@ keys = [
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
-        ["mod1", "shift"], "1", lazy.spawn("google-chrome --profile-directory=Default")
+        ["mod1", "shift"], "1", lazy.spawn(
+            "google-chrome --profile-directory=Default")
     ),
     Key(
         ["mod1", "shift"],
         "2",
-        lazy.spawn('google-chrome --profile-directory="Profile 3"'),
+        lazy.spawn('google-chrome --profile-directory="Profile 1"'),
     ),
     Key(
         ["mod1", "shift"],
@@ -181,11 +184,13 @@ keys = [
     Key(
         ["mod1", "shift"],
         "m",
-        lazy.spawn('google-chrome --profile-directory="Profile 2" music.youtube.com'),
+        lazy.spawn(
+            'google-chrome --profile-directory="Profile 2" music.youtube.com'),
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
+        desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -239,7 +244,8 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(
+                func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
