@@ -107,8 +107,7 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(),
-        desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -138,8 +137,7 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(),
-                desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -167,8 +165,7 @@ keys = [
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
-        ["mod1", "shift"], "1", lazy.spawn(
-            "google-chrome --profile-directory=Default")
+        ["mod1", "shift"], "1", lazy.spawn("google-chrome --profile-directory=Default")
     ),
     Key(
         ["mod1", "shift"],
@@ -184,13 +181,11 @@ keys = [
     Key(
         ["mod1", "shift"],
         "m",
-        lazy.spawn(
-            'google-chrome --profile-directory="Profile 2" music.youtube.com'),
+        lazy.spawn('google-chrome --profile-directory="Profile 2" music.youtube.com'),
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
-        desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -198,7 +193,12 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    # Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key(
+        [MOD],
+        "y",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     Key(["mod1", "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -215,9 +215,11 @@ keys = [
         lazy.spawn("brightnessctl set 3-% "),
         desc="Lower brightness level by 3%",
     ),
+    # Key([], ""),
     # Key(
     #     [MOD], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
     # ),
+    Key([], "Print", lazy.spawn("xfce4-screenshooter")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
@@ -244,8 +246,7 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(
-                func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
@@ -306,6 +307,15 @@ layouts = [
         border_focus=nord_fox["cyan"],
         border_width=2,
         margin=MARGIN,
+    ),
+    Floating(
+        border_normal=nord_fox["bg"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        float_rules=[
+            *Floating.default_float_rules,
+            Match(wm_class="nitrogen"),  # gitk
+        ],
     ),
     Max(
         border_normal=nord_fox["black"],
@@ -490,16 +500,7 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = Floating(
-    border_normal=nord_fox["bg"],
-    border_focus=nord_fox["cyan"],
-    border_width=2,
-    float_rules=[
-        *Floating.default_float_rules,
-        Match(wm_class="nitrogen"),  # gitk
-    ],
-)
-# floating_layout.layout.confi
+# floating_layout = # floating_layout.layout.confi
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
