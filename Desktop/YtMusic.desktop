@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Youtube Music
+Comment=Launch Youtube Music in App Mode from Personal Profile
+Exec=brave-browser --profile-directory="Profile 2" --app=https://music.youtube.com 
+Icon=brave-browser
+Type=Application
+Categories=Network;WebBrowser;Music;
+Terminal=false

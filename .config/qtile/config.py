@@ -186,6 +186,17 @@ keys = [
     Key(
         ["mod1", "shift"],
         "m",
+        lazy.spawn(
+            [
+                "/home/anmol/dotfiles/scripts/start_brave.sh",
+                "Default",
+                "https://music.youtube.com",
+            ]
+        ),
+    ),
+    Key(
+        ["mod1", "shift"],
+        "m",
         lazy.spawn(browser + ' --profile-directory="Profile 2" music.youtube.com'),
     ),
     # Toggle between different layouts as defined below
@@ -260,7 +271,7 @@ for vt in range(1, 8):
 groups = []
 
 temp_groups = [
-    ["1", "", "stack", ["google-chrome --profile-directory=Default"], None],
+    ["1", "", "stack", None, None],
     ["2", "󱃖", "monadtall", [terminal], None],
     ["3", "󱃖", "bsp", [terminal], None],
     ["4", "", "floating", None, None],
