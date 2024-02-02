@@ -27,6 +27,7 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 
 MOD = "mod4"
 terminal = "alacritty"
+browser = "brave-browser"
 
 
 nord_fox = {
@@ -165,23 +166,27 @@ keys = [
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
-        ["mod1", "shift"], "1", lazy.spawn("google-chrome --profile-directory=Default")
+        ["mod1", "shift"],
+        "1",
+        lazy.spawn(
+            browser + " --profile-directory=Default",
+        ),
     ),
     Key(
         ["mod1", "shift"],
         "2",
-        lazy.spawn('google-chrome --profile-directory="Profile 1"'),
+        lazy.spawn(browser + ' --profile-directory="Profile 1"'),
     ),
     Key(
         ["mod1", "shift"],
         "3",
-        lazy.spawn('google-chrome --profile-directory="Profile 2"'),
+        lazy.spawn(browser + ' --profile-directory="Profile 2"'),
     ),
     Key(["mod1", "shift"], "s", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
         ["mod1", "shift"],
         "m",
-        lazy.spawn('google-chrome --profile-directory="Profile 2" music.youtube.com'),
+        lazy.spawn(browser + ' --profile-directory="Profile 2" music.youtube.com'),
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
