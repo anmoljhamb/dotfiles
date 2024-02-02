@@ -187,11 +187,7 @@ keys = [
         ["mod1", "shift"],
         "m",
         lazy.spawn(
-            [
-                "/home/anmol/dotfiles/scripts/start_brave.sh",
-                "Default",
-                "https://music.youtube.com",
-            ]
+            browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
         ),
     ),
     Key(
@@ -282,6 +278,7 @@ temp_groups = [
         "flatpak run com.spotify.Client",
         [
             Match(wm_class="spotify"),
+            Match(wm_class="crx_cinhimbnkkaeohfgghhklpknlkffjgod"),
         ],
     ],
 ]
