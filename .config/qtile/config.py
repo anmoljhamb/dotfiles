@@ -26,7 +26,7 @@ from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 
 MOD = "mod4"
-terminal = guess_terminal()
+terminal = "alacritty"
 
 
 nord_fox = {
@@ -255,19 +255,29 @@ for vt in range(1, 8):
 groups = []
 
 temp_groups = [
-    ["1", "", "stack"],
-    ["2", "󱃖", "monadtall"],
-    ["3", "󱃖", "bsp"],
-    ["4", "", "floating"],
-    ["5", "󰎆", "stack"],
+    ["1", "", "stack", ["google-chrome --profile-directory=Default"], None],
+    ["2", "󱃖", "monadtall", [terminal], None],
+    ["3", "󱃖", "bsp", [terminal], None],
+    ["4", "", "floating", None, None],
+    [
+        "5",
+        "󰎆",
+        "stack",
+        "flatpak run com.spotify.Client",
+        [
+            Match(wm_class="spotify"),
+        ],
+    ],
 ]
 
-for name, label, _layout in temp_groups:
+for name, label, _layout, apps, matches in temp_groups:
     groups.append(
         Group(
             name=name,
             layout=_layout.lower(),
             label=label,
+            spawn=apps,
+            matches=matches,
         )
     )
 
