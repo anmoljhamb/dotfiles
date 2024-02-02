@@ -458,6 +458,10 @@ screens = [
                     format="󰤨     {essid}   {percent:03.0%}",
                     disconnected_message="󰤭",
                 ),
+                widget.Spacer(8, background=nord_fox["fg_gutter"]),
+                widget.PulseVolume(
+                    background=nord_fox["fg_gutter"],
+                ),
                 widget.Spacer(
                     8,
                     background=nord_fox["fg_gutter"],
