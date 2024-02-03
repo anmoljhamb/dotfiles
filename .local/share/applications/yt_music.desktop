@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=YouTube Music ( brave )
+Exec=/opt/brave.com/brave/brave-browser "--profile-directory=Profile 2" --app=https://music.youtube.com --app-id=yt_music
+Icon=brave-cinhimbnkkaeohfgghhklpknlkffjgod-Profile_2
+StartupWMClass=yt_music
