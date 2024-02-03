@@ -275,11 +275,21 @@ temp_groups = [
         "5",
         "󰎆",
         "stack",
-        "flatpak run com.spotify.Client",
+        [
+            "flatpak run com.spotify.Client",
+            '/opt/brave.com/brave/brave-browser "--profile-directory=Profile 2" --app=https://music.youtube.com --app-id=yt_music',
+        ],
         [
             Match(wm_class="spotify"),
             Match(wm_class="music.youtube.com"),
         ],
+    ],
+    [
+        "6",
+        "󰭻",
+        "stack",
+        "/opt/brave.com/brave/brave-browser --profile-directory=Default --app=https://web.whatsapp.com --app-id=whatsapp",
+        [Match(wm_class="web.whatsapp.com")],
     ],
 ]
 
