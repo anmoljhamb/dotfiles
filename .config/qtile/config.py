@@ -278,7 +278,7 @@ temp_groups = [
         "flatpak run com.spotify.Client",
         [
             Match(wm_class="spotify"),
-            Match(wm_class="crx_cinhimbnkkaeohfgghhklpknlkffjgod"),
+            Match(wm_class="music.youtube.com"),
         ],
     ],
 ]
