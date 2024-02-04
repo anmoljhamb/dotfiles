@@ -493,6 +493,8 @@ screens = [
                 ),
                 widget.Spacer(8, background=nord_fox["fg_gutter"]),
                 widget.PulseVolume(
+                    emoji=True,
+                    emoji_list=["󰝟", "󰕿", "󰖀", "󰕾"],
                     background=nord_fox["fg_gutter"],
                 ),
                 widget.UPowerWidget(
