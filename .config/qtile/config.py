@@ -495,6 +495,10 @@ screens = [
                 widget.PulseVolume(
                     background=nord_fox["fg_gutter"],
                 ),
+                widget.UPowerWidget(
+                    fill_charge=nord_fox["green"],
+                    background=nord_fox["fg_gutter"],
+                ),
                 widget.Spacer(
                     8,
                     background=nord_fox["fg_gutter"],
