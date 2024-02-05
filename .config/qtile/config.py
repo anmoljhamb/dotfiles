@@ -271,9 +271,8 @@ temp_groups = [
     ["2", "", "stack", None, None],
     ["3", "󱃖", "monadtall", [terminal], None],
     ["4", "󱃖", "bsp", [terminal], None],
-    ["5", "", "floating", None, None],
     [
-        "6",
+        "5",
         "󰎆",
         "stack",
         [
@@ -285,6 +284,7 @@ temp_groups = [
             Match(wm_class="music.youtube.com"),
         ],
     ],
+    ["6", "", "floating", None, None],
     [
         "7",
         "󰭻",
