@@ -268,11 +268,12 @@ groups = []
 
 temp_groups = [
     ["1", "", "stack", None, None],
-    ["2", "󱃖", "monadtall", [terminal], None],
-    ["3", "󱃖", "bsp", [terminal], None],
-    ["4", "", "floating", None, None],
+    ["2", "", "stack", None, None],
+    ["3", "󱃖", "monadtall", [terminal], None],
+    ["4", "󱃖", "bsp", [terminal], None],
+    ["5", "", "floating", None, None],
     [
-        "5",
+        "6",
         "󰎆",
         "stack",
         [
@@ -285,7 +286,7 @@ temp_groups = [
         ],
     ],
     [
-        "6",
+        "7",
         "󰭻",
         "stack",
         "/opt/brave.com/brave/brave-browser --profile-directory=Default --app=https://web.whatsapp.com --app-id=whatsapp",
