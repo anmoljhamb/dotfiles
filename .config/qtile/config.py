@@ -277,11 +277,11 @@ temp_groups = [
         "stack",
         [
             "flatpak run com.spotify.Client",
-            '/opt/brave.com/brave/brave-browser "--profile-directory=Profile 2" --app=https://music.youtube.com --app-id=yt_music',
+            '/opt/google/chrome/google-chrome "--profile-directory=Profile 2" --app-id=cinhimbnkkaeohfgghhklpknlkffjgod',
         ],
         [
             Match(wm_class="spotify"),
-            Match(wm_class="music.youtube.com"),
+            Match(wm_class="crx_cinhimbnkkaeohfgghhklpknlkffjgod"),
         ],
     ],
     ["6", "", "floating", None, None],
