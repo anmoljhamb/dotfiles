@@ -122,6 +122,7 @@ eval "$(zoxide init zsh)"
 export PATH=$PATH:/home/anmol/.spicetify
 export PATH=$PATH:/home/anmol/Applications
 export PATH=$PATH:/home/anmol/Android/Sdk/platform-tools
+export PATH=/home/anmol/.pub-cache/bin:$PATH
 export PATH=$PATH:/snap/bin
 export LC_ALL=C
 

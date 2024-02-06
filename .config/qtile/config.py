@@ -27,7 +27,7 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 
 MOD = "mod4"
 terminal = "alacritty"
-browser = "brave-browser"
+browser = "google-chrome"
 
 
 nord_fox = {
