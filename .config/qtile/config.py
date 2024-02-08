@@ -267,7 +267,7 @@ for vt in range(1, 8):
 groups = []
 
 temp_groups = [
-    ["1", "", "stack", None, None],
+    ["1", "", "stack", [f'{browser} "--profile-directory=Default"'], None],
     ["2", "", "stack", None, None],
     ["3", "󱃖", "monadtall", [terminal], None],
     ["4", "󱃖", "bsp", [terminal], None],
@@ -277,7 +277,6 @@ temp_groups = [
         "stack",
         [
             "flatpak run com.spotify.Client",
-            '/opt/google/chrome/google-chrome "--profile-directory=Profile 2" --app-id=cinhimbnkkaeohfgghhklpknlkffjgod',
         ],
         [
             Match(wm_class="spotify"),
@@ -289,8 +288,8 @@ temp_groups = [
         "7",
         "󰭻",
         "stack",
-        "/opt/brave.com/brave/brave-browser --profile-directory=Default --app=https://web.whatsapp.com --app-id=whatsapp",
-        [Match(wm_class="web.whatsapp.com")],
+        None,
+        Match(wm_class="crx_hnpfjngllnobngcgfapefoaidbinmjnm"),
     ],
 ]
 
