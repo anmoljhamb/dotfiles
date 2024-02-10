@@ -267,7 +267,7 @@ for vt in range(1, 8):
 groups = []
 
 temp_groups = [
-    ["1", "", "stack", [f'{browser} "--profile-directory=Default"'], None],
+    ["1", "", "stack", None, None],
     ["2", "", "stack", None, None],
     ["3", "󱃖", "monadtall", [terminal], None],
     ["4", "󱃖", "bsp", [terminal], None],
