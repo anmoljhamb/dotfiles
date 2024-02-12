@@ -116,6 +116,7 @@ alias cd="z"
 alias sdi="sudo dnf install"
 alias gac="git add . && git commit -am "
 alias tmux="tmux -u"
+alias ts="tmux_sessionizer"
 
 eval "$(zoxide init zsh)"
 

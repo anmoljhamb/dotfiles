@@ -163,6 +163,12 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     # Spawns
+    Key(
+        [],
+        "F12",
+        lazy.spawn("/home/anmol/dotfiles/scripts/tmux_sessionizer"),
+        desc="Launch terminal",
+    ),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
