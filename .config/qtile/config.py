@@ -1,3 +1,4 @@
+import logging
 import os
 import subprocess
 from typing import Optional
@@ -28,7 +29,10 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 MOD = "mod4"
 terminal = "alacritty"
 browser = "google-chrome"
+logging.basicConfig(filename="/home/anmol/logs/qtile.log", level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
+logging.debug("This is a debug message")
 
 nord_fox = {
     "bg": "#2e3440",
@@ -108,7 +112,8 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(),
+        desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -138,7 +143,8 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(),
+                desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -169,6 +175,7 @@ keys = [
         lazy.spawn("/home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
+    Key([MOD], "KP_1", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
@@ -196,14 +203,10 @@ keys = [
             browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
         ),
     ),
-    Key(
-        ["mod1", "shift"],
-        "m",
-        lazy.spawn(browser + ' --profile-directory="Profile 2" music.youtube.com'),
-    ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
+        desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -219,7 +222,7 @@ keys = [
     ),
     Key(["mod1", "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # COmmands to control stuff on laptop
     Key(
         [],
@@ -264,7 +267,8 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(
+                func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
@@ -320,7 +324,19 @@ for i in groups:
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
+            # Key(
+            #     [MOD],
+            #     f"KP_{i.name}",
+            #     lazy.group[i.name].toscreen(),
+            #     desc="Switch to group {}".format(i.name),
+            # ),
             # MOD1 + shift + letter of group = move focused window to group
+            # Key(
+            #     [MOD, "shift"],
+            #     f"KP_{i.name}",
+            #     lazy.window.togroup(i.name, switch_group=False),
+            #     desc="Move focused window to group {}".format(i.name),
+            # ),
             Key(
                 [MOD, "shift"],
                 i.name,
