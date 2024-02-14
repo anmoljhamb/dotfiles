@@ -233,7 +233,7 @@ keys = [
     ),
     Key([MOD, "shift"], "l", lazy.spawn("i3lock")),
     Key(["mod1", "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([MOD, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # COmmands to control stuff on laptop
     Key(
@@ -554,6 +554,7 @@ screens = [
                 ),
                 widget.Spacer(10, background=nord_fox["black"]),
                 widget.QuickExit(
+                    countdown_start=3,
                     background=nord_fox["black"],
                     foreground=nord_fox["white"],
                     default_text="󰿅",
