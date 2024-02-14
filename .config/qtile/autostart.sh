@@ -10,6 +10,6 @@ function run {
 
 run nm-applet &
 blueman-applet &
-~/dotfiles/scripts/change_wallpaper
+/bin/python3 ~/dotfiles/scripts/wallpaper_modifier.py &
 picom --config $HOME/.config/picom/picom.conf &
 # flatpak run org.jellyfin.JellyfinServer &
