@@ -27,6 +27,7 @@ def setCurrWallpaper(index: int):
 
 def setWallpaper(file: str):
     print("Setting wallpaper to:", file)  # Add this line for debugging
+    os.environ["DISPLAY"] = ":0"
     cmd = ["feh", "--bg-fill", file]
     sp.run(cmd, check=True)
 
