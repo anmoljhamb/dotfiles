@@ -176,7 +176,6 @@ keys = [
         lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
-    Key([MOD], "KP_1", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
     Key(
@@ -320,6 +319,19 @@ for name, label, _layout, apps, matches in temp_groups:
         )
     )
 
+KP = {
+    "1": "End",
+    "2": "Down",
+    "3": "Next",
+    "4": "Left",
+    "5": "Begin",
+    "6": "Right",
+    "7": "Home",
+    "8": "Up",
+    "9": "Prior",
+    "0": "Insert",
+}
+
 for i in groups:
     keys.extend(
         [
@@ -330,19 +342,19 @@ for i in groups:
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # Key(
-            #     [MOD],
-            #     f"KP_{i.name}",
-            #     lazy.group[i.name].toscreen(),
-            #     desc="Switch to group {}".format(i.name),
-            # ),
+            Key(
+                [MOD],
+                f"KP_{KP[i.name]}",
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
             # MOD1 + shift + letter of group = move focused window to group
-            # Key(
-            #     [MOD, "shift"],
-            #     f"KP_{i.name}",
-            #     lazy.window.togroup(i.name, switch_group=False),
-            #     desc="Move focused window to group {}".format(i.name),
-            # ),
+            Key(
+                [MOD, "shift"],
+                f"KP_{KP[i.name]}",
+                lazy.window.togroup(i.name, switch_group=False),
+                desc="Move focused window to group {}".format(i.name),
+            ),
             Key(
                 [MOD, "shift"],
                 i.name,
