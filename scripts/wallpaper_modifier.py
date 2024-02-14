@@ -37,8 +37,11 @@ if __name__ == "__main__":
     curr = getCurrWallpaper()
     print(f"curr_wallpaper={curr}")
     rand = random.randint(0, len(files) - 1)
-    while rand == curr:
+    while True:
         rand = random.randint(0, len(files) - 1)
+        if rand != curr and files[rand] != "curr_wallpaper":
+            break
+
     curr = rand
     setCurrWallpaper(curr)
     print(f"new_wallpaper={curr}")
