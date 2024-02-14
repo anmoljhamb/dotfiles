@@ -3,7 +3,7 @@ import os
 import subprocess
 from typing import Optional
 
-from libqtile import hook, qtile
+from libqtile import hook, layout, qtile
 from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.layout.bsp import Bsp
@@ -177,7 +177,7 @@ keys = [
         desc="Launch terminal",
     ),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([MOD], "f", lazy.spawn("nautilus"), desc="Launch File explorer"),
+    Key([MOD], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
     Key(
         ["mod1", "shift"],
         "1",
@@ -231,6 +231,7 @@ keys = [
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
+    Key([MOD, "shift"], "l", lazy.spawn("i3lock")),
     Key(["mod1", "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -251,7 +252,7 @@ keys = [
     # Key(
     #     [MOD], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
     # ),
-    Key([], "Print", lazy.spawn("xfce4-screenshooter")),
+    Key([], "Print", lazy.spawn("gnome-screenshot -i")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
@@ -392,7 +393,7 @@ layouts = [
         border_width=2,
         float_rules=[
             *Floating.default_float_rules,
-            Match(wm_class="nitrogen"),  # gitk
+            Match(wm_class="Nemo"),  # gitk
         ],
     ),
     Max(
@@ -588,10 +589,24 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
+floating_layout = Floating(
+    border_normal=nord_fox["bg"],
+    border_focus=nord_fox["cyan"],
+    border_width=2,
+    float_rules=[
+        *Floating.default_float_rules,
+        Match(wm_class="Nemo"),  # gitk
+        Match(wm_class="gnome-screenshot"),  # gitk
+        Match(wm_class="cinnamon-settings network"),  # gitk
+        Match(wm_class="gnome-calendar"),
+        Match(wm_class="gnome-calculator"),
+    ],
+)
 # floating_layout = # floating_layout.layout.confi
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
+wmname = "LG3D"
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
