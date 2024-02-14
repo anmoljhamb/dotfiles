@@ -172,7 +172,7 @@ keys = [
     # Spawns
     Key(
         [],
-        "F12",
+        "F1",
         lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
