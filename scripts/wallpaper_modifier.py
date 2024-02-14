@@ -27,7 +27,7 @@ def setCurrWallpaper(index: int):
 
 def setWallpaper(file: str):
     print("Setting wallpaper to:", file)  # Add this line for debugging
-    cmd = ["nitrogen", "--set-zoom-fill", file]
+    cmd = ["feh", "--bg-fill", file]
     sp.run(cmd, check=True)
 
 
