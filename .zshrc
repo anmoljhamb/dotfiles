@@ -100,8 +100,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=/home/anmol/Applications/nvim.appimage
+export EDITOR=/home/anmol/Applications/nvim.appimage
 export PATH=~/dotfiles/scripts:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
