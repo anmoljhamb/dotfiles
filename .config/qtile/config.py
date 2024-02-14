@@ -29,8 +29,11 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 MOD = "mod4"
 terminal = "alacritty"
 browser = "google-chrome"
-logging.basicConfig(filename="/home/anmol/logs/qtile.log", level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="/home/anmol/logs/qtile.log",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 logging.debug("This is a debug message")
 
@@ -112,8 +115,7 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(),
-        desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -143,8 +145,7 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(),
-                desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -172,7 +173,7 @@ keys = [
     Key(
         [],
         "F12",
-        lazy.spawn("/home/anmol/dotfiles/scripts/tmux_sessionizer"),
+        lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
     Key([MOD], "KP_1", lazy.spawn(terminal), desc="Launch terminal"),
@@ -205,8 +206,7 @@ keys = [
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
-        desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -267,8 +267,7 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(
-                func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
