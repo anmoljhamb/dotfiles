@@ -199,6 +199,13 @@ keys = [
     Key(["mod1", "shift"], "s", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
         ["mod1", "shift"],
+        "w",
+        lazy.spawn(
+            "/usr/bin/python3 /home/anmol/dotfiles/scripts/wallpaper_modifier.py"
+        ),
+    ),
+    Key(
+        ["mod1", "shift"],
         "m",
         lazy.spawn(
             browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
