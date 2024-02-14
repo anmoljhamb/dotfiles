@@ -25,6 +25,12 @@ def setCurrWallpaper(index: int):
         file.write(str(index))
 
 
+def setWallpaper(file: str):
+    print("Setting wallpaper to:", file)  # Add this line for debugging
+    cmd = ["nitrogen", "--set-zoom-fill", file]
+    sp.run(cmd, check=True)
+
+
 if __name__ == "__main__":
     files = os.listdir(directory)
     curr = getCurrWallpaper()
@@ -36,4 +42,4 @@ if __name__ == "__main__":
     setCurrWallpaper(curr)
     print(f"new_wallpaper={curr}")
     file = f"{directory}{files[curr]}"
-    print(file)
+    setWallpaper(file)
