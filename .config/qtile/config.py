@@ -198,6 +198,11 @@ keys = [
     Key(["mod1", "shift"], "s", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
         ["mod1", "shift"],
+        "p",
+        lazy.spawn("/home/anmol/dotfiles/scripts/rofi_wallpaper_selector"),
+    ),
+    Key(
+        ["mod1", "shift"],
         "w",
         lazy.spawn(
             "/usr/bin/python3 /home/anmol/dotfiles/scripts/wallpaper_modifier.py"
