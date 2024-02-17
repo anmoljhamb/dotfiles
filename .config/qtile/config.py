@@ -289,7 +289,15 @@ groups = []
 
 temp_groups = [
     ["1", "", "stack", None, None],
-    ["2", "", "stack", None, None],
+    [
+        "2",
+        "",
+        "stack",
+        None,
+        [
+            Match(wm_class="zoom"),
+        ],
+    ],
     ["3", "󱃖", "monadtall", [terminal], None],
     ["4", "󱃖", "bsp", [terminal], None],
     [
@@ -310,7 +318,10 @@ temp_groups = [
         "󰭻",
         "stack",
         None,
-        Match(wm_class="crx_hnpfjngllnobngcgfapefoaidbinmjnm"),
+        [
+            Match(wm_class="crx_hnpfjngllnobngcgfapefoaidbinmjnm"),
+            Match(wm_class="discord"),
+        ],
     ],
 ]
 
