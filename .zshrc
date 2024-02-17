@@ -126,6 +126,7 @@ export PATH=$PATH:/home/anmol/Android/Sdk/platform-tools
 export PATH=/home/anmol/.pub-cache/bin:$PATH
 export PATH=$PATH:/snap/bin
 export PATH=$PATH:/sbin/
+export PATH=$PATH:/usr/local/go/bin
 export LC_ALL=C
 
 # Created by `pipx` on 2024-01-28 21:14:25
