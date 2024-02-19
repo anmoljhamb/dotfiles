@@ -607,6 +607,7 @@ floating_layout = Floating(
     border_width=2,
     float_rules=[
         *Floating.default_float_rules,
+        Match(role="pop-up"),  # gitk
         Match(wm_class="Nemo"),  # gitk
         Match(wm_class="gnome-screenshot"),  # gitk
         Match(wm_class="cinnamon-settings network"),  # gitk
