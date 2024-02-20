@@ -299,7 +299,7 @@ temp_groups = [
         ],
     ],
     ["3", "󱃖", "monadtall", [terminal], None],
-    ["4", "󱃖", "bsp", [terminal], None],
+    ["4", "󱃖", "monadtall", [terminal], None],
     [
         "5",
         "󰎆",
