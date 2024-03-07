@@ -115,7 +115,8 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(),
+        desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -145,7 +146,8 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(),
+                desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -173,7 +175,8 @@ keys = [
     Key(
         [],
         "F1",
-        lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
+        lazy.spawn(
+            f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
@@ -217,7 +220,8 @@ keys = [
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
+        desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -279,7 +283,8 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(
+                func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
@@ -612,6 +617,8 @@ floating_layout = Floating(
         Match(wm_class="shotwell"),  # gitk
         Match(wm_class="Nemo"),  # gitk
         Match(wm_class="gnome-screenshot"),  # gitk
+        Match(wm_class="cinnamon-settings"),  # gitk
+        Match(wm_class="cinnamon-settings calendar"),  # gitk
         Match(wm_class="cinnamon-settings network"),  # gitk
         Match(wm_class="gnome-calendar"),
         Match(wm_class="gnome-calculator"),
