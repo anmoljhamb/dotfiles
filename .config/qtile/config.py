@@ -115,8 +115,7 @@ keys = [
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key(["control", "shift"], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key(["control", "shift"], "l", lazy.layout.right(),
-        desc="Move focus to right"),
+    Key(["control", "shift"], "l", lazy.layout.right(), desc="Move focus to right"),
     Key(["control", "shift"], "j", lazy.layout.down(), desc="Move focus down"),
     Key(["control", "shift"], "k", lazy.layout.up(), desc="Move focus up"),
     Key(
@@ -146,8 +145,7 @@ keys = [
             Key([], "k", lazy.layout.shuffle_up()),
             Key([], "q", lazy.window.kill()),
             Key(["control"], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key(["control"], "l", lazy.layout.right(),
-                desc="Move focus to right"),
+            Key(["control"], "l", lazy.layout.right(), desc="Move focus to right"),
             Key(["control"], "j", lazy.layout.down(), desc="Move focus down"),
             Key(["control"], "k", lazy.layout.up(), desc="Move focus up"),
             Key(["shift"], "l", lazy.layout.grow_left(), lazy.layout.grow()),
@@ -175,8 +173,7 @@ keys = [
     Key(
         [],
         "F1",
-        lazy.spawn(
-            f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
+        lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
@@ -213,6 +210,11 @@ keys = [
     ),
     Key(
         ["mod1", "shift"],
+        "n",
+        lazy.spawn("/home/anmol/Applications/Obsidian-1.5.8.AppImage"),
+    ),
+    Key(
+        ["mod1", "shift"],
         "m",
         lazy.spawn(
             browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
@@ -220,8 +222,7 @@ keys = [
     ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(),
-        desc="Toggle between layouts"),
+    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
     Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [MOD],
@@ -270,7 +271,7 @@ keys = [
     Key([MOD, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
     Key([MOD, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
     # rofi
-    Key(["mod1"], "tab", lazy.spawn("rofi -show window")),
+    # Key(["mod1"], "tab", lazy.spawn("rofi -show window")),
     Key([MOD], "r", lazy.spawn("rofi -show drun")),
     Key([MOD, "shift"], "r", lazy.spawn("rofi -show run")),
 ]
@@ -283,8 +284,7 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(
-                func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
