@@ -328,6 +328,13 @@ temp_groups = [
             Match(wm_class="discord"),
         ],
     ],
+    [
+        "8",
+        "󱞁",
+        "stack",
+        None,
+        Match(wm_class="obsidian"),
+    ],
 ]
 
 for name, label, _layout, apps, matches in temp_groups:
