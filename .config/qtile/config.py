@@ -257,7 +257,7 @@ keys = [
     # Key(
     #     [MOD], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
     # ),
-    Key([], "Print", lazy.spawn("gnome-screenshot -i")),
+    Key([], "Print", lazy.spawn("env GDK_BACKEND=x11 gnome-screenshot -i")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
