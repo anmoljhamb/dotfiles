@@ -195,7 +195,7 @@ keys = [
         "3",
         lazy.spawn(browser + ' --profile-directory="Profile 2"'),
     ),
-    Key(["mod1", "shift"], "s", lazy.spawn("flatpak run com.spotify.Client")),
+    Key(["mod1", "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
         ["mod1", "shift"],
         "p",
@@ -213,13 +213,13 @@ keys = [
         "n",
         lazy.spawn("/home/anmol/Applications/Obsidian-1.5.8.AppImage"),
     ),
-    Key(
-        ["mod1", "shift"],
-        "m",
-        lazy.spawn(
-            browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
-        ),
-    ),
+    # Key(
+    #     ["mod1", "shift"],
+    #     "m",
+    #     lazy.spawn(
+    #         browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
+    #     ),
+    # ),
     # Toggle between different layouts as defined below
     Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
@@ -624,6 +624,7 @@ floating_layout = Floating(
         # Match(role="pop-up"),  # gitk
         Match(wm_class="shotwell"),  # gitk
         Match(wm_class="Nemo"),  # gitk
+        Match(wm_class="blueman-manager"),  # gitk
         Match(wm_class="gnome-screenshot"),  # gitk
         Match(wm_class="cinnamon-settings"),  # gitk
         Match(wm_class="cinnamon-settings calendar"),  # gitk

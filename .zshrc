@@ -129,6 +129,7 @@ export PATH=$PATH:/sbin/
 export PATH=$PATH:/usr/local/go/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export TERM=xterm-256color
 
 # Created by `pipx` on 2024-01-28 21:14:25
 export PATH="$PATH:/home/anmol/.local/bin"
