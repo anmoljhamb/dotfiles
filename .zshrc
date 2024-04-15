@@ -129,7 +129,8 @@ export PATH=$PATH:/sbin/
 export PATH=$PATH:/usr/local/go/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export TERM=xterm-256color
+export FAQSERVER="159.89.165.219"
+# export TERM=xterm-256color
 
 # Created by `pipx` on 2024-01-28 21:14:25
 export PATH="$PATH:/home/anmol/.local/bin"
@@ -150,4 +151,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+# Automatically add SSH key to the SSH agent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -s)
+    ssh-add ~/.ssh/faq-chatbot
+fi
