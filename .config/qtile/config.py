@@ -179,10 +179,20 @@ keys = [
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
     Key(
+        [MOD, "shift"],
+        "n",
+        lazy.spawn("dunstctl set-paused toggle"),
+    ),
+    Key(
+        [MOD, "shift"],
+        "d",
+        lazy.spawn("dunstctl close-all"),
+    ),
+    Key(
         ["mod1", "shift"],
         "1",
         lazy.spawn(
-            browser + " --profile-directory=Default",
+            browser + ' --profile-directory="Profile 4"',
         ),
     ),
     Key(
