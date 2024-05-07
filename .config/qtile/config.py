@@ -209,7 +209,7 @@ keys = [
     Key(
         ["mod1", "shift"],
         "p",
-        lazy.spawn("/home/anmol/dotfiles/scripts/rofi_wallpaper_selector"),
+        lazy.spawn("/home/anmol/Downloads/Postman/Postman"),
     ),
     Key(
         ["mod1", "shift"],
