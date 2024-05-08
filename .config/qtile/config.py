@@ -213,6 +213,11 @@ keys = [
     ),
     Key(
         ["mod1", "shift"],
+        "a",
+        lazy.spawn("/home/anmol/Applications/arduino-ide_2.3.2_Linux_64bit.AppImage"),
+    ),
+    Key(
+        ["mod1", "shift"],
         "w",
         lazy.spawn(
             "/usr/bin/python3 /home/anmol/dotfiles/scripts/wallpaper_modifier.py"

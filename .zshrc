@@ -134,6 +134,8 @@ export FAQSERVER="159.89.165.219"
 
 # Created by `pipx` on 2024-01-28 21:14:25
 export PATH="$PATH:/home/anmol/.local/bin"
+export PATH="$PATH:/home/anmol/bin"
+export PATH="$PATH:/home/anmol/go/bin"
 
 . "$HOME/.cargo/env"
 
