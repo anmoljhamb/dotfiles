@@ -117,6 +117,8 @@ alias sdi="sudo dnf install"
 alias gac="git add . && git commit -am "
 alias tmux="tmux -u"
 alias ts="tmux_sessionizer"
+alias sva="source .venv/bin/activate"
+alias cab="conda activate base"
 
 eval "$(zoxide init zsh)"
 
@@ -158,3 +160,10 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s)
     ssh-add ~/.ssh/faq-chatbot
 fi
+
+# bun completions
+[ -s "/home/anmol/.bun/_bun" ] && source "/home/anmol/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
