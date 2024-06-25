@@ -132,6 +132,7 @@ export PATH=$PATH:/usr/local/go/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export FAQSERVER="159.89.165.219"
+export BBB_SERVER="157.245.98.120"
 # export TERM=xterm-256color
 
 # Created by `pipx` on 2024-01-28 21:14:25

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Check if the user provided a filename as an argument
+if [ -z "$1" ]; then
+    echo "Usage: $0 <filename.cpp>"
+    exit 1
+fi
+
+# Get the filename from the first argument
+filename=$1
+
+# Check if the file exists
+if [ ! -f "$filename" ]; then
+    echo "File not found: $filename"
+    exit 1
+fi
+
+# Extract the base name (without extension) to create the output file name
+base_name=$(basename "$filename" .cpp)
+
+# Compile the C++ file
+g++ "$filename" -o "${base_name}.out"
+
+# Check if the compilation was successful
+if [ $? -ne 0 ]; then
+    echo "Compilation failed."
+    exit 1
+fi
+
+# Make the output file executable
+chmod +x "${base_name}.out"
+
+# Run the compiled program
+./"${base_name}.out"
+
