@@ -1,25 +1,33 @@
 #!/usr/bin/env bash
 
+# Ensure a selected directory is provided or chosen using fzf
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    selected="$1"
 else
     selected=$(find ~/Projects ~/College/ ~/ ~/dotfiles ~/.config/ ~/.config/nvim/ -mindepth 1 -maxdepth 2 -type d | sort -u | fzf)
 fi
 
-if [[ -z $selected ]]; then
+# Exit if no directory is selected
+if [[ -z "$selected" ]]; then
     exit 0
 fi
 
+# Check if tmux is running
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux -u new-session -c "$selected"
+# Prepare the session name
+selected_name=$(basename "$selected" | tr . _)
+
+# Start a new tmux session if not in a tmux environment and tmux is not running
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
+    tmux -u new-session -s "$selected_name" -c "$selected"
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+# Create a new session if it does not already exist
 if ! tmux has-session -t="$selected_name" 2> /dev/null; then
     tmux -u new-session -ds "$selected_name" -c "$selected"
 fi
 
+# Attach to the existing or newly created session
 tmux -u attach -t "$selected_name"
