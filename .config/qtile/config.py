@@ -176,6 +176,7 @@ keys = [
         lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
+    Key(["mod1"], "Tab", lazy.screen.toggle_group(), desc="Toggle Group"),
     Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
     Key(
