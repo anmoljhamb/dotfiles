@@ -196,6 +196,12 @@ scratch_pads = [
         lazy.group["scratchpad"].dropdown_toggle("file_manager"),
         desc="Launch File Explorer",
     ),
+    Key(
+        [ALT_KEY, "shift"],
+        "t",
+        lazy.group["scratchpad"].dropdown_toggle("terminal"),
+        desc="Launch Terminal",
+    ),
 ]
 
 shortcut_keys = [
