@@ -3,6 +3,7 @@ import os
 import subprocess
 from typing import Optional
 
+from constants import WINDOWS_KEY, TERMINAL, BROWSER
 from theme import nord_fox
 
 from libqtile import hook, qtile
@@ -24,9 +25,8 @@ from libqtile.widget.window_count import WindowCount
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 
-MOD = "mod4"
-terminal = "alacritty"
-browser = "google-chrome"
+
+MOD = WINDOWS_KEY
 logging.basicConfig(
     filename="/home/anmol/logs/qtile.log",
     level=logging.DEBUG,
@@ -129,11 +129,11 @@ keys = [
     Key(
         [],
         "F1",
-        lazy.spawn(f"{terminal} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
+        lazy.spawn(f"{TERMINAL} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
     Key(["mod1"], "Tab", lazy.screen.toggle_group(), desc="Toggle Group"),
-    Key([MOD], "t", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
     Key([MOD], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
     Key(
         [MOD, "shift"],
@@ -149,18 +149,18 @@ keys = [
         ["mod1", "shift"],
         "1",
         lazy.spawn(
-            browser + ' --profile-directory="Profile 4"',
+            BROWSER + ' --profile-directory="Profile 4"',
         ),
     ),
     Key(
         ["mod1", "shift"],
         "2",
-        lazy.spawn(browser + ' --profile-directory="Profile 1"'),
+        lazy.spawn(BROWSER + ' --profile-directory="Profile 1"'),
     ),
     Key(
         ["mod1", "shift"],
         "3",
-        lazy.spawn(browser + ' --profile-directory="Profile 2"'),
+        lazy.spawn(BROWSER + ' --profile-directory="Profile 2"'),
     ),
     Key(["mod1", "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
@@ -276,8 +276,8 @@ temp_groups = [
             Match(wm_class="zoom"),
         ],
     ],
-    ["3", "󱃖", "monadtall", [terminal], None],
-    ["4", "󱃖", "monadtall", [terminal], None],
+    ["3", "󱃖", "monadtall", [TERMINAL], None],
+    ["4", "󱃖", "monadtall", [TERMINAL], None],
     [
         "5",
         "󰎆",
