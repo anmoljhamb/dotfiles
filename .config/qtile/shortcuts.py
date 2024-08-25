@@ -197,10 +197,16 @@ scratch_pads = [
         desc="Launch File Explorer",
     ),
     Key(
-        [ALT_KEY, "shift"],
-        "t",
+        [],
+        "F1",
         lazy.group["scratchpad"].dropdown_toggle("terminal"),
         desc="Launch Terminal",
+    ),
+    Key(
+        [],
+        "F2",
+        lazy.group["scratchpad"].dropdown_toggle("chatgpt"),
+        desc="Launch GPT",
     ),
 ]
 
