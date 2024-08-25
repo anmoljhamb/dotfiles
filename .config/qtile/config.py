@@ -3,9 +3,6 @@ import os
 import subprocess
 from typing import Optional
 
-from constants import WINDOWS_KEY, TERMINAL, BROWSER
-from theme import nord_fox
-
 from libqtile import hook, qtile
 from libqtile.bar import Bar
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
@@ -25,8 +22,9 @@ from libqtile.widget.window_count import WindowCount
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 
+from constants import ALT_KEY, BROWSER, TERMINAL, WINDOWS_KEY
+from theme import nord_fox
 
-MOD = WINDOWS_KEY
 logging.basicConfig(
     filename="/home/anmol/logs/qtile.log",
     level=logging.DEBUG,
@@ -84,7 +82,7 @@ keys = [
     # Moving out of range in Columns layout will create new column.
     # Grow windows. If current window is on the edge of screen and direction
     KeyChord(
-        [MOD],
+        [WINDOWS_KEY],
         "Return",
         [
             Key(
@@ -120,7 +118,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key(
-        [MOD, "shift"],
+        [WINDOWS_KEY, "shift"],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
@@ -132,86 +130,88 @@ keys = [
         lazy.spawn(f"{TERMINAL} -e /home/anmol/dotfiles/scripts/tmux_sessionizer"),
         desc="Launch terminal",
     ),
-    Key(["mod1"], "Tab", lazy.screen.toggle_group(), desc="Toggle Group"),
-    Key([MOD], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-    Key([MOD], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
+    Key([ALT_KEY], "Tab", lazy.screen.toggle_group(), desc="Toggle Group"),
+    Key([WINDOWS_KEY], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
+    Key([WINDOWS_KEY], "f", lazy.spawn("nemo"), desc="Launch File explorer"),
     Key(
-        [MOD, "shift"],
+        [WINDOWS_KEY, "shift"],
         "n",
         lazy.spawn("dunstctl set-paused toggle"),
     ),
     Key(
-        [MOD, "shift"],
+        [WINDOWS_KEY, "shift"],
         "d",
         lazy.spawn("dunstctl close-all"),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "1",
         lazy.spawn(
             BROWSER + ' --profile-directory="Profile 4"',
         ),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "2",
         lazy.spawn(BROWSER + ' --profile-directory="Profile 1"'),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "3",
         lazy.spawn(BROWSER + ' --profile-directory="Profile 2"'),
     ),
-    Key(["mod1", "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
+    Key([ALT_KEY, "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "p",
         lazy.spawn("/home/anmol/Downloads/Postman/Postman"),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "a",
         lazy.spawn("/home/anmol/Applications/arduino-ide_2.3.2_Linux_64bit.AppImage"),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "w",
         lazy.spawn(
             "/usr/bin/python3 /home/anmol/dotfiles/scripts/wallpaper_modifier.py"
         ),
     ),
     Key(
-        ["mod1", "shift"],
+        [ALT_KEY, "shift"],
         "n",
         lazy.spawn("/home/anmol/Applications/Obsidian-1.5.8.AppImage"),
     ),
     # Key(
-    #     ["mod1", "shift"],
+    #     [ALT_KEY, "shift"],
     #     "m",
     #     lazy.spawn(
     #         browser + ' --profile-directory="Profile 2" --app=https://music.youtube.com'
     #     ),
     # ),
     # Toggle between different layouts as defined below
-    Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([MOD, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
-    Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([WINDOWS_KEY], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key(
-        [MOD],
+        [WINDOWS_KEY, "shift"], "Tab", lazy.prev_layout(), desc="Toggle between layouts"
+    ),
+    Key([WINDOWS_KEY], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key(
+        [WINDOWS_KEY],
         "m",
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
     Key(
-        [MOD],
+        [WINDOWS_KEY],
         "y",
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window",
     ),
-    Key([MOD, "shift"], "l", lazy.spawn("i3lock")),
-    Key(["mod1", "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([MOD, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([WINDOWS_KEY, "shift"], "l", lazy.spawn("i3lock")),
+    Key([ALT_KEY, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([WINDOWS_KEY, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    # Key([WINDOWS_KEY], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # COmmands to control stuff on laptop
     Key(
         [],
@@ -227,26 +227,26 @@ keys = [
     ),
     # Key([], ""),
     # Key(
-    #     [MOD], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
+    #     [WINDOWS_KEY], "n", lazy.spawn(["/bin/zsh", "-c", 'echo hello && notify-send "hello?"'])
     # ),
     Key([], "Print", lazy.spawn("flameshot gui")),
-    Key(["mod1", "shift"], "s", lazy.spawn("flameshot gui")),
+    Key([ALT_KEY, "shift"], "s", lazy.spawn("flameshot gui")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
     # Decrease volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
     # Toggle mute
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([MOD], "x", lazy.spawn("playerctl next")),
-    Key([MOD], "z", lazy.spawn("playerctl previous")),
-    Key([MOD], "space", lazy.spawn("playerctl play-pause")),
-    # Key(["mod1", "shift"], "w", lazy.spawn("echo Hello World!")),
+    Key([WINDOWS_KEY], "x", lazy.spawn("playerctl next")),
+    Key([WINDOWS_KEY], "z", lazy.spawn("playerctl previous")),
+    Key([WINDOWS_KEY], "space", lazy.spawn("playerctl play-pause")),
+    # Key([ALT_KEY, "shift"], "w", lazy.spawn("echo Hello World!")),
     # Groups.
-    Key([MOD, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
-    Key([MOD, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
+    Key([WINDOWS_KEY, "shift"], "w", lazy.screen.next_group(skip_empty=True)),
+    Key([WINDOWS_KEY, "shift"], "s", lazy.screen.prev_group(skip_empty=True)),
     # rofi
-    # Key(["mod1"], "tab", lazy.spawn("rofi -show window")),
-    Key([MOD], "r", lazy.spawn("rofi -show drun")),
-    Key([MOD, "shift"], "r", lazy.spawn("rofi -show run")),
+    # Key([ALT_KEY], "tab", lazy.spawn("rofi -show window")),
+    Key([WINDOWS_KEY], "r", lazy.spawn("rofi -show drun")),
+    Key([WINDOWS_KEY, "shift"], "r", lazy.spawn("rofi -show run")),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -255,7 +255,7 @@ keys = [
 for vt in range(1, 8):
     keys.append(
         Key(
-            ["control", "mod1"],
+            ["control", ALT_KEY],
             f"f{vt}",
             lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
@@ -339,26 +339,26 @@ for i in groups:
         [
             # mod1 + letter of group = switch to group
             Key(
-                [MOD],
+                [WINDOWS_KEY],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
             Key(
-                [MOD],
+                [WINDOWS_KEY],
                 f"KP_{KP[i.name]}",
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # MOD1 + shift + letter of group = move focused window to group
+            # WINDOWS_KEY1 + shift + letter of group = move focused window to group
             Key(
-                [MOD, "shift"],
+                [WINDOWS_KEY, "shift"],
                 f"KP_{KP[i.name]}",
                 lazy.window.togroup(i.name, switch_group=False),
                 desc="Move focused window to group {}".format(i.name),
             ),
             Key(
-                [MOD, "shift"],
+                [WINDOWS_KEY, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=False),
                 desc="Move focused window to group {}".format(i.name),
@@ -569,15 +569,18 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag(
-        [MOD],
+        [WINDOWS_KEY],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [MOD], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+        [WINDOWS_KEY],
+        "Button3",
+        lazy.window.set_size_floating(),
+        start=lazy.window.get_size(),
     ),
-    Click([MOD], "Button2", lazy.window.bring_to_front()),
+    Click([WINDOWS_KEY], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
