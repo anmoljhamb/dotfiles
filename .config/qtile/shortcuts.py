@@ -163,6 +163,15 @@ system_controls = [
     Key([WINDOWS_KEY, "shift"], "l", lazy.spawn("i3lock"), desc="Lock screen"),
     Key([ALT_KEY, "shift"], "r", lazy.reload_config(), desc="Reload Qtile config"),
     Key([WINDOWS_KEY, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([WINDOWS_KEY, "shift"], "n", lazy.spawn("dunstctl set-paused toggle")),
+    Key([WINDOWS_KEY, "shift"], "d", lazy.spawn("dunstctl close-all")),
+    Key(
+        [ALT_KEY, "shift"],
+        "w",
+        lazy.spawn(
+            "/usr/bin/python3 /home/anmol/dotfiles/scripts/wallpaper_modifier.py"
+        ),
+    ),
 ]
 
 group_navigation = [
@@ -189,3 +198,5 @@ shortcut_keys = [
     *system_controls,
     *group_navigation,
 ]
+
+print(len(shortcut_keys))
