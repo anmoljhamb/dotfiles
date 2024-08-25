@@ -11,17 +11,10 @@ from libqtile.layout.max import Max
 from libqtile.layout.stack import Stack
 from libqtile.layout.xmonad import MonadTall
 from libqtile.lazy import lazy
-from libqtile.widget.clock import Clock
-from libqtile.widget.cpu import CPU
-from libqtile.widget.groupbox import GroupBox
-from libqtile.widget.memory import Memory
-from libqtile.widget.net import Net
 from libqtile.widget.textbox import TextBox
-from libqtile.widget.window_count import WindowCount
-from qtile_extras import widget
-from qtile_extras.widget.decorations import PowerLineDecoration
 
-from constants import ALT_KEY, BROWSER, FONT_SIZE, TERMINAL, WINDOWS_KEY
+from constants import (ALT_KEY, BROWSER, FONT_SIZE, GROUPS, KP, TERMINAL,
+                       WINDOWS_KEY)
 from custom_bar import custom_bar
 from theme import nord_fox
 
@@ -265,50 +258,7 @@ for vt in range(1, 8):
 
 groups = []
 
-temp_groups = [
-    ["1", "", "stack", None, None],
-    [
-        "2",
-        "",
-        "stack",
-        None,
-        [
-            Match(wm_class="zoom"),
-        ],
-    ],
-    ["3", "󱃖", "monadtall", [TERMINAL], None],
-    ["4", "󱃖", "monadtall", [TERMINAL], None],
-    [
-        "5",
-        "󰎆",
-        "stack",
-        [
-            "flatpak run com.spotify.Client",
-        ],
-        [
-            Match(wm_class="spotify"),
-            Match(wm_class="crx_cinhimbnkkaeohfgghhklpknlkffjgod"),
-        ],
-    ],
-    ["6", "", "floating", None, None],
-    [
-        "7",
-        "󰭻",
-        "stack",
-        None,
-        [
-            Match(wm_class="crx_hnpfjngllnobngcgfapefoaidbinmjnm"),
-            Match(wm_class="discord"),
-        ],
-    ],
-    [
-        "8",
-        "󱞁",
-        "stack",
-        None,
-        Match(wm_class="obsidian"),
-    ],
-]
+temp_groups = [*GROUPS]
 
 for name, label, _layout, apps, matches in temp_groups:
     groups.append(
@@ -321,18 +271,6 @@ for name, label, _layout, apps, matches in temp_groups:
         )
     )
 
-KP = {
-    "1": "End",
-    "2": "Down",
-    "3": "Next",
-    "4": "Left",
-    "5": "Begin",
-    "6": "Right",
-    "7": "Home",
-    "8": "Up",
-    "9": "Prior",
-    "0": "Insert",
-}
 
 for i in groups:
     keys.extend(
