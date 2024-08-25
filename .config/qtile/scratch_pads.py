@@ -1,5 +1,7 @@
 from libqtile.config import DropDown, ScratchPad
 
+from utils import calc_center
+
 scratch_pads = [
     ScratchPad(
         "scratchpad",
@@ -7,7 +9,7 @@ scratch_pads = [
             DropDown(
                 "file_manager",
                 "nemo",
-                x=0.1,
+                x=calc_center(0.4),
                 width=0.6,
                 height=0.6,
                 opacity=0.9,
