@@ -73,3 +73,43 @@ GROUPS = [
         Match(wm_class="obsidian"),
     ],
 ]
+
+LAYOUTS = [
+    Stack(
+        num_stacks=1,
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=MARGIN,
+    ),
+    Bsp(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=MARGIN,
+    ),
+    Floating(
+        border_normal=nord_fox["bg"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        float_rules=[
+            *Floating.default_float_rules,
+            Match(wm_class="Nemo"),  # gitk
+        ],
+    ),
+    Max(
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        border_width=2,
+        margin=MARGIN,
+    ),
+    MonadTall(
+        ratio=0.72,
+        border_normal=nord_fox["black"],
+        border_focus=nord_fox["cyan"],
+        margin=MARGIN,
+        border_width=2,
+        single_border_width=2,
+        single_margin=MARGIN,
+    ),
+]

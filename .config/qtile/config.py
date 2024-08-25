@@ -13,8 +13,8 @@ from libqtile.layout.xmonad import MonadTall
 from libqtile.lazy import lazy
 from libqtile.widget.textbox import TextBox
 
-from constants import (ALT_KEY, BROWSER, FONT_SIZE, GROUPS, KP, TERMINAL,
-                       WINDOWS_KEY)
+from constants import (ALT_KEY, BROWSER, FONT_SIZE, GROUPS, KP, LAYOUTS,
+                       TERMINAL, WINDOWS_KEY)
 from custom_bar import custom_bar
 from theme import nord_fox
 
@@ -307,46 +307,6 @@ for i in groups:
 
 MARGIN = 6
 
-layouts = [
-    Stack(
-        num_stacks=1,
-        border_normal=nord_fox["black"],
-        border_focus=nord_fox["cyan"],
-        border_width=2,
-        margin=MARGIN,
-    ),
-    Bsp(
-        border_normal=nord_fox["black"],
-        border_focus=nord_fox["cyan"],
-        border_width=2,
-        margin=MARGIN,
-    ),
-    Floating(
-        border_normal=nord_fox["bg"],
-        border_focus=nord_fox["cyan"],
-        border_width=2,
-        float_rules=[
-            *Floating.default_float_rules,
-            Match(wm_class="Nemo"),  # gitk
-        ],
-    ),
-    Max(
-        border_normal=nord_fox["black"],
-        border_focus=nord_fox["cyan"],
-        border_width=2,
-        margin=MARGIN,
-    ),
-    MonadTall(
-        ratio=0.72,
-        border_normal=nord_fox["black"],
-        border_focus=nord_fox["cyan"],
-        margin=MARGIN,
-        border_width=2,
-        single_border_width=2,
-        single_margin=MARGIN,
-    ),
-]
-
 
 widget_defaults = dict(
     font="CaskayiaCove Nerd Font",
@@ -354,9 +314,9 @@ widget_defaults = dict(
     padding=8,
 )
 
+layouts = [*LAYOUTS]
+
 extension_defaults = widget_defaults.copy()
-
-
 screens = [
     Screen(top=custom_bar),
 ]
