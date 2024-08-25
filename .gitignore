@@ -1,6 +1,7 @@
 .venv
 python3*
 # Byte-compiled / optimized / DLL files
+curr_wallpaper
 __pycache__/
 *.py[cod]
 *$py.class
