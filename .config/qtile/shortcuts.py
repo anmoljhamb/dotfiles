@@ -82,7 +82,6 @@ window_resizing = [
 
 application_launchers = [
     Key([WINDOWS_KEY], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
-    Key([WINDOWS_KEY], "f", lazy.spawn("nemo"), desc="Launch File Explorer"),
     Key([WINDOWS_KEY], "r", lazy.spawn("rofi -show drun"), desc="Launch Rofi drun"),
     Key(
         [WINDOWS_KEY, "shift"],
@@ -190,6 +189,15 @@ group_navigation = [
     Key([ALT_KEY], "Tab", lazy.screen.toggle_group(), desc="Toggle between groups"),
 ]
 
+scratch_pads = [
+    Key(
+        [WINDOWS_KEY],
+        "f",
+        lazy.group["scratchpad"].dropdown_toggle("file_manager"),
+        desc="Launch File Explorer",
+    ),
+]
+
 shortcut_keys = [
     *window_management,
     *layout_management,
@@ -197,6 +205,5 @@ shortcut_keys = [
     *application_launchers,
     *system_controls,
     *group_navigation,
+    *scratch_pads,
 ]
-
-print(len(shortcut_keys))

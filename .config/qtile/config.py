@@ -9,6 +9,7 @@ from libqtile.lazy import lazy
 
 from constants import ALT_KEY, FONT_SIZE, GROUPS, KP, LAYOUTS, WINDOWS_KEY
 from custom_bar import custom_bar
+from scratch_pads import scratch_pads
 from shortcuts import shortcut_keys
 from theme import nord_fox
 
@@ -85,6 +86,7 @@ for i in groups:
         ]
     )
 
+groups.extend(scratch_pads)
 
 MARGIN = 6
 
