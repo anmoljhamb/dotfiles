@@ -208,6 +208,12 @@ scratch_pads = [
         lazy.group["scratchpad"].dropdown_toggle("chatgpt"),
         desc="Launch GPT",
     ),
+    Key(
+        [],
+        "F3",
+        lazy.group["scratchpad"].dropdown_toggle("ytmusic"),
+        desc="Launch YT Music",
+    ),
 ]
 
 shortcut_keys = [

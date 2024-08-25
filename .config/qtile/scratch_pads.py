@@ -28,7 +28,17 @@ scratch_pads = [
             ),
             DropDown(
                 "chatgpt",
-                f'{BROWSER} -app=https://chat.openai.com --profile-directory="Profile 4" --user-data-dir=.config/chromium/scratchpad-chatgpt',
+                f"{BROWSER} -app=https://chat.openai.com --user-data-dir=.config/chromium/scratchpad-chatgpt",
+                x=calc_center(0.7),
+                y=calc_center(0.7),
+                width=0.7,
+                height=0.7,
+                opacity=1,
+                on_focus_lost_hide=False,
+            ),
+            DropDown(
+                "ytmusic",
+                f"{BROWSER} -app=https://music.youtube.com --user-data-dir=.config/chromium/scratchpad-ytmusic",
                 x=calc_center(0.7),
                 y=calc_center(0.7),
                 width=0.7,
