@@ -41,14 +41,14 @@ def create_symlink(target_path, link_name):
     - target_path: The file to link to.
     - link_name: The name of the symlink.
     """
-    if os.path.exists(link_name):
-        print(f"Link or file already exists: {link_name}")
-    else:
+    if not os.path.exists(link_name):
         try:
             os.symlink(target_path, link_name)
             print(f"Created symlink: {link_name} -> {target_path}")
+            return 1
         except OSError as e:
             print(f"Failed to create symlink: {e}")
+    return 0
 
 
 if __name__ == "__main__":
@@ -76,11 +76,11 @@ if __name__ == "__main__":
 
         # Display files with their paths
         if files:
-            print("Files found:")
+            count = 0
             for file_path, filename in files:
                 target_path = os.path.abspath(file_path)
                 link_name = target_path.replace("/dotfiles", "")
-                print(f"> ln -s {target_path} {link_name}")
-                create_symlink(target_path, link_name)
+                count += create_symlink(target_path, link_name)
+            print(f"Linked {count} new files.")
         else:
             print("No files found in the directory and its subdirectories.")
