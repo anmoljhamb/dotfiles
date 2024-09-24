@@ -1,14 +1,38 @@
 swipe:
   3:
     up:
-      command: "xdotool key super+shift+s" # History forward
+      begin:
+        command: "xdotool key XF86AudioRaiseVolume" # Start increasing volume
+      update:
+        command: "xdotool key XF86AudioRaiseVolume" # Continue increasing volume based on gesture speed
+      end:
+        command: "xdotool key XF86AudioRaiseVolume" # Final adjustment at the end of swipe
     down:
-      command: "xdotool key super+shift+w" # History back
+      begin:
+        command: "xdotool key XF86AudioLowerVolume" # Start decreasing volume
+      update:
+        command: "xdotool key XF86AudioLowerVolume" # Continue decreasing volume based on gesture speed
+      end:
+        command: "xdotool key XF86AudioLowerVolume" # Final adjustment at the end of swipe
     left:
-      command: "xdotool key super+shift+s" # History forward
+      command: "xdotool key super+shift+s"
     right:
-      command: "xdotool key super+shift+w" # History back
+      command: "xdotool key super+shift+w"
   4:
+    up:
+      begin:
+        command: "xdotool key XF86MonBrightnessUp"
+      update:
+        command: "xdotool key XF86MonBrightnessUp"
+      end:
+        command: "xdotool key XF86MonBrightnessUp"
+    down:
+      begin:
+        command: "xdotool key XF86MonBrightnessDown"
+      update:
+        command: "xdotool key XF86MonBrightnessDown"
+      end:
+        command: "xdotool key XF86MonBrightnessDown"
     left:
       command: "xdotool key super+z"
     right:
@@ -16,10 +40,11 @@ swipe:
 
 hold:
   4:
-    command: "xdotool key super+space" # Activity
+    command: "xdotool key super+space"
 
 threshold:
   swipe: 0.5
 
 interval:
+  hold: 0.2
   swipe: 0.5
