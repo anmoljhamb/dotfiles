@@ -169,3 +169,7 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/home/anmol/Applications/apache-maven-3.9.8/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
