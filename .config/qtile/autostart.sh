@@ -12,4 +12,5 @@ run nm-applet &
 blueman-applet &
 /bin/python3 ~/dotfiles/scripts/wallpaper_modifier.py &
 picom --config $HOME/.config/picom/picom.conf &
+fusuma &
 # flatpak run org.jellyfin.JellyfinServer &
