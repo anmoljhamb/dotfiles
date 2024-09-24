@@ -14,6 +14,10 @@ swipe:
     right:
       command: "xdotool key super+x"
 
+hold:
+  4:
+    command: "xdotool key super+space" # Activity
+
 threshold:
   swipe: 0.5
 
