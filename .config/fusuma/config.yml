@@ -1,0 +1,10 @@
+swipe:
+  3:
+    up:
+      command: "xdotool key super+shift+s" # History forward
+    down:
+      command: "xdotool key super+shift+w" # History back
+    left:
+      command: "xdotool key super+shift+s" # History forward
+    right:
+      command: "xdotool key super+shift+w" # History back
