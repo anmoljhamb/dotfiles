@@ -8,3 +8,9 @@ swipe:
       command: "xdotool key super+shift+s" # History forward
     right:
       command: "xdotool key super+shift+w" # History back
+
+threshold:
+  swipe: 0.5
+
+interval:
+  swipe: 0.5
