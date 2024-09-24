@@ -121,13 +121,13 @@ system_controls = [
     Key(
         [],
         "XF86MonBrightnessUp",
-        lazy.spawn("brightnessctl set +3%"),
+        lazy.spawn("/home/anmol/dotfiles/scripts/brightness.sh up"),
         desc="Raise brightness",
     ),
     Key(
         [],
         "XF86MonBrightnessDown",
-        lazy.spawn("brightnessctl set 3-% "),
+        lazy.spawn("/home/anmol/dotfiles/scripts/brightness.sh down"),
         desc="Lower brightness",
     ),
     Key([], "Print", lazy.spawn("flameshot gui"), desc="Take screenshot"),
