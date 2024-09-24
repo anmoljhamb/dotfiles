@@ -1,7 +1,6 @@
+from constants import ALT_KEY, BROWSER, TERMINAL, WINDOWS_KEY
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
-
-from constants import ALT_KEY, BROWSER, TERMINAL, WINDOWS_KEY
 
 # A list of available commands that can be bound to keys can be found
 # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -136,19 +135,19 @@ system_controls = [
     Key(
         [],
         "XF86AudioRaiseVolume",
-        lazy.spawn("amixer -q set Master 5%+"),
+        lazy.spawn("/home/anmol/dotfiles/scripts/volume.sh up"),
         desc="Increase volume",
     ),
     Key(
         [],
         "XF86AudioLowerVolume",
-        lazy.spawn("amixer -q set Master 5%-"),
+        lazy.spawn("/home/anmol/dotfiles/scripts/volume.sh down"),
         desc="Decrease volume",
     ),
     Key(
         [],
         "XF86AudioMute",
-        lazy.spawn("amixer -q set Master toggle"),
+        lazy.spawn("/home/anmol/dotfiles/scripts/volume.sh mute"),
         desc="Mute/Unmute volume",
     ),
     Key([WINDOWS_KEY], "x", lazy.spawn("playerctl next"), desc="Next track"),
@@ -201,12 +200,6 @@ scratch_pads = [
         "F1",
         lazy.group["scratchpad"].dropdown_toggle("terminal"),
         desc="Launch Terminal",
-    ),
-    Key(
-        [],
-        "F2",
-        lazy.group["scratchpad"].dropdown_toggle("chatgpt"),
-        desc="Launch GPT",
     ),
     Key(
         [],
