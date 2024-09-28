@@ -119,6 +119,7 @@ alias tmux="tmux -u"
 alias ts="tmux_sessionizer"
 alias sva="source .venv/bin/activate"
 alias cab="conda activate base"
+alias ctcb="xclip -selection clipboard"
 
 eval "$(zoxide init zsh)"
 
