@@ -20,6 +20,10 @@ installPreReq(){
 
 installChrome(){
   notify $counter "Intalling Chrome"
+  chrome_url="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+  wget $chrome_url -O /tmp/google-chrome-stable_current_amd64.deb
+  sudo apt install -y /tmp/google-chrome-stable_current_amd64.deb
+  rm -f /tmp/google-chrome-stable_current_amd64.deb
   ((counter++))
 }
 
