@@ -2,22 +2,29 @@
 
 NAME="Anmol Jhamb"
 EMAIL="talktoanmol@outlook.com"
+counter=1
 
-installPreReq(){
+notify(){
   cat << EOF
 ---
-1. Installing prerequisites.
+${1}: ${2}
 EOF
+}
 
+installPreReq(){
+  notify $counter "Intalling PreRequesites"
   pre_reqs=$(tr '\n' ' ' < ./pre-reqs.txt)
   echo "$pre_reqs" | xargs sudo apt install 
+  ((counter++))
+}
+
+installChrome(){
+  notify $counter "Intalling Chrome"
+  ((counter++))
 }
 
 setupGit(){
-  cat << EOF
----
-2. Setting Up git.
-EOF
+  notify $counter "Setting up Git"
   ssh_file=~/.ssh/heyitsanmolj_github
   git config --global user.email "$EMAIL"
   git config --global user.name "$NAME"
@@ -25,7 +32,9 @@ EOF
   eval "$(ssh-agent -s)"
   ssh-add $ssh_file
   xclip -selection clipboard -i "$ssh_file.pub"
+  ((counter++))
 }
 
 installPreReq
-setupGit
+installChrome
+# setupGit
