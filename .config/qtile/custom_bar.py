@@ -1,3 +1,4 @@
+from constants import ICON_SIZE
 from libqtile.bar import Bar
 from libqtile.widget.clock import Clock
 from libqtile.widget.cpu import CPU
@@ -7,8 +8,6 @@ from libqtile.widget.net import Net
 from libqtile.widget.window_count import WindowCount
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
-
-from constants import ICON_SIZE
 from theme import nord_fox
 
 custom_bar = Bar(
@@ -90,10 +89,10 @@ custom_bar = Bar(
             # background=nord_fox["black"],
             decorations=[PowerLineDecoration(path="rounded_right")],
         ),
-        widget.ThermalSensor(
-            background=nord_fox["bg"],
-            foreground=nord_fox["pink"],
-        ),
+        # widget.ThermalSensor(
+        #     background=nord_fox["bg"],
+        #     foreground=nord_fox["pink"],
+        # ),
         CPU(
             format="  {freq_current}GHz {load_percent:05.2f}%",
             background=nord_fox["bg"],
@@ -104,13 +103,13 @@ custom_bar = Bar(
             background=nord_fox["bg"],
             foreground=nord_fox["cyan"],
         ),
-        Net(
-            format="{interface}: {down:6.2f}{down_suffix:<2}↓",
-            prefix="M",
-            interface="wlp3s0",
-            background=nord_fox["bg"],
-            foreground=nord_fox["green"],
-        ),
+        # Net(
+        #     format="{interface}: {down:6.2f}{down_suffix:<2}↓",
+        #     prefix="M",
+        #     interface="wlp3s0",
+        #     background=nord_fox["bg"],
+        #     foreground=nord_fox["green"],
+        # ),
         widget.Spacer(
             8,
             background=nord_fox["bg"],
