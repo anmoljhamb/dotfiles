@@ -18,10 +18,6 @@ confirm() {
     fi
 }
 
-# confirm() {
-#     read -r -p "$1 (Press Enter to continue or Ctrl+C to cancel) " response
-# }
-
 notify(){
   cat << EOF
 ---
