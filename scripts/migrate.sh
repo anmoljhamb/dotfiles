@@ -154,3 +154,4 @@ confirm "Install Font?" installFont
 confirm "Setup Alacritty?" setupAlacritty
 confirm "Setup Tmux?" setupTmux
 confirm "Setup Qtile?" setupQtile
+confirm "Install Grub Theme?" installGrubTheme
