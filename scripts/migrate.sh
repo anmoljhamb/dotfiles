@@ -111,6 +111,38 @@ setupAlacritty(){
   rm -rf ~/alacritty
 }
 
+setupTmux(){
+  notify "Setting Up Tmux"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
+setupQtile(){
+  notify "Setting up Qtile"
+  mkdir -p ~/logs
+  sudo wget https://raw.githubusercontent.com/qtile/qtile/refs/heads/master/resources/qtile.desktop -O /usr/share/xsessions/qtile.desktop
+  sudo gpasswd -a $USER input
+  newgrp input
+  sudo apt-get install libinput-tools
+  sudo apt-get install ruby
+  sudo gem install fusuma
+  echo "1" >> ~/dotfiles/Wallpapers/curr_wallpaper
+  cd ~
+  git clone https://github.com/vinceliuice/Tela-icon-theme.git
+  cd Tela-icon-theme
+  ./install.sh
+  cd ..
+  cd ..
+}
+
+installGrubTheme(){
+  notify "Installing Grub Theme"
+  git clone https://github.com/vinceliuice/grub2-themes.git
+  cd grub2-themes
+  sudo ./install.sh -b -t tela
+  cd ..
+  rm -rf ~/grub2-themes/
+}
+
 confirm "Install PreRequesites?" installPreReq
 confirm "Install Google Chrome?" installChrome
 confirm "Setup git?" setupGit
@@ -120,3 +152,5 @@ confirm "Setuo zsh?" setupZsh
 confirm "Link All Dotfiles?" linkAll
 confirm "Install Font?" installFont
 confirm "Setup Alacritty?" setupAlacritty
+confirm "Setup Tmux?" setupTmux
+confirm "Setup Qtile?" setupQtile
