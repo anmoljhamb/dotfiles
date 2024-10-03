@@ -43,6 +43,8 @@ def create_symlink(target_path, link_name):
     """
     if not os.path.exists(link_name):
         try:
+            folder_path = os.path.dirname(link_name)
+            os.makedirs(folder_path, exist_ok=True)
             os.symlink(target_path, link_name)
             print(f"Created symlink: {link_name} -> {target_path}")
             return 1
