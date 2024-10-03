@@ -140,7 +140,7 @@ installGrubTheme(){
   cd grub2-themes
   sudo ./install.sh -b -t tela
   cd ..
-  rm -rf ~/grub2-themes/
+  rm -rf grub2-themes
 }
 
 confirm "Install PreRequesites?" installPreReq
