@@ -14,7 +14,7 @@ EOF
 installPreReq(){
   notify $counter "Intalling PreRequesites"
   pre_reqs=$(tr '\n' ' ' < ./pre-reqs.txt)
-  echo "$pre_reqs" | xargs sudo apt install 
+  echo "$pre_reqs" | xargs sudo apt install -y 
   ((counter++))
 }
 
@@ -41,4 +41,4 @@ setupGit(){
 
 installPreReq
 installChrome
-# setupGit
+setupGit
