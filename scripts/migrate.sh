@@ -4,6 +4,24 @@ NAME="Anmol Jhamb"
 EMAIL="talktoanmol@outlook.com"
 counter=1
 
+confirm() {
+    local prompt_message="$1"  # First argument is the message
+    local function_to_call="$2"  # Second argument is the function name
+
+    read -r -p "$prompt_message (Press Enter to proceed, type 's' to skip) " response
+
+    if [[ "$response" != "s" ]]; then
+        # Call the function if the user doesn't skip
+        "$function_to_call"
+    else
+        echo "Step skipped."
+    fi
+}
+
+# confirm() {
+#     read -r -p "$1 (Press Enter to continue or Ctrl+C to cancel) " response
+# }
+
 notify(){
   cat << EOF
 ---
@@ -39,6 +57,6 @@ setupGit(){
   ((counter++))
 }
 
-installPreReq
-installChrome
-setupGit
+confirm "Install PreRequesites?" installPreReq
+confirm "Install Google Chrome?" installChrome
+confirm "Setup git?" setupGit
