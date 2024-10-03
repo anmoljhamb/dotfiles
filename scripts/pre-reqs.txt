@@ -35,3 +35,4 @@ flameshot
 lxappearance
 nemo
 materia-gtk-theme
+zsh

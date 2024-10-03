@@ -54,6 +54,12 @@ setupGit(){
   ((counter++))
 }
 
+linkAll(){
+  notify $counter "Linking all dotfiles"
+  python3 ~/dotfiles/link_all.py
+}
+
 confirm "Install PreRequesites?" installPreReq
 confirm "Install Google Chrome?" installChrome
 confirm "Setup git?" setupGit
+confirm "Link All Dotfiles?" linkAll
