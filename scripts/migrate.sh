@@ -196,12 +196,15 @@ case "$step_to_run" in
   setupQtile)
     setupQtile
     ;;
+  installFusuma)
+    installFusuma
+    ;;
   installGrubTheme)
     installGrubTheme
     ;;
   *)
     echo "Unknown step: $step_to_run"
-    echo "Available steps: installPreReq, installChrome, setupGit, linkAll, setupNpm, setupNvim, setupZsh, installFont, setupAlacritty, setupTmux, setupQtile, installGrubTheme"
+    echo "Available steps: installPreReq, installChrome, setupGit, linkAll, setupNpm, setupNvim, setupZsh, installFont, setupAlacritty, setupTmux, setupQtile, installGrubTheme, installFusuma"
     exit 1
     ;;
 esac
