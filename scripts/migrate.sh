@@ -72,6 +72,7 @@ setupNvim(){
   notify "Setup NeoVim"
   wget https://github.com/neovim/neovim/releases/download/v0.10.2/nvim.appimage -O ~/Applications/nvim.appimage
   chmod u+x ~/Applications/nvim.appimage
+  git clone https://github.com/anmoljhamb/nvim-config.git ~/.config/nvim
 }
 
 setupZsh(){
@@ -96,9 +97,9 @@ setupAlacritty(){
   notify "Setting up Alacritty"
   curl https://sh.rustup.rs -sSf | sh
   # shellcheck source=/dev/null
-  source ~/.zshrc
-  git clone https://github.com/alacritty/alacritty.git
-  cd alacritty
+  . "$HOME/.cargo/env"
+  git clone https://github.com/alacritty/alacritty.git ~/alacritty
+  cd ~/alacritty
   rustup override set stable
   rustup update stable
   cargo build --release
@@ -124,19 +125,16 @@ setupTmux(){
 setupQtile(){
   notify "Setting up Qtile"
   mkdir -p ~/logs
-  sudo wget https://raw.githubusercontent.com/qtile/qtile/refs/heads/master/resources/qtile.desktop -O /usr/share/xsessions/qtile.desktop
+  sudo cp ~/dotfiles/scripts/qtile.desktop /usr/share/xsessions/qtile.desktop
   sudo gpasswd -a $USER input
   newgrp input
   sudo apt-get install libinput-tools
   sudo apt-get install ruby
   sudo gem install fusuma
   echo "1" >> ~/dotfiles/Wallpapers/curr_wallpaper
-  cd ~
-  git clone https://github.com/vinceliuice/Tela-icon-theme.git
-  cd Tela-icon-theme
-  ./install.sh
-  cd ..
-  # cd ..
+  git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/Tela-icon-theme
+  ~/Tela-icon-theme/.install.sh
+  rm -rf ~/Tela-icon-theme
 }
 
 installGrubTheme(){
