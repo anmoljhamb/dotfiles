@@ -82,6 +82,7 @@ window_resizing = [
 application_launchers = [
     Key([WINDOWS_KEY], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
     Key([WINDOWS_KEY], "r", lazy.spawn("rofi -show drun"), desc="Launch Rofi drun"),
+    Key([WINDOWS_KEY], "b", lazy.spawn("blueman-manager"), desc="Launch bluetooth-manager"),
     Key(
         [WINDOWS_KEY, "shift"],
         "r",
