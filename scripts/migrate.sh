@@ -121,18 +121,21 @@ setupTmux(){
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
+installFusuma(){
+  echo "Installing fusuma"
+  sudo apt-get install -y libinput-tools ruby ruby
+  sudo gem install fusuma
+  sudo gpasswd -a $USER input
+  newgrp input
+}
+
 setupQtile(){
   notify "Setting up Qtile"
   mkdir -p ~/logs
   sudo cp ~/dotfiles/scripts/qtile.desktop /usr/share/xsessions/qtile.desktop
-  sudo gpasswd -a $USER input
-  newgrp input
-  sudo apt-get install libinput-tools
-  sudo apt-get install ruby
-  sudo gem install fusuma
   echo "1" >> ~/dotfiles/Wallpapers/curr_wallpaper
   git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/Tela-icon-theme
-  ~/Tela-icon-theme/.install.sh
+  ~/Tela-icon-theme/install.sh
   rm -rf ~/Tela-icon-theme
 }
 
@@ -159,6 +162,9 @@ case "$step_to_run" in
     ;;
   setupGit)
     setupGit
+    ;;
+  installFusuma)
+    installFusuma
     ;;
   linkAll)
     linkAll
