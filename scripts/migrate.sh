@@ -132,7 +132,7 @@ setupQtile(){
   cd Tela-icon-theme
   ./install.sh
   cd ..
-  cd ..
+  # cd ..
 }
 
 installGrubTheme(){
@@ -144,15 +144,53 @@ installGrubTheme(){
   rm -rf grub2-themes
 }
 
-confirm "Install PreRequesites?" installPreReq
-confirm "Install Google Chrome?" installChrome
-confirm "Setup git?" setupGit
-confirm "Setup npm?" setupNpm
-confirm "Setup nvim?" setupNvim
-confirm "Setuo zsh?" setupZsh
-confirm "Link All Dotfiles?" linkAll
-confirm "Install Font?" installFont
-confirm "Setup Alacritty?" setupAlacritty
-confirm "Setup Tmux?" setupTmux
-confirm "Setup Qtile?" setupQtile
-confirm "Install Grub Theme?" installGrubTheme
+if [[ $# -eq 0 ]]; then
+  echo "Please provide a step name to run."
+  exit 1
+fi
+
+step_to_run="$1"
+
+case "$step_to_run" in
+  installPreReq)
+    installPreReq
+    ;;
+  installChrome)
+    installChrome
+    ;;
+  setupGit)
+    setupGit
+    ;;
+  linkAll)
+    linkAll
+    ;;
+  setupNpm)
+    setupNpm
+    ;;
+  setupNvim)
+    setupNvim
+    ;;
+  setupZsh)
+    setupZsh
+    ;;
+  intallFont)
+    intallFont
+    ;;
+  setupAlacritty)
+    setupAlacritty
+    ;;
+  setupTmux)
+    setupTmux
+    ;;
+  setupQtile)
+    setupQtile
+    ;;
+  installGrubTheme)
+    installGrubTheme
+    ;;
+  *)
+    echo "Unknown step: $step_to_run"
+    echo "Available steps: installPreReq, installChrome, setupGit, linkAll, setupNpm, setupNvim, setupZsh, installFont, setupAlacritty, setupTmux, setupQtile, installGrubTheme"
+    exit 1
+    ;;
+esac
