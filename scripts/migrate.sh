@@ -184,8 +184,8 @@ case "$step_to_run" in
   setupZsh)
     setupZsh
     ;;
-  intallFont)
-    intallFont
+  installFont)
+    installFont
     ;;
   setupAlacritty)
     setupAlacritty

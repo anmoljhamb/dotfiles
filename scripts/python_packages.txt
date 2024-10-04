@@ -64,7 +64,6 @@ pyudev
 pyxdg
 qtile
 qtile-extras
-quodlibet
 reportbug
 requests
 rfc
