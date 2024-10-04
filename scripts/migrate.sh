@@ -21,7 +21,7 @@ confirm() {
 notify(){
   cat << EOF
 ---
-$counter: ${2}
+$counter: ${1}
 EOF
 ((counter++))
 }
