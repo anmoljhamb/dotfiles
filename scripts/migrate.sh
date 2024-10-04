@@ -28,9 +28,10 @@ EOF
 
 installPreReq(){
   notify "Intalling PreRequesites"
-  pre_reqs=$(tr '\n' ' ' < ./pre-reqs.txt)
+  pre_reqs=$(tr '\n' ' ' < ~/dotfiles/scripts/pre-reqs.txt)
   echo "$pre_reqs" | xargs sudo apt install -y 
-  pip install -r ~/dotfiles/requirements.txt --break-system-packages
+  python_packages=$(tr '\n' ' ' < ~/dotfiles/scripts/python_packages.txt)
+  echo "$python_packages" | xargs pip install --break-system-packages
 }
 
 installChrome(){
