@@ -82,6 +82,7 @@ setupZsh(){
 installFont(){
   notify "Installing Font"
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip -O /tmp/CascadiaCode.zip
+  cd /tmp
   unzip CascadiaCode.zip -d font
   mkdir -p ~/.fonts
   mv /tmp/font/*.ttf ~/.fonts
