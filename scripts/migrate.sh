@@ -87,8 +87,7 @@ setupZsh(){
 installFont(){
   notify "Installing Font"
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip -O /tmp/CascadiaCode.zip
-  cd /tmp
-  unzip CascadiaCode.zip -d font
+  unzip /tmp/CascadiaCode.zip -d /tmp/font
   mkdir -p ~/.fonts
   mv /tmp/font/*.ttf ~/.fonts
 }
@@ -113,7 +112,7 @@ setupAlacritty(){
   scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
   mkdir -p ${ZDOTDIR:-~}/.zsh_functions\necho 'fpath+=${ZDOTDIR:-~}/.zsh_functions' >> ${ZDOTDIR:-~}/.zshrc
   cp extra/completions/_alacritty ${ZDOTDIR:-~}/.zsh_functions/_alacritty
-  cd ..
+  cd ~/dotfiles
   rm -rf ~/alacritty
 }
 
@@ -139,11 +138,9 @@ setupQtile(){
 
 installGrubTheme(){
   notify "Installing Grub Theme"
-  git clone https://github.com/vinceliuice/grub2-themes.git
-  cd grub2-themes
-  sudo ./install.sh -b -t tela
-  cd ..
-  rm -rf grub2-themes
+  git clone https://github.com/vinceliuice/grub2-themes.git ~/grub2-themes
+  sudo ~/grub2-themes/install.sh -b -t tela
+  rm -rf ~/grub2-themes
 }
 
 if [[ $# -eq 0 ]]; then
