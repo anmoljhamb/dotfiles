@@ -133,7 +133,10 @@ setupQtile(){
   notify "Setting up Qtile"
   mkdir -p ~/logs
   sudo cp ~/dotfiles/scripts/qtile.desktop /usr/share/xsessions/qtile.desktop
-  echo "1" >> ~/dotfiles/Wallpapers/curr_wallpaper
+  echo "1" > ~/dotfiles/Wallpapers/curr_wallpaper
+}
+
+setupLooks(){
   git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/Tela-icon-theme
   ~/Tela-icon-theme/install.sh
   rm -rf ~/Tela-icon-theme
@@ -162,6 +165,9 @@ case "$step_to_run" in
     ;;
   setupGit)
     setupGit
+    ;;
+  setupLooks)
+    setupLooks
     ;;
   installFusuma)
     installFusuma
