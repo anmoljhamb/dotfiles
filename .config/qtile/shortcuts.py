@@ -91,7 +91,7 @@ application_launchers = [
     Key(
         [ALT_KEY, "shift"],
         "1",
-        lazy.spawn(BROWSER + ' --profile-directory="Profile 4"'),
+        lazy.spawn(BROWSER + ' --profile-directory="Default"'),
     ),
     Key(
         [ALT_KEY, "shift"],
