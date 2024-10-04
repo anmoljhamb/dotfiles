@@ -22,6 +22,7 @@ notify(){
   cat << EOF
 ---
 $counter: ${1}
+---
 EOF
 ((counter++))
 }
@@ -51,6 +52,7 @@ setupGit(){
   eval "$(ssh-agent -s)"
   ssh-add $ssh_file
   xclip -selection clipboard -i "$ssh_file.pub"
+  echo "Copied $ssh_file.pub to clipboard"
 }
 
 linkAll(){
