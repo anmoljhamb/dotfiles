@@ -8,8 +8,8 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export VISUAL=/home/anmol/Applications/nvim.appimage
-export EDITOR=/home/anmol/Applications/nvim.appimage
+export VISUAL=nvim
+export EDITOR=nvim
 export PATH=~/dotfiles/scripts:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -17,8 +17,8 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(zoxide init zsh)"
 
-alias nvim="nvim.appimage"
-alias vim="nvim.appimage"
+# alias nvim="nvim.appimage"
+alias vim="nvim"
 alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
@@ -37,6 +37,7 @@ export PATH=$PATH:/home/anmol/Android/Sdk/platform-tools
 export PATH=/home/anmol/.pub-cache/bin:$PATH
 export PATH=$PATH:/snap/bin
 export PATH=$PATH:/sbin/
+export PATH=$PATH:/home/anmol/Applications/squashfs-root/usr/bin
 export PATH=$PATH:/usr/local/go/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -49,7 +50,7 @@ export PATH="$PATH:/home/anmol/.local/bin"
 export PATH="$PATH:/home/anmol/bin"
 export PATH="$PATH:/home/anmol/go/bin"
 
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

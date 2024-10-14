@@ -2,13 +2,12 @@ import logging
 import os
 import subprocess
 
+from constants import ALT_KEY, FONT_SIZE, GROUPS, KP, LAYOUTS, WINDOWS_KEY
+from custom_bar import custom_bar
 from libqtile import hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.layout.floating import Floating
 from libqtile.lazy import lazy
-
-from constants import ALT_KEY, FONT_SIZE, GROUPS, KP, LAYOUTS, WINDOWS_KEY
-from custom_bar import custom_bar
 from scratch_pads import scratch_pads
 from shortcuts import shortcut_keys
 from theme import nord_fox

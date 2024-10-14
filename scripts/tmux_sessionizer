@@ -4,7 +4,7 @@
 if [[ $# -eq 1 ]]; then
     selected="$1"
 else
-    selected=$(find ~/Projects ~/ ~/dotfiles ~/.config/ ~/.config/nvim/ -mindepth 1 -maxdepth 2 -type d | sort -u | fzf)
+    selected=$(find /mnt/c/Projects ~/ ~/dotfiles ~/.config/ ~/.config/nvim/ -mindepth 1 -maxdepth 2 -type d | sort -u | fzf)
 fi
 
 # Exit if no directory is selected
