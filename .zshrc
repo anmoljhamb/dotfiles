@@ -66,7 +66,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-eval $(keychain --eval --agents ssh heyitsanmolj_github > /dev/null 2>&1)
+eval $(keychain --eval --agents ssh heyitsanmolj_github faq_server 2>/dev/null)
 
 # bun completions
 [ -s "/home/anmol/.bun/_bun" ] && source "/home/anmol/.bun/_bun"
