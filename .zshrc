@@ -65,11 +65,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-# Automatically add SSH key to the SSH agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent -s)
-    ssh-add ~/.ssh/heyitsanmolj_github
-fi
+
+eval $(keychain --eval --agents ssh heyitsanmolj_github > /dev/null 2>&1)
 
 # bun completions
 [ -s "/home/anmol/.bun/_bun" ] && source "/home/anmol/.bun/_bun"
