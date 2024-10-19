@@ -105,7 +105,7 @@ application_launchers = [
         lazy.spawn(BROWSER + ' --profile-directory="Profile 2"'),
     ),
     Key([ALT_KEY, "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
-    Key([ALT_KEY, "shift"], "p", lazy.spawn("/home/anmol/Downloads/Postman/Postman")),
+    Key([ALT_KEY, "shift"], "p", lazy.spawn("/home/anmol/Applications/Postman/Postman")),
     Key(
         [ALT_KEY, "shift"],
         "a",
