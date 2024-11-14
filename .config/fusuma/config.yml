@@ -15,9 +15,9 @@ swipe:
       end:
         command: "xdotool key XF86AudioLowerVolume" # Final adjustment at the end of swipe
     left:
-      command: "xdotool key super+shift+s"
+      command: "xdotool key super+z"
     right:
-      command: "xdotool key super+shift+w"
+      command: "xdotool key super+x"
   4:
     up:
       begin:
@@ -34,9 +34,9 @@ swipe:
       end:
         command: "xdotool key XF86MonBrightnessDown"
     left:
-      command: "xdotool key super+z"
+      command: "xdotool key super+shift+s"
     right:
-      command: "xdotool key super+x"
+      command: "xdotool key super+shift+w"
 
 hold:
   4:
