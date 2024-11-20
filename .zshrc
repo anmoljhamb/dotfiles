@@ -30,6 +30,7 @@ alias ts="tmux_sessionizer"
 alias sva="source .venv/bin/activate"
 alias cab="conda activate base"
 alias ctcb="xclip -selection clipboard"
+alias gfrh="git fetch && git reset --hard origin/dev"
 
 export PATH=$PATH:/home/anmol/.spicetify
 export PATH=$PATH:/home/anmol/Applications
