@@ -1,0 +1,97 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.activityBar.location": "hidden",
+    "editor.minimap.autohide": true,
+    "editor.minimap.scale": 3,
+    "editor.minimap.renderCharacters": false,
+    "editor.copyWithSyntaxHighlighting": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.emptySelectionClipboard": false,
+    "workbench.editor.enablePreview": false,
+    "window.newWindowDimensions": "inherit",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "files.trimTrailingWhitespace": true,
+    "diffEditor.renderSideBySide": false,
+    "editor.snippetSuggestions": "top",
+    "editor.detectIndentation": true,
+    "files.insertFinalNewline": false,
+    "files.trimFinalNewlines": true,
+    "workbench.editor.showTabs": "multiple",
+    "editor.lineNumbers": "relative",
+    // Silence the Noise
+    "editor.guides.indentation": true,
+    "breadcrumbs.enabled": false,
+    "scm.diffDecorations": "none",
+    // "editor.hover.delay": 1500,
+    "editor.hover.enabled": true,
+    "editor.matchBrackets": "always",
+    "workbench.tips.enabled": false,
+    "editor.colorDecorators": true,
+    "git.decorations.enabled": false,
+    "workbench.startupEditor": "none",
+    "editor.lightbulb.enabled": "off",
+    "editor.selectionHighlight": false,
+    "editor.overviewRulerBorder": false,
+    "editor.renderLineHighlight": "gutter",
+    "editor.occurrencesHighlight": "off",
+    "problems.decorations.enabled": true,
+    "editor.renderControlCharacters": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.gotoLocation.multipleReferences": "goto",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "editor.gotoLocation.multipleDeclarations": "goto",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "editor.gotoLocation.multipleImplementations": "goto",
+    "editor.gotoLocation.multipleTypeDefinitions": "goto",
+    // Typography
+    "editor.fontFamily": "CaskaydiaCove Nerd Font",
+    "editor.suggestFontSize": 16,
+    "editor.suggestLineHeight": 30,
+    "terminal.integrated.lineHeight": 1.5,
+    "terminal.integrated.fontSize": 16,
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        // Hide everything in /vendor, except the "laravel" and "livewire" folder.
+        "**/vendor/{[^l],?[^ai]}*": true,
+        // Hide everything in /public, except "index.php"
+        "**/public/{[^i],?[^n]}*": true,
+        "**/node_modules": true,
+        "**/.venv": true,
+        "**/__pycache__/**": true,
+        "**/dist": true,
+        "**/_ide_helper.php": true,
+        "**/composer.lock": true,
+        "**/package-lock.json": true,
+        "storage": true,
+        ".phpunit.result.cache": true
+    },
+    // Code
+    "editor.linkedEditing": true,
+    "editor.formatOnSave": true,
+    "editor.fontLigatures": true,
+    "diffEditor.wordWrap": "on",
+    "editor.fontSize": 15,
+    "explorer.confirmDelete": false,
+    "editor.accessibilitySupport": "off",
+    "chat.editor.wordWrap": "on",
+    "editor.fontWeight": "400",
+    "vscode_custom_css.imports": [
+        "file:///home/anmol/dotfiles/vscode/custom_css.css",
+        "file:///home/anmol/dotfiles/vscode/custom_js.js",
+    ],
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.tree.enableStickyScroll": false,
+    "editor.stickyScroll.maxLineCount": 1,
+    "editor.stickyScroll.enabled": false,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<esc>"
+            ]
+        }
+    ],
+}
