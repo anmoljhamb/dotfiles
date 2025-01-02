@@ -70,7 +70,6 @@ unset __conda_setup
 # Automatically add SSH key to the SSH agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s)
-    ssh-add ~/.ssh/faq-chatbot
     ssh-add ~/.ssh/id_ed25519
     ssh-add ~/.ssh/id_rsa
 fi
