@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-plugins=(git zsh-autosuggestions ssh-agent)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -40,6 +40,7 @@ export PATH=$PATH:/snap/bin
 export PATH=$PATH:/sbin/
 export PATH=$PATH:/home/anmol/Applications/squashfs-root/usr/bin
 export PATH=$PATH:/usr/local/go/bin
+export PATH=~/development/flutter/bin:$PATH
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export FAQSERVER="159.89.165.219"
@@ -67,12 +68,17 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+<<<<<<< HEAD
 # Automatically add SSH key to the SSH agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s)
     ssh-add ~/.ssh/id_ed25519
     ssh-add ~/.ssh/id_rsa
 fi
+=======
+
+eval $(keychain --eval --agents ssh heyitsanmolj_github faq_server 2>/dev/null)
+>>>>>>> main
 
 # bun completions
 [ -s "/home/anmol/.bun/_bun" ] && source "/home/anmol/.bun/_bun"
@@ -81,6 +87,7 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/home/anmol/Applications/apache-maven-3.9.8/bin:$PATH"
+export PATH="/home/anmol/Applications/platform-tools/:$PATH"
 
 
 # Load Angular CLI autocompletion.

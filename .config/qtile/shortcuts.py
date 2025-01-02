@@ -82,6 +82,7 @@ window_resizing = [
 application_launchers = [
     Key([WINDOWS_KEY], "t", lazy.spawn(TERMINAL), desc="Launch terminal"),
     Key([WINDOWS_KEY], "r", lazy.spawn("rofi -show drun"), desc="Launch Rofi drun"),
+    Key([WINDOWS_KEY], "b", lazy.spawn("blueman-manager"), desc="Launch bluetooth-manager"),
     Key(
         [WINDOWS_KEY, "shift"],
         "r",
@@ -104,7 +105,7 @@ application_launchers = [
         lazy.spawn(BROWSER + ' --profile-directory="Profile 2"'),
     ),
     Key([ALT_KEY, "shift"], "m", lazy.spawn("flatpak run com.spotify.Client")),
-    Key([ALT_KEY, "shift"], "p", lazy.spawn("/home/anmol/Downloads/Postman/Postman")),
+    Key([ALT_KEY, "shift"], "p", lazy.spawn("/home/anmol/Applications/Postman/Postman")),
     Key(
         [ALT_KEY, "shift"],
         "a",
