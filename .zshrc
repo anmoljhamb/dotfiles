@@ -32,6 +32,11 @@ alias cve="python3 -m venv .venv"
 alias pir="pip install -r requirements.txt"
 alias cab="conda activate base"
 alias ctcb="xclip -selection clipboard"
+alias dcu="docker compose up"
+alias dcl="docker compose logs"
+alias dclf="docker compose logs --follow"
+alias dcub="docker compose up --build"
+alias dcd="docker compose down"
 
 export PATH=$PATH:/home/anmol/.spicetify
 export PATH=$PATH:/home/anmol/Applications
