@@ -33,6 +33,7 @@ alias pir="pip install -r requirements.txt"
 alias cab="conda activate base"
 alias ctcb="xclip -selection clipboard"
 alias gfrh="git fetch && git reset --hard origin/dev"
+alias ta="tmux attach"
 
 export PATH=$PATH:/home/anmol/.spicetify
 export PATH=$PATH:/home/anmol/Applications
