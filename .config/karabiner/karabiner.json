@@ -30,7 +30,159 @@
       ],
       "name": "Customized",
       "selected": true,
-      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" },
+      "complex_modifications": {
+        "rules": [
+          {
+            "description": "Remap Ctrl-based shortcuts to Cmd in browsers",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": ["left_control"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "t",
+                    "modifiers": ["left_command"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.google\\.Chrome$",
+                      "^org\\.mozilla\\.firefox$",
+                      "^com\\.apple\\.Safari$",
+                      "^com\\.microsoft\\.Edg$"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": ["left_control", "left_shift"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "t",
+                    "modifiers": ["left_command", "left_shift"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.google\\.Chrome$",
+                      "^org\\.mozilla\\.firefox$",
+                      "^com\\.apple\\.Safari$",
+                      "^com\\.microsoft\\.Edg$"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "mandatory": ["left_control"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "l",
+                    "modifiers": ["left_command", "left_option"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.google\\.Chrome$",
+                      "^org\\.mozilla\\.firefox$",
+                      "^com\\.apple\\.Safari$",
+                      "^com\\.microsoft\\.Edg$"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "w",
+                  "modifiers": {
+                    "mandatory": ["left_control"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "w",
+                    "modifiers": ["left_command"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.google\\.Chrome$",
+                      "^org\\.mozilla\\.firefox$",
+                      "^com\\.apple\\.Safari$",
+                      "^com\\.microsoft\\.Edg$"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Remap Option + Q to Command + W",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "q",
+                  "modifiers": {
+                    "mandatory": ["left_option"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "w",
+                    "modifiers": ["left_command"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Open iTerm with Left Option + T",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": ["left_command"]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -na iTerm"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }
