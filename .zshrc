@@ -8,8 +8,8 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export VISUAL=/home/anmol/Applications/nvim.appimage
-export EDITOR=/home/anmol/Applications/nvim.appimage
+export VISUAL=nvim
+export EDITOR=nvim
 export PATH=~/dotfiles/scripts:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -17,8 +17,7 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(zoxide init zsh)"
 
-alias nvim="nvim.appimage"
-alias vim="nvim.appimage"
+alias vim="nvim"
 alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
@@ -57,8 +56,6 @@ export PATH="$PATH:/home/anmol/.local/bin"
 export PATH="$PATH:/home/anmol/bin"
 export PATH="$PATH:/home/anmol/go/bin"
 
-. "$HOME/.cargo/env"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/anmol/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -89,4 +86,3 @@ export PATH="/home/anmol/Applications/platform-tools/:$PATH"
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-. "/home/anmol/.deno/env"
