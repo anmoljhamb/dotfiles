@@ -36,6 +36,7 @@ alias dcl="docker compose logs"
 alias dclf="docker compose logs --follow"
 alias dcub="docker compose up --build"
 alias dcd="docker compose down"
+alias dir="ls"
 
 export PATH=$PATH:/home/anmol/.spicetify
 export PATH=$PATH:/home/anmol/Applications
