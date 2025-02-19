@@ -1,7 +1,0 @@
-#!/bin/bash 
-
-export DISPLAY=:0
-
-WALLPAPER_DIR="$HOME/dotfiles/Wallpapers"
-chosen_wallpaper=$(ls -1 ~/dotfiles/Wallpapers | grep "\.jpg$" | rofi -dmenu -i -selected-row 1 -p "Choose Wallpaper")
-feh --bg-fill $WALLPAPER_DIR/$chosen_wallpaper
