@@ -87,3 +87,5 @@ export PATH="/home/anmol/Applications/platform-tools/:$PATH"
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
