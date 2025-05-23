@@ -18,6 +18,7 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(zoxide init zsh)"
 
 alias vim="nvim"
+alias d="deactivate"
 alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
 alias soz="source ~/.zshrc"
