@@ -1,13 +1,65 @@
 #!/usr/bin/env bash
 
 PROJECTS_DIR=~/Projects
-OPTIONS=("attach" "new" "list" "attach-any" "kill" "quit")
+
+# Colors for better visual appeal
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+GRAY='\033[0;90m'
+NC='\033[0m' # No Color
+
+# Unicode symbols
+ARROW="→"
+BULLET="•"
+CHECK="✓"
+CROSS="✗"
+
+print_header() {
+    clear
+    echo -e "${CYAN}╭─────────────────────────────────────╮${NC}"
+    echo -e "${CYAN}│${WHITE}         Tmux Session Manager        ${CYAN}│${NC}"
+    echo -e "${CYAN}╰─────────────────────────────────────╯${NC}"
+    echo
+}
+
+print_menu() {
+    echo -e "${WHITE}Choose an action:${NC}"
+    echo
+    echo -e "  ${GREEN}[a]${NC} ${ARROW} Attach to project session"
+    echo -e "  ${GREEN}[n]${NC} ${ARROW} Create new project session"
+    echo -e "  ${GREEN}[l]${NC} ${ARROW} List all active sessions"
+    echo -e "  ${GREEN}[t]${NC} ${ARROW} Attach to any session"
+    echo -e "  ${GREEN}[k]${NC} ${ARROW} Kill a session"
+    echo -e "  ${RED}[q]${NC} ${ARROW} Quit"
+    echo
+    echo -n -e "${YELLOW}${BULLET} Enter your choice: ${NC}"
+}
+
+print_success() {
+    echo -e "${GREEN}${CHECK} $1${NC}"
+}
+
+print_error() {
+    echo -e "${RED}${CROSS} $1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}${BULLET} $1${NC}"
+}
 
 while true; do
-    echo "Action: (a)ttach project, (n)ew project, (l)ist sessions, (t) attach any, (k) kill session, (q)uit"
+    print_header
+    print_menu
+    
     read -rsn1 input
     echo
-
+    echo
+    
     case "$input" in
         a|A)
             action="attach"
@@ -25,59 +77,118 @@ while true; do
             action="kill"
             ;;
         q|Q|$'\e')
-            break
+            echo -e "${GRAY}Goodbye! ${NC}"
+            exit 0
             ;;
         *)
-            echo "Invalid key: '$input'"
+            print_error "Invalid key: '$input'"
+            echo
+            read -rp "Press Enter to continue..."
             continue
             ;;
     esac
 
-    if [[ "$action" == "new" ]]; then
-        read -rp "New project name: " name
-        [[ -z "$name" ]] && continue
-
-        dir="$PROJECTS_DIR/$name"
-        mkdir -p "$dir"
-        tmux new-session -s "$name" -c "$dir"
-        break
-    fi
-
-    if [[ "$action" == "attach" ]]; then
-        selected=$(find "$PROJECTS_DIR" -mindepth 1 -maxdepth 1 -type d | sort | fzf --prompt="Select project: ")
-        [[ -z "$selected" ]] && continue
-
-        selected_name=$(basename "$selected" | tr . _)
-
-        if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-            tmux new-session -ds "$selected_name" -c "$selected"
-        fi
-
-        tmux attach -t "$selected_name"
-        break
-    fi
-
-    if [[ "$action" == "list" ]]; then
-        tmux ls || echo "No tmux sessions found."
-        echo
-        read -rp "Press Enter to return to menu..."
-        continue
-    fi
-
-    if [[ "$action" == "attach-any" ]]; then
-        session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Attach session: ")
-        [[ -z "$session" ]] && continue
-        tmux attach-session -t "$session"
-        break
-    fi
-
-    if [[ "$action" == "kill" ]]; then
-        session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Kill session: ")
-        [[ -z "$session" ]] && continue
-
-        tmux kill-session -t "$session"
-        echo "Killed session: $session"
-        read -rp "Press Enter to return to menu..."
-        continue
-    fi
+    case "$action" in
+        "new")
+            echo -e "${CYAN}Creating new project session...${NC}"
+            echo
+            read -rp "$(echo -e "${YELLOW}${BULLET} Project name: ${NC}")" name
+            
+            if [[ -z "$name" ]]; then
+                print_error "Project name cannot be empty"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            dir="$PROJECTS_DIR/$name"
+            mkdir -p "$dir"
+            print_success "Created directory: $dir"
+            print_info "Starting tmux session..."
+            tmux new-session -s "$name" -c "$dir"
+            exit 0
+            ;;
+            
+        "attach")
+            echo -e "${CYAN}Selecting project to attach...${NC}"
+            echo
+            selected=$(find "$PROJECTS_DIR" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | fzf --prompt="Select project: " --height=40% --border --preview="ls -la {}")
+            
+            if [[ -z "$selected" ]]; then
+                print_error "No project selected"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            selected_name=$(basename "$selected" | tr . _)
+            
+            if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+                print_info "Creating new session: $selected_name"
+                tmux new-session -ds "$selected_name" -c "$selected"
+            fi
+            
+            print_success "Attaching to session: $selected_name"
+            tmux attach -t "$selected_name"
+            exit 0
+            ;;
+            
+        "list")
+            echo -e "${CYAN}Active tmux sessions:${NC}"
+            echo -e "${GRAY}────────────────────${NC}"
+            
+            if tmux ls 2>/dev/null; then
+                echo
+            else
+                print_info "No tmux sessions found"
+            fi
+            
+            echo -e "${GRAY}────────────────────${NC}"
+            read -rp "Press Enter to return to menu..."
+            ;;
+            
+        "attach-any")
+            echo -e "${CYAN}Selecting session to attach...${NC}"
+            echo
+            
+            if ! tmux ls 2>/dev/null >/dev/null; then
+                print_error "No active tmux sessions found"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Attach to session: " --height=40% --border)
+            
+            if [[ -z "$session" ]]; then
+                print_error "No session selected"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            print_success "Attaching to session: $session"
+            tmux attach-session -t "$session"
+            exit 0
+            ;;
+            
+        "kill")
+            echo -e "${CYAN}Selecting session to kill...${NC}"
+            echo
+            
+            if ! tmux ls 2>/dev/null >/dev/null; then
+                print_error "No active tmux sessions found"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Kill session: " --height=40% --border)
+            
+            if [[ -z "$session" ]]; then
+                print_error "No session selected"
+                read -rp "Press Enter to continue..."
+                continue
+            fi
+            
+            tmux kill-session -t "$session"
+            print_success "Killed session: $session"
+            read -rp "Press Enter to continue..."
+            ;;
+    esac
 done
