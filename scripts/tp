@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+PROJECTS_DIR=~/Projects
+OPTIONS=("attach" "new" "list" "attach-any" "kill" "quit")
+
+while true; do
+    echo "Action: (a)ttach project, (n)ew project, (l)ist sessions, (t) attach any, (k) kill session, (q)uit"
+    read -rsn1 input
+    echo
+
+    case "$input" in
+        a|A)
+            action="attach"
+            ;;
+        n|N)
+            action="new"
+            ;;
+        l|L)
+            action="list"
+            ;;
+        t|T)
+            action="attach-any"
+            ;;
+        k|K)
+            action="kill"
+            ;;
+        q|Q|$'\e')
+            break
+            ;;
+        *)
+            echo "Invalid key: '$input'"
+            continue
+            ;;
+    esac
+
+    if [[ "$action" == "new" ]]; then
+        read -rp "New project name: " name
+        [[ -z "$name" ]] && continue
+
+        dir="$PROJECTS_DIR/$name"
+        mkdir -p "$dir"
+        tmux new-session -s "$name" -c "$dir"
+        break
+    fi
+
+    if [[ "$action" == "attach" ]]; then
+        selected=$(find "$PROJECTS_DIR" -mindepth 1 -maxdepth 1 -type d | sort | fzf --prompt="Select project: ")
+        [[ -z "$selected" ]] && continue
+
+        selected_name=$(basename "$selected" | tr . _)
+
+        if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+            tmux new-session -ds "$selected_name" -c "$selected"
+        fi
+
+        tmux attach -t "$selected_name"
+        break
+    fi
+
+    if [[ "$action" == "list" ]]; then
+        tmux ls || echo "No tmux sessions found."
+        echo
+        read -rp "Press Enter to return to menu..."
+        continue
+    fi
+
+    if [[ "$action" == "attach-any" ]]; then
+        session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Attach session: ")
+        [[ -z "$session" ]] && continue
+        tmux attach-session -t "$session"
+        break
+    fi
+
+    if [[ "$action" == "kill" ]]; then
+        session=$(tmux ls 2>/dev/null | cut -d: -f1 | fzf --prompt="Kill session: ")
+        [[ -z "$session" ]] && continue
+
+        tmux kill-session -t "$session"
+        echo "Killed session: $session"
+        read -rp "Press Enter to return to menu..."
+        continue
+    fi
+done
