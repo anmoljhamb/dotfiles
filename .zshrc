@@ -94,3 +94,5 @@ export PATH="/home/anmol/Applications/platform-tools/:$PATH"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(pyenv init -)"
