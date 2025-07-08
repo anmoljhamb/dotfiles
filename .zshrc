@@ -17,7 +17,7 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(zoxide init zsh)"
 
-alias vim="nvim"
+alias vim="nvim.appimage"
 alias d="deactivate"
 alias editzsh="vim ~/.zshrc"
 alias editvim="cd ~/.config/nvim && vim ."
@@ -94,7 +94,3 @@ export PATH="/home/anmol/Applications/platform-tools/:$PATH"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(pyenv init -)"
-
-. "$HOME/.local/bin/env"
