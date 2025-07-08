@@ -96,3 +96,5 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(pyenv init -)"
+
+. "$HOME/.local/bin/env"
