@@ -16,6 +16,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(zoxide init zsh)"
+export PATH=~/Applications/:$PATH
 
 alias vim="nvim.appimage"
 alias d="deactivate"
