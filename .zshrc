@@ -95,6 +95,17 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH=/Users/consultadd/.opencode/bin:$PATH
+export PATH="$(brew --prefix python3)/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
-. "$HOME/.local/bin/env"
+# pnpm
+export PNPM_HOME="/Users/consultadd/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
+export PATH="$HOME/develop/flutter/bin:$PATH"
