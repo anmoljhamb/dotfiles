@@ -109,3 +109,10 @@ esac
 # pnpm end
 #
 export PATH="$HOME/develop/flutter/bin:$PATH"
+
+
+alias claude1="CLAUDE_CONFIG_DIR=~/.claude-account1 claude"
+alias claude2="CLAUDE_CONFIG_DIR=~/.claude-account2 claude"
+
+# Added by Antigravity
+export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
