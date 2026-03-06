@@ -116,3 +116,25 @@ alias claude2="CLAUDE_CONFIG_DIR=~/.claude-account2 claude"
 
 # Added by Antigravity
 export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
+
+killpython() {
+    local port=$1
+    if [ -z "$port" ]; then
+        echo "Usage: killpython <port>"
+        return 1
+    fi
+    
+    local pids=$(lsof -i :$port | grep -i python | awk '{print $2}' | sort -u)
+    
+    if [ -z "$pids" ]; then
+        echo "No Python processes found on port $port"
+        return 0
+    fi
+    
+    echo "Killing Python PIDs on port $port: $pids"
+    echo "$pids" | xargs kill -9 2>/dev/null
+    echo "Done!"
+}
+
+# Added by Antigravity
+export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
