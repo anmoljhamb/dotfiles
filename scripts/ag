@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case "$1" in
+  1) antigravity --user-data-dir ~/.ag1 --new-window ;;
+  2) antigravity --user-data-dir ~/.ag2 --new-window ;;
+  3) antigravity --user-data-dir ~/.ag3 --new-window ;;
+  *) echo "Usage: ag {1|2|3}" ;;
+esac

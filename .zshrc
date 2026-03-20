@@ -138,3 +138,12 @@ killpython() {
 
 # Added by Antigravity
 export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/consultadd/.antigravity/antigravity/bin:$PATH"
