@@ -76,3 +76,6 @@ assets/
 # (call them directly from repo or add repo/scripts to PATH)
 scripts/
 
+# Reference folder (assets stored in repo but not symlinked)
+reference/
+reference

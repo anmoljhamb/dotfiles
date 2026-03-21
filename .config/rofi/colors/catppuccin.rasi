@@ -1,0 +1,30 @@
+/**
+ * Catppuccin Mocha Theme Colors for Rofi
+ * Based on https://github.com/catppuccin/catppuccin
+ */
+
+* {
+    bg0:     #1e1e2e;
+    bg1:     #181825;
+    bg2:     #11111b;
+    bg3:     #313244;
+    bg4:     #45475a;
+
+    fg:      #cdd6f4;
+    fg-dark: #a6adc8;
+
+    red:     #f38ba8;
+    orange:  #fab387;
+    yellow:  #f9e2af;
+    green:   #a6e3a1;
+    aqua:    #94e2d5;
+    blue:    #89b4fa;
+    purple:  #cba6f7;
+
+    background:     @bg0;
+    background-alt: @bg3;
+    foreground:     @fg;
+    selected:       @purple;
+    active:         @green;
+    urgent:         @red;
+}

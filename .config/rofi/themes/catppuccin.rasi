@@ -1,0 +1,205 @@
+/* Catppuccin Mocha Theme for Rofi */
+
+configuration {
+    modi:                        "drun,calc";
+    show-icons:                  true;
+    display-calc:                " ";
+    display-drun:                " ";
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono Nerd Font 12";
+}
+
+@import "~/.config/rofi/colors/catppuccin.rasi"
+
+* {
+    shade-shadow:                @bg2;
+    shade-bg:                    @bg3;
+    shade-border:                @bg4;
+
+    text-selected:               @bg0;
+    text:                        @fg;
+}
+
+/* Main Window ------------------------------------------------ */
+window {
+    fullscreen:                  false;
+    transparency:                "real";
+    cursor:                      "default";
+    background-color:            @bg1;
+    border:                      2px;
+    border-color:                @purple;
+    border-radius:               16px;
+    width:                       800px;
+    location:                    center;
+    anchor:                      center;
+}
+
+/* Main Box --------------------------------------------------- */
+mainbox {
+    children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+    background-color:            transparent;
+    spacing:                     16px;
+    margin:                      0px;
+    padding:                     24px;
+}
+
+/* Inputbar --------------------------------------------------- */
+inputbar {
+    children:                    [ "prompt", "entry" ];
+    border-radius:               12px;
+    background-color:            @bg3;
+    text-color:                  @fg;
+    spacing:                     12px;
+    margin:                      0px;
+    padding:                     12px 16px;
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  @purple;
+    font:                        "JetBrainsMono Nerd Font 14";
+}
+
+textbox-prompt-colon {
+    expand:                      false;
+    str:                         "::";
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+/* Entry input ------------------------------------------------ */
+entry {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    placeholder:                 "Search...";
+    placeholder-color:           @fg-dark;
+}
+
+/* Listview --------------------------------------------------- */
+listview {
+    cursor:                      "default";
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+    background-color:            transparent;
+    text-color:                  @fg;
+    spacing:                     8px;
+    margin:                      0px;
+    padding:                     0px;
+}
+
+/* Scrollbar ---------------------------------------------------- */
+scrollbar {
+    margin:                      0px 4px;
+    handle-width:                6px;
+    handle-color:                @purple;
+    background-color:            @bg2;
+    border-radius:               3px;
+}
+
+/* ---- Mode Switcher ---- */
+mode-switcher {
+    background-color:            transparent;
+    border:                      0px;
+    margin:                      0px;
+    padding:                     0px;
+    spacing:                     12px;
+}
+
+button {
+    padding:                     10px 16px;
+    border-radius:               10px;
+    background-color:            @bg3;
+    text-color:                  @fg;
+    cursor:                      pointer;
+}
+
+button selected {
+    background-color:            @purple;
+    text-color:                  @bg0;
+}
+
+/* Elements --------------------------------------------------- */
+element {
+    cursor:                      pointer;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @fg;
+    orientation:                 horizontal;
+    spacing:                     12px;
+    margin:                      0px;
+    padding:                     10px 14px;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        28px;
+    cursor:                      inherit;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element selected.normal {
+    background-color:            @bg3;
+    text-color:                  @purple;
+    border:                      1px solid;
+    border-color:                @purple;
+}
+
+element urgent.normal,
+element urgent.selected {
+    background-color:            @red;
+    text-color:                  @bg0;
+}
+
+element active.normal,
+element active.selected {
+    background-color:            @green;
+    text-color:                  @bg0;
+}
+
+/* Message ------------------------------------------------------ */
+message {
+    background-color:            @bg3;
+    border:                      1px solid;
+    border-color:                @bg4;
+    border-radius:               10px;
+    padding:                     16px;
+}
+
+error-message {
+    padding:                     24px;
+    border:                      0px solid;
+    border-radius:               0px;
+    background-color:            @bg0;
+    text-color:                  @red;
+}
+
+textbox {
+    background-color:            transparent;
+    text-color:                  @fg;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    highlight:                   none;
+}
