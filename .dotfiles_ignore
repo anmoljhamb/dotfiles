@@ -1,0 +1,78 @@
+# Dotfiles Exclusion Patterns
+# These patterns exclude files/directories from being:
+# - Scanned as untracked configs
+# - Linked from the repo to home
+# - Imported from home to repo
+#
+# Format follows .gitignore syntax
+
+# Version control
+.git
+.gitignore
+
+# Editor/IDE
+nvim/
+nvim
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Package managers
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Cache and temp files
+.cache/
+.thumbnails/
+Trash/
+*.log
+*.tmp
+*.temp
+
+# Sensitive/security
+.ssh/
+.gnupg/
+.pki/
+.password-store/
+
+# Application data (not configs)
+.mozilla/
+.google-chrome/
+.chromium/
+.discord/
+.spotify/
+.steam/
+
+# History files
+.*_history
+.bash_history
+.zsh_history
+.lesshst
+.wget-hst
+
+# Local state (often machine-specific)
+.local/state/
+.local/share/flatpak/
+.local/share/containers/
+
+# This tool's own files
+.backups/
+link_all.py
+dotfiles.py
+dotfiles.yaml
+.dotfiles_ignore
+
+# Assets stored in repo but not symlinked (referenced by path in configs)
+Wallpapers/
+wallpapers/
+assets/
+
+# Scripts stored in repo but not symlinked to home
+# (call them directly from repo or add repo/scripts to PATH)
+scripts/
+

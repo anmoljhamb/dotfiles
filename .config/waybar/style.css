@@ -1,0 +1,145 @@
+@import "colors/catppuccin.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @bg0;
+    color: @fg;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    padding: 4px 8px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd,
+#custom-notification {
+    padding: 4px 12px;
+    margin: 0 4px;
+    background-color: @bg3;
+    border-radius: 8px;
+    color: @fg;
+}
+
+#clock {
+    background-color: @blue;
+    color: @bg0;
+    font-weight: bold;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    margin: 0 2px;
+    background-color: @bg3;
+    color: @fg;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background-color: @bg4;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    background-color: @purple;
+    color: @bg0;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+    color: @bg0;
+}
+
+#pulseaudio {
+    background-color: @aqua;
+    color: @bg0;
+}
+
+#pulseaudio.muted {
+    background-color: @red;
+    color: @bg0;
+}
+
+#network {
+    background-color: @green;
+    color: @bg0;
+}
+
+#network.disconnected {
+    background-color: @red;
+    color: @bg0;
+}
+
+#battery {
+    background-color: @yellow;
+    color: @bg0;
+}
+
+#battery.warning {
+    background-color: @orange;
+    color: @bg0;
+}
+
+#battery.critical {
+    background-color: @red;
+    color: @bg0;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+#custom-notification {
+    background-color: @bg3;
+}
+
+#tray {
+    background-color: @bg3;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+}
+
+tooltip {
+    background-color: @bg1;
+    border: 2px solid @bg4;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: @fg;
+}

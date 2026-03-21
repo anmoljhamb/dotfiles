@@ -1,0 +1,61 @@
+# Dotfiles Manager Configuration
+# This file defines how your dotfiles are organized and managed
+
+# Repository settings
+repo:
+  # Root directory of your dotfiles repo (relative to this config file)
+  root: "."
+  
+  # Where to store backups when replacing existing files
+  backup_dir: ".backups"
+
+# OS-specific configuration
+# Files matching these patterns will be auto-selected based on current OS
+os_specific:
+  patterns:
+    - "*.linux"
+    - "*.macos" 
+    - "*.darwin"
+    - "*.windows"
+    - "*.wsl"
+  
+  # Map OS names to pattern suffixes
+  mappings:
+    linux: ".linux"
+    darwin: ".macos"  # macOS
+    windows: ".windows"
+
+# Directories to scan for untracked configs
+scan_paths:
+  - "~/.config"
+  - "~/"
+
+# Auto-import list - these will be suggested for import during scan
+# Patterns can be directories or files
+auto_import:
+  - "kitty"
+  - "hypr"
+  - "tmux"
+  - "alacritty"
+  - "wezterm"
+  - "starship.toml"
+  - ".tmux.conf"
+  - ".bashrc"
+  - ".zshrc"
+  - ".gitconfig"
+  - ".p10k.zsh"
+
+# Exclusions file (gitignore-style patterns)
+# See .dotfiles_ignore for actual patterns
+exclusions_file: ".dotfiles_ignore"
+
+# Linking behavior
+linking:
+  # Create parent directories if they don't exist
+  create_parents: true
+  
+  # Follow symlinks when checking if destination exists
+  follow_symlinks: true
+  
+  # Verify symlinks point to repo (for status check)
+  verify_targets: true

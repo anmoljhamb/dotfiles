@@ -1,0 +1,43 @@
+{
+  "repo": {
+    "root": ".",
+    "backup_dir": ".backups"
+  },
+  "os_specific": {
+    "patterns": [
+      "*.linux",
+      "*.macos",
+      "*.darwin",
+      "*.windows",
+      "*.wsl"
+    ],
+    "mappings": {
+      "linux": ".linux",
+      "darwin": ".macos",
+      "windows": ".windows"
+    }
+  },
+  "scan_paths": [
+    "~/.config",
+    "~/"
+  ],
+  "auto_import": [
+    "kitty",
+    "hypr",
+    "tmux",
+    "alacritty",
+    "wezterm",
+    "starship.toml",
+    ".tmux.conf",
+    ".bashrc",
+    ".zshrc",
+    ".gitconfig",
+    ".p10k.zsh"
+  ],
+  "exclusions_file": ".dotfiles_ignore",
+  "linking": {
+    "create_parents": true,
+    "follow_symlinks": true,
+    "verify_targets": true
+  }
+}
