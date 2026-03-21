@@ -3,7 +3,7 @@
   "margin-top": 0,
   "modules-left": ["clock", "hyprland/workspaces"],
   "modules-center": ["tray"],
-  "modules-right": ["pulseaudio", "network", "battery", "custom/notification"],
+  "modules-right": ["power-profiles-daemon", "pulseaudio", "network", "battery", "custom/notification"],
   "clock": {
     "interval": 60,
     "tooltip": true,
@@ -49,6 +49,17 @@
     "scroll-step": 1,
     "on-click": "pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
   },
   "network": {
     "interface": "wlan0",
