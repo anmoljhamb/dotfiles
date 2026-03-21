@@ -1,24 +1,28 @@
 @import "colors/catppuccin.css";
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-    font-size: 14px;
-    border: none;
-    border-radius: 0;
-    min-height: 0;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
 }
 
 window#waybar {
-    background-color: @bg0;
-    color: @fg;
-    transition-property: background-color;
-    transition-duration: 0.5s;
+  background: linear-gradient(180deg, @bg0 0%, @bg1 100%);
+  border-bottom: 2px solid @purple;
+  color: @fg;
+}
+
+window#waybar.empty {
+  background: transparent;
+  border-bottom: none;
 }
 
 .modules-left,
 .modules-center,
 .modules-right {
-    padding: 4px 8px;
+  padding: 6px 12px;
 }
 
 #clock,
@@ -38,108 +42,135 @@ window#waybar {
 #scratchpad,
 #mpd,
 #custom-notification {
-    padding: 4px 12px;
-    margin: 0 4px;
-    background-color: @bg3;
-    border-radius: 8px;
-    color: @fg;
+  padding: 6px 14px;
+  margin: 0 6px;
+  background: rgba(49, 50, 68, 0.8);
+  border-radius: 12px;
+  color: @fg;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 }
 
 #clock {
-    background-color: @blue;
-    color: @bg0;
-    font-weight: bold;
+  background: @blue;
+  color: @bg0;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.4);
 }
 
 #workspaces button {
-    padding: 4px 10px;
-    margin: 0 2px;
-    background-color: @bg3;
-    color: @fg;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+  padding: 6px 12px;
+  margin: 0 3px;
+  background: rgba(49, 50, 68, 0.6);
+  color: @fg;
+  border-radius: 10px;
+  transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-    background-color: @bg4;
+  background: rgba(69, 71, 90, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 #workspaces button.focused,
 #workspaces button.active {
-    background-color: @purple;
-    color: @bg0;
+  background: @purple;
+  color: @bg0;
+  box-shadow: 0 2px 8px rgba(203, 166, 247, 0.4);
 }
 
 #workspaces button.urgent {
-    background-color: @red;
-    color: @bg0;
+  background: @red;
+  color: @bg0;
+}
+
+#workspaces {
+  padding: 4px;
+  background: rgba(30, 30, 46, 0.5);
+  border-radius: 14px;
+  margin: 0 6px;
 }
 
 #pulseaudio {
-    background-color: @aqua;
-    color: @bg0;
+  background: @aqua;
+  color: @bg0;
+}
+
+#pulseaudio:hover {
+  background: #b4e8dc;
 }
 
 #pulseaudio.muted {
-    background-color: @red;
-    color: @bg0;
+  background: @red;
+  color: @bg0;
 }
 
 #network {
-    background-color: @green;
-    color: @bg0;
+  background: @green;
+  color: @bg0;
+}
+
+#network:hover {
+  background: #b8e8b3;
 }
 
 #network.disconnected {
-    background-color: @red;
-    color: @bg0;
+  background: @red;
+  color: @bg0;
 }
 
 #battery {
-    background-color: @yellow;
-    color: @bg0;
+  background: @yellow;
+  color: @bg0;
+}
+
+#battery:hover {
+  background: #fbecc1;
 }
 
 #battery.warning {
-    background-color: @orange;
-    color: @bg0;
+  background: @orange;
+  color: @bg0;
 }
 
 #battery.critical {
-    background-color: @red;
-    color: @bg0;
-    animation: blink 1s linear infinite;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0.5;
-    }
+  background: @red;
+  color: @bg0;
 }
 
 #custom-notification {
-    background-color: @bg3;
+  background: rgba(49, 50, 68, 0.8);
+}
+
+#custom-notification:hover {
+  background: @purple;
+  color: @bg0;
 }
 
 #tray {
-    background-color: @bg3;
+  background: rgba(49, 50, 68, 0.8);
+  padding: 6px 10px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: @red;
+  -gtk-icon-effect: highlight;
+  background: @red;
+  border-radius: 8px;
 }
 
 tooltip {
-    background-color: @bg1;
-    border: 2px solid @bg4;
-    border-radius: 8px;
+  background: @bg1;
+  border: 2px solid @purple;
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 tooltip label {
-    color: @fg;
+  color: @fg;
+  font-size: 13px;
 }
