@@ -1,4 +1,1 @@
-## Current Theme
-
-type="$HOME/.config/rofi/applets/type-1"
-style='style-1.rasi'
+/home/anmol/dotfiles/.config/rofi/applets/shared/theme.bash

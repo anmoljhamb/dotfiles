@@ -1,0 +1,31 @@
+/* Catppuccin Mocha - Notifications styling for waybar */
+
+/* Notification widget styling */
+#custom-notification {
+    background-color: @bg1;
+    color: @fg;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin: 4px;
+    font-size: 14px;
+}
+
+#custom-notification:hover {
+    background-color: @bg3;
+}
+
+/* Notification count badge */
+#custom-notification.notification {
+    background-color: @blue;
+    color: @bg0;
+}
+
+#custom-notification.critical {
+    background-color: @red;
+    color: @bg0;
+}
+
+#custom-notification.warning {
+    background-color: @yellow;
+    color: @bg0;
+}

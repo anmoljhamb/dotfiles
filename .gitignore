@@ -1,4 +1,5 @@
 history.txt
+.backups
 .venv
 python3*
 # Byte-compiled / optimized / DLL files

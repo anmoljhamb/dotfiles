@@ -166,10 +166,14 @@ class Config:
         
         try:
             with open(config_path) as f:
-                if config_path.suffix == '.json' or not HAS_YAML:
+                if config_path.suffix == '.json':
                     data = json.load(f)
-                else:
+                elif HAS_YAML:
                     data = yaml.safe_load(f)  # type: ignore
+                else:
+                    out.error(f"Cannot parse {config_path.suffix} files: PyYAML not installed")
+                    out.info("Install with: pip install pyyaml")
+                    return cls._defaults()
         except Exception as e:
             out.error(f"Failed to load config: {e}")
             return cls._defaults()
@@ -378,18 +382,36 @@ class FileManager:
         """Create a symbolic link with safety checks."""
         target = target.resolve()
         
-        # Check if already correctly linked
+        # Check if already correctly linked (do this FIRST)
         if link.is_symlink():
-            if link.resolve() == target:
-                return True, "already linked"
-            else:
-                return False, f"wrong target (points to {link.resolve()})"
+            try:
+                link_resolved = link.resolve()
+                if link_resolved == target:
+                    return True, "already linked"
+                # Check if it would create a circular symlink (link points INTO repo but not to correct target)
+                if self.config.repo_root in link_resolved.parents:
+                    return False, "would create circular symlink"
+                return False, f"wrong target (points to {link_resolved})"
+            except:
+                return False, "broken symlink"
+        
+        # CRITICAL: Prevent creating symlinks that would point into the repo
+        # This prevents the circular symlink bug
+        try:
+            link_resolved = link.resolve()
+            if self.config.repo_root in link_resolved.parents or link_resolved == self.config.repo_root:
+                return False, "would create circular symlink"
+        except:
+            pass
         
         # Check if file/directory exists
         if link.exists():
             if not dry_run:
                 backup_path = self.backup(link)
-                if link.is_dir():
+                # CRITICAL: Check if it's a symlink FIRST - shutil.rmtree follows symlinks!
+                if link.is_symlink():
+                    link.unlink()  # Remove symlink without affecting target
+                elif link.is_dir():
                     shutil.rmtree(link)
                 else:
                     link.unlink()
@@ -614,40 +636,117 @@ class DotfilesManager:
         if dry_run:
             out.warning("DRY RUN MODE - No changes will be made")
         
-        # Get all files in repo
-        repo_files = list(self.config.repo_root.rglob("*"))
+        # Get all items in repo
+        all_repo_items = list(self.config.repo_root.rglob("*"))
         
-        # Filter: only files, exclude patterns
-        files = []
-        for f in repo_files:
-            if not f.is_file():
-                continue
-            
-            rel_path = str(f.relative_to(self.config.repo_root))
+        # Separate dirs and files, excluding root config files
+        repo_dirs = []
+        repo_files = []
+        
+        for item in all_repo_items:
+            rel_path = item.relative_to(self.config.repo_root)
+            str_path = str(rel_path)
             
             # Skip exclusions
-            if self.exclusions.is_excluded(rel_path):
+            if self.exclusions.is_excluded(str_path):
                 continue
             
-            # Skip config files themselves
-            if f.name in ["dotfiles.yaml", ".dotfiles_ignore", "link_all.py", "dotfiles.py"]:
+            # Skip config files and repo metadata
+            if item.name in ["dotfiles.yaml", ".dotfiles_ignore", "link_all.py", "dotfiles.py", 
+                             "dotfiles.json", ".git", ".gitignore", "README.md", ".gitattributes",
+                             ".backups", ".dotfiles_ignore"]:
                 continue
             
-            files.append(f)
+            if item.is_dir():
+                repo_dirs.append((rel_path, item))
+            elif item.is_file():
+                repo_files.append((rel_path, item))
+        
+        # Strategy: Symlink directories inside .config/, not .config/ itself
+        # Also symlink other top-level directories
+        config_dirs = []  # Directories like .config/hypr, .config/kitty
+        other_dirs = []   # Other directories like scripts, vscode
+        
+        for rp, ri in repo_dirs:
+            str_rp = str(rp)
+            parts = str_rp.split("/")
+            
+            # Skip .config/ itself - only symlink subdirectories
+            if str_rp == ".config":
+                continue
+            
+            # Skip subdirectories of .config/ (e.g., .config/hypr/themes)
+            if str_rp.startswith(".config/") and len(parts) > 2:
+                continue
+            
+            # Skip subdirectories of other directories
+            is_subdir = False
+            for existing_rp, existing_ri in config_dirs + other_dirs:
+                if str_rp.startswith(str(existing_rp) + "/"):
+                    is_subdir = True
+                    break
+            if is_subdir:
+                continue
+            
+            if str_rp.startswith(".config/"):
+                config_dirs.append((rp, ri))
+            else:
+                other_dirs.append((rp, ri))
+        
+        # Filter out files that are inside any selected directory
+        all_dir_paths = {str(rp) for rp, ri in config_dirs + other_dirs}
+        filtered_files = []
+        for rp, ri in repo_files:
+            str_rp = str(rp)
+            # Check if this file is inside any selected directory
+            inside_dir = any(str_rp.startswith(dp + "/") for dp in all_dir_paths)
+            if not inside_dir:
+                filtered_files.append((rp, ri))
         
         # Handle OS-specific files
-        files = OSDetector.select_os_specific(files, self.config)
+        filtered_files = [(rp, ri) for rp, ri in filtered_files 
+                         if OSDetector.select_os_specific([ri], self.config) or True]
         
-        # Create symlinks
         linked = 0
         skipped = 0
         failed = 0
         results = []
         
-        for repo_file in files:
-            rel_path = repo_file.relative_to(self.config.repo_root)
+        # First: Symlink config directories
+        for rel_path, repo_dir in config_dirs:
             home_path = Path.home() / rel_path
+            success, message = self.file_manager.create_symlink(repo_dir, home_path, dry_run)
             
+            if success:
+                if "already" in message:
+                    skipped += 1
+                else:
+                    linked += 1
+            else:
+                failed += 1
+            
+            status = "✓" if success else "✗"
+            results.append([status, str(rel_path) + "/", message])
+        
+        # Second: Symlink other directories (non-.config)
+        for rel_path, repo_dir in other_dirs:
+            home_path = Path.home() / rel_path
+            success, message = self.file_manager.create_symlink(repo_dir, home_path, dry_run)
+            
+            if success:
+                if "already" in message:
+                    skipped += 1
+                else:
+                    linked += 1
+            else:
+                failed += 1
+            
+            status = "✓" if success else "✗"
+            results.append([status, str(rel_path) + "/", message])
+        
+        # Third: Symlink individual files
+        for rel_path, repo_file in filtered_files:
+            home_path = Path.home() / rel_path
             success, message = self.file_manager.create_symlink(repo_file, home_path, dry_run)
             
             if success:
