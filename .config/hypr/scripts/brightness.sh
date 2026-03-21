@@ -1,0 +1,1 @@
+/home/anmol/dotfiles/scripts/brightness.sh

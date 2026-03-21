@@ -21,28 +21,24 @@ function send_notification {
     # https://en.wikipedia.org/wiki/Box-drawing_character
 #bar=$(seq -s "─" $(($volume/5)) | sed 's/[0-9]//g')
 if [ "$volume" = "0" ]; then
-        icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-audio-volume-muted.svg"
-$DIR/notify-send.sh "$volume""      " -i "$icon_name" -t 2000 -h int:value:"$volume" -h string:synchronous:"─" --replace=555
-    else
-	if [  "$volume" -lt "10" ]; then
-	     icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-audio-volume-low.svg"
-$DIR/notify-send.sh "$volume""     " -i "$icon_name" --replace=555 -t 2000
+    icon_name="/usr/share/icons/breeze-dark/status/24/audio-volume-muted.svg"
+else
+    if [ "$volume" -lt "10" ]; then
+        icon_name="/usr/share/icons/breeze-dark/status/24/audio-volume-low.svg"
     else
         if [ "$volume" -lt "30" ]; then
-            icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-audio-volume-low.svg"
+            icon_name="/usr/share/icons/breeze-dark/status/24/audio-volume-low.svg"
         else
             if [ "$volume" -lt "70" ]; then
-                icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-audio-volume-medium.svg"
+                icon_name="/usr/share/icons/breeze-dark/status/24/audio-volume-medium.svg"
             else
-                icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-audio-volume-high.svg"
+                icon_name="/usr/share/icons/breeze-dark/status/24/audio-volume-high.svg"
             fi
         fi
     fi
 fi
-bar=$(seq -s "─" $(($volume/5)) | sed 's/[0-9]//g')
-# Send the notification
-$DIR/notify-send.sh "$volume""     ""$bar" -i "$icon_name" -t 2000 -h int:value:"$volume" -h string:synchronous:"$bar" --replace=555
-
+# Send the notification without text body to trigger slider widget in swaync
+$DIR/notify-send.sh -i "$icon_name" -t 2000 -h int:value:"$volume" -h string:synchronous:"volume" --replace=555 "Volume" ""
 }
 
 case $1 in

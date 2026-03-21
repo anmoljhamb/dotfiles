@@ -5,7 +5,9 @@
 # $./brightness.sh down
 
 function get_brightness {
-    brightnessctl g | awk '{printf "%.0f", $1 / 255 * 100}'
+    local current=$(brightnessctl g)
+    local max=$(brightnessctl m)
+    awk -v cur="$current" -v max="$max" 'BEGIN { printf "%.0f", cur / max * 100 }'
 }
 
 function is_brightness_off {
@@ -22,41 +24,39 @@ function send_notification {
     brightness=$(get_brightness)
 
     if [ "$brightness" = "0" ]; then
-        icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-off.svg"
-        $DIR/notify-send.sh "$brightness""      " -i "$icon_name" -t 2000 -h int:value:"$brightness" -h string:synchronous:"─" --replace=555
+        icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-low.svg"
     else
         if [ "$brightness" -lt "10" ]; then
-            icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-low.svg"
+            icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-low.svg"
         else
             if [ "$brightness" -lt "30" ]; then
-                icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-low.svg"
+                icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-low.svg"
             else
                 if [ "$brightness" -lt "70" ]; then
-                    icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-medium.svg"
+                    icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-high.svg"
                 else
                     if [ "$brightness" -lt "100" ]; then
-                        icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-high.svg"
+                        icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-high.svg"
                     else
-                        icon_name="/usr/share/icons/Papirus-Light/48x48/status/notification-display-brightness-full.svg"
+                        icon_name="/usr/share/icons/breeze-dark/actions/24/brightness-high.svg"
                     fi
                 fi
             fi
         fi
     fi
-    bar=$(seq -s "─" $(($brightness/5)) | sed 's/[0-9]//g')
-    # Send the notification
-    $DIR/notify-send.sh "$brightness""     ""$bar" -i "$icon_name" -t 2000 -h int:value:"$brightness" -h string:synchronous:"$bar" --replace=555
+    # Send the notification without text body to trigger slider widget in swaync
+    $DIR/notify-send.sh -i "$icon_name" -t 2000 -h int:value:"$brightness" -h string:synchronous:"brightness" --replace=555 "Brightness" ""
 }
 
 case $1 in
     up)
-        # Increase brightness (+ 5%)
-        brightnessctl set +5% > /dev/null
+        # Increase brightness (+ 10%)
+        brightnessctl set +10% > /dev/null
         send_notification
         ;;
     down)
-        # Decrease brightness (- 5%)
-        brightnessctl set 5%- > /dev/null
+        # Decrease brightness (- 10%)
+        brightnessctl set 10%- > /dev/null
         send_notification
         ;;
     off)

@@ -109,3 +109,15 @@
   background-color: @selected;
 }
 
+.notification progress {
+  min-height: 8px;
+  border-radius: 12.6px;
+}
+
+.notification progressbar,
+.notification trough {
+  min-height: 8px;
+  min-width: 150px;
+  border-radius: 12.6px;
+}
+
