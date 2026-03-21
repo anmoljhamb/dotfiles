@@ -1,1 +1,0 @@
-/home/anmol/dotfiles/.config/rofi/applets/shared/theme.bash

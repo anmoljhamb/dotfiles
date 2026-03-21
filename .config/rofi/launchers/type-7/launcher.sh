@@ -1,1 +1,0 @@
-/home/anmol/dotfiles/.config/rofi/launchers/type-7/launcher.sh

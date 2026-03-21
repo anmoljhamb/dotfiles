@@ -1,1 +1,0 @@
-/home/anmol/dotfiles/.config/rofi/applets/bin/appasroot.sh
