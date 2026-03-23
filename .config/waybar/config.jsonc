@@ -1,14 +1,32 @@
 {
   "position": "top",
   "margin-top": 0,
-  "modules-left": ["clock", "hyprland/workspaces"],
-  "modules-center": ["tray"],
-  "modules-right": ["power-profiles-daemon", "pulseaudio", "network", "battery", "custom/notification"],
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/media", "pulseaudio", "bluetooth", "network", "cpu", "memory", "battery", "tray", "power-profiles-daemon", "custom/notification"],
   "clock": {
     "interval": 60,
-    "tooltip": true,
-    "format": "{:%H.%M}",
-    "tooltip-format": "{:%Y-%m-%d}",
+    "format": "{:%H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode"          : "month",
+      "mode-mon-col"  : 3,
+      "on-scroll"     : 1,
+      "on-click-right": "mode",
+      "format": {
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    },
+    "on-click": "google-chrome-stable --app='https://calendar.google.com/'"
   },
   "hyprland/workspaces": {
     "format": "{name}: {icon}",
@@ -66,12 +84,43 @@
     "format": "{ifname}",
     "format-wifi": "{essid} ",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "", //An empty format will hide the module.
+    "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
+  },
+  "custom/media": {
+    "format": "{}",
+    "return-type": "json",
+    "max-length": 40,
+    "escape": true,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause"
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "kitty -e bluetuith"
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {usage}%",
+    "max-length": 10,
+    "on-click": "kitty -e btop"
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "format-alt":" {used:0.1f}G",
+    "max-length": 10,
+    "on-click": "kitty -e htop"
   },
   "battery": {
     "interval": 60,
