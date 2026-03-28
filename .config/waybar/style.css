@@ -1,7 +1,7 @@
 @import "colors/tokyonight.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 0;
@@ -20,19 +20,19 @@ window#waybar.empty {
 .modules-left,
 .modules-center,
 .modules-right {
-  background: alpha(@bg0, 0.82);
-  border-radius: 16px;
-  border: 1px solid alpha(@purple, 0.25);
-  padding: 4px 10px;
-  margin: 6px 4px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  padding: 0;
+  margin: 4px 2px;
 }
 
 #custom-arch {
+  background: alpha(@bg0, 0.85);
+  border-radius: 12px;
   font-size: 18px;
   color: @blue;
-  padding: 4px 12px 4px 8px;
-  margin: 0 4px;
+  padding: 4px 16px;
+  margin: 2px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 #clock,
@@ -54,25 +54,30 @@ window#waybar.empty {
 #bluetooth,
 #power-profiles-daemon,
 #custom-notification {
-  padding: 4px 12px;
-  margin: 2px 3px;
-  background: alpha(@bg3, 0.55);
-  border-radius: 10px;
+  padding: 4px 14px;
+  margin: 2px 5px;
+  background: alpha(@bg0, 0.85);
+  border-radius: 12px;
   color: @fg;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 #clock {
   background: @blue;
-  color: @bg0;
-  font-weight: bold;
-  box-shadow: 0 2px 8px alpha(@blue, 0.35);
+  color: #1a1b26;
+  font-weight: 800;
+}
+
+#clock:hover {
+  background: @aqua;
+  color: #1a1b26;
 }
 
 #workspaces button {
-  padding: 4px 10px;
-  margin: 2px 2px;
-  background: alpha(@bg3, 0.45);
+  padding: 4px 14px;
+  margin: 2px 6px;
+  background: transparent;
   color: @fg;
   border-radius: 10px;
   transition: all 0.2s ease;
@@ -96,93 +101,108 @@ window#waybar.empty {
 }
 
 #workspaces {
-  padding: 2px;
-  background: transparent;
-  border-radius: 10px;
-  margin: 0 2px;
+  padding: 4px 8px;
+  background: alpha(@bg0, 0.85);
+  border-radius: 12px;
+  margin: 2px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 #pulseaudio {
-  background: alpha(@aqua, 0.85);
-  color: @bg0;
+  background: @aqua;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #pulseaudio:hover {
-  background: @aqua;
+  background: @blue;
+  color: #1a1b26;
 }
 
 #pulseaudio.muted {
-  background: alpha(@red, 0.85);
-  color: @bg0;
+  background: @red;
+  color: #1a1b26;
 }
 
 #network {
-  background: alpha(@green, 0.85);
-  color: @bg0;
+  background: @green;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #network:hover {
-  background: @green;
+  background: @yellow;
+  color: #1a1b26;
 }
 
 #network.disconnected {
-  background: alpha(@red, 0.85);
-  color: @bg0;
+  background: @red;
+  color: #1a1b26;
 }
 
 #battery {
-  background: alpha(@yellow, 0.85);
-  color: @bg0;
+  background: @yellow;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #battery:hover {
-  background: @yellow;
+  background: @orange;
+  color: #1a1b26;
 }
 
 #battery.warning {
-  background: alpha(@orange, 0.85);
-  color: @bg0;
+  background: @orange;
+  color: #1a1b26;
 }
 
 #battery.critical {
-  background: alpha(@red, 0.85);
-  color: @bg0;
+  background: @red;
+  color: #1a1b26;
 }
 
 #bluetooth {
-  background: alpha(@blue, 0.7);
-  color: @bg0;
+  background: @blue;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #bluetooth:hover {
-  background: @blue;
+  background: @purple;
+  color: #1a1b26;
 }
 
 #power-profiles-daemon {
-  background: alpha(@purple, 0.7);
-  color: @bg0;
+  background: @purple;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #power-profiles-daemon:hover {
-  background: @purple;
+  background: @blue;
+  color: #1a1b26;
 }
 
 #cpu {
-  background: alpha(@orange, 0.7);
-  color: @bg0;
+  background: @orange;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #cpu:hover {
-  background: @orange;
+  background: @red;
+  color: #1a1b26;
 }
 
 #memory {
-  background: alpha(@purple, 0.55);
-  color: @fg;
+  background: @purple;
+  color: #1a1b26;
+  font-weight: 800;
 }
 
 #memory:hover {
-  background: alpha(@purple, 0.75);
+  background: @blue;
+  color: #1a1b26;
 }
 
 #custom-notification {
@@ -195,8 +215,7 @@ window#waybar.empty {
 }
 
 #tray {
-  background: alpha(@bg3, 0.55);
-  padding: 4px 8px;
+  /* Inherits base styles */
 }
 
 #tray > .passive {
@@ -216,19 +235,25 @@ window#waybar.empty {
 }
 
 #custom-media {
-  background: alpha(@bg3, 0.55);
-  color: @fg;
+  background: @purple;
+  color: #1a1b26;
+  font-weight: 800;
+}
+
+#custom-media:hover {
+  background: @blue;
+  color: #1a1b26;
 }
 
 tooltip {
-  background: alpha(@bg1, 0.92);
-  border: 1px solid alpha(@purple, 0.4);
+  background: alpha(@bg0, 0.95);
+  border: 2px solid @blue;
   border-radius: 12px;
-  padding: 8px 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 tooltip label {
   color: @fg;
-  font-size: 13px;
+  font-size: 14px;
 }

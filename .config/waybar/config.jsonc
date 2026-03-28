@@ -3,14 +3,17 @@
   "margin-top": 6,
   "margin-left": 10,
   "margin-right": 10,
-  "modules-left": ["custom/arch", "hyprland/workspaces"],
-  "modules-center": ["clock"],
+  "modules-left": [
+    "custom/arch",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "hyprland/submap",
     "custom/media",
     "pulseaudio",
-    "bluetooth",
-    "network",
     "cpu",
     "memory",
     "battery",
@@ -21,25 +24,7 @@
   "clock": {
     "interval": 60,
     "format": "{:%H:%M}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "on-scroll": 1,
-      "on-click-right": "mode",
-      "format": {
-        "months": "<span color='#ffead3'><b>{}</b></span>",
-        "days": "<span color='#ecc6d9'><b>{}</b></span>",
-        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
-      },
-    },
-    "actions": {
-      "on-click-right": "mode",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down",
-    },
+    "tooltip": false,
     "on-click": "google-chrome-stable --app='https://calendar.google.com/'",
   },
   "hyprland/workspaces": {
@@ -63,8 +48,8 @@
     "spacing": 10,
   },
   "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-bluetooth": "{volume}% {icon}",
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
       "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
@@ -76,11 +61,16 @@
       "phone-muted": "",
       "portable": "",
       "car": "",
-      "default": ["", ""],
+      "default": [
+        "",
+        ""
+      ],
     },
     "scroll-step": 1,
     "on-click": "pavucontrol",
-    "ignored-sinks": ["Easy Effects Sink"],
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ],
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -106,9 +96,9 @@
     "max-length": 50,
   },
   "custom/media": {
-    "format": "{}",
+    "format": "  {}",
     "return-type": "json",
-    "max-length": 40,
+    "max-length": 25,
     "escape": true,
     "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click": "playerctl play-pause",
@@ -130,25 +120,34 @@
   },
   "cpu": {
     "interval": 10,
-    "format": " {usage}%",
+    "format": " {usage}%",
     "max-length": 10,
-    "on-click": "kitty -e btop",
+    "on-click": "kitty --class floating-terminal -e btop"
   },
   "memory": {
-    "interval": 30,
-    "format": " {}%",
+    "interval": 10,
+    "format": " {}%",
     "max-length": 10,
-    "on-click": "kitty -e htop",
+    "on-click": "kitty --class floating-terminal -e btop"
   },
   "battery": {
-    "interval": 60,
     "states": {
+      "good": 80,
       "warning": 30,
-      "critical": 15,
+      "critical": 10
     },
     "format": "{capacity}% {icon}",
-    "format-icons": ["", "", "", "", ""],
-    "max-length": 25,
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    // "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "on-click": "kitty --class floating-terminal -e btop"
   },
   "custom/notification": {
     "tooltip": true,
@@ -171,7 +170,7 @@
     "escape": true,
   },
   "custom/arch": {
-    "format": "",
+    "format": " ",
     "tooltip": false,
     "on-click": "rofi -show drun",
   },
