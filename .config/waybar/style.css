@@ -1,7 +1,7 @@
 @import "colors/tokyonight.css";
 
 * {
-  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-family: "Inter", "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 0;
