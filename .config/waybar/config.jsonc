@@ -1,34 +1,56 @@
 {
+  "layer": "top",
   "position": "top",
-  "margin-top": 6,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
   "margin-left": 10,
   "margin-right": 10,
+  "margin-top": 6,
+  "margin-bottom": -10,
+
   "modules-left": [
-    "custom/arch",
+    "power-profiles-daemon",
     "hyprland/workspaces"
   ],
   "modules-center": [
     "clock"
   ],
   "modules-right": [
-    "hyprland/submap",
     "custom/media",
-    "pulseaudio",
+    "tray",
     "cpu",
     "memory",
+    "pulseaudio",
     "battery",
-    "tray",
-    "power-profiles-daemon",
-    "custom/notification",
+    "custom/notification"
   ],
-  "clock": {
-    "interval": 60,
-    "format": "{:%H:%M}",
-    "tooltip": false,
-    "on-click": "google-chrome-stable --app='https://calendar.google.com/'",
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
   "hyprland/workspaces": {
-    "format": "{name}: {icon}",
+    "format": "{icon}",
+    "show-special": false,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
     "format-icons": {
       "1": "",
       "2": "",
@@ -36,41 +58,81 @@
       "4": "",
       "5": "",
       "active": "",
-      "default": "",
+      "default": ""
     },
     "persistent-workspaces": {
-      "*": 5, // 5 workspaces by default on every monitor
-      // "HDMI-A-1": 3, // but only three on HDMI-A-1
-    },
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%I:%M:%S %p    %A, %B %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "on-click": "google-chrome-stable --app='https://calendar.google.com/'",
+    "calendar": {
+        "mode": "month",
+        "on-scroll": 1
+    }
   },
   "tray": {
-    "icon-size": 21,
-    "spacing": 10,
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "custom/media": {
+    "format": "  {}",
+    "return-type": "json",
+    "max-length": 25,
+    "escape": true,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next"
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "  {usage}%",
+    "max-length": 10,
+    "on-click": "kitty --class floating-terminal -e btop"
+  },
+  "memory": {
+    "interval": 30,
+    "format": "  {}%",
+    "max-length": 10,
+    "on-click": "kitty --class floating-terminal -e htop"
   },
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "{icon}  {volume}%",
     "format-muted": "",
     "format-icons": {
-      "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
-      "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
       "headphone": "",
       "hands-free": "",
       "headset": "",
       "phone": "",
-      "phone-muted": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        ""
-      ],
+      "default": ["", ""]
     },
-    "scroll-step": 1,
+    "scroll-step": 5,
     "on-click": "pavucontrol",
-    "ignored-sinks": [
-      "Easy Effects Sink"
-    ],
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "good": 85,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "on-click": "kitty --class floating-terminal -e btop"
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -80,98 +142,7 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": "",
-    },
-  },
-  "network": {
-    "interface": "wlan0",
-    "format": "{ifname}",
-    "format-wifi": "{essid} ",
-    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "",
-    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50,
-  },
-  "custom/media": {
-    "format": "  {}",
-    "return-type": "json",
-    "max-length": 25,
-    "escape": true,
-    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "on-click": "playerctl play-pause",
-  },
-  "bluetooth": {
-    "format": " {status}",
-    "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "kitty -e bluetuith",
-  },
-  "hyprland/submap": {
-    "format": "  {}",
-    "max-length": 20,
-    "tooltip": false,
-  },
-  "cpu": {
-    "interval": 10,
-    "format": " {usage}%",
-    "max-length": 10,
-    "on-click": "kitty --class floating-terminal -e btop"
-  },
-  "memory": {
-    "interval": 10,
-    "format": " {}%",
-    "max-length": 10,
-    "on-click": "kitty --class floating-terminal -e btop"
-  },
-  "battery": {
-    "states": {
-      "good": 80,
-      "warning": 30,
-      "critical": 10
-    },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    // "format-alt": "{time} {icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "on-click": "kitty --class floating-terminal -e btop"
-  },
-  "custom/notification": {
-    "tooltip": true,
-    "format": "<span size='16pt'>{icon}</span>",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂜",
-      "dnd-notification": "󰂠",
-      "dnd-none": "󰪓",
-      "inhibited-notification": "󰂛",
-      "inhibited-none": "󰪑",
-      "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰪑",
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true,
-  },
-  "custom/arch": {
-    "format": " ",
-    "tooltip": false,
-    "on-click": "rofi -show drun",
-  },
+      "power-saver": ""
+    }
+  }
 }

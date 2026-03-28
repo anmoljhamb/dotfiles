@@ -1,259 +1,142 @@
-@import "colors/tokyonight.css";
+/* TokyoNight Colors */
+@define-color bg0 #1a1b26;
+@define-color fg #c0caf5;
+@define-color blue #7aa2f7;
+@define-color aqua #7dcfff;
+@define-color purple #bb9af7;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color yellow #e0af68;
+@define-color orange #ff9e64;
+@define-color surface #24283b;
+@define-color surface_light #414868;
+@define-color active #2ac3de;
 
 * {
-  font-family: "Inter", "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", sans-serif;
-  font-size: 14px;
-  border: none;
-  border-radius: 0;
-  min-height: 0;
+    border: none;
+    border-radius: 0;
+    font-family: "CaskaydiaCove Nerd Font", "JetBrainsMono Nerd Font";
+    font-weight: 700;
+    font-size: 14px;
+    min-height: 0;
 }
 
 window#waybar {
-  background: transparent;
-  color: @fg;
+    background-color: transparent;
+    color: @fg;
+    /* Removed the border as requested */
 }
 
-window#waybar.empty {
-  background: transparent;
+.modules-left, .modules-center, .modules-right {
+    padding: 4px 6px;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  background: transparent;
-  padding: 0;
-  margin: 4px 2px;
-}
-
-#custom-arch {
-  background: alpha(@bg0, 0.85);
-  border-radius: 12px;
-  font-size: 18px;
-  color: @blue;
-  padding: 4px 16px;
-  margin: 2px 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#mpd,
-#bluetooth,
-#power-profiles-daemon,
-#custom-notification {
-  padding: 4px 14px;
-  margin: 2px 5px;
-  background: alpha(@bg0, 0.85);
-  border-radius: 12px;
-  color: @fg;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-#clock {
-  background: @blue;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#clock:hover {
-  background: @aqua;
-  color: #1a1b26;
-}
-
-#workspaces button {
-  padding: 4px 14px;
-  margin: 2px 6px;
-  background: transparent;
-  color: @fg;
-  border-radius: 10px;
-  transition: all 0.2s ease;
-}
-
-#workspaces button:hover {
-  background: alpha(@bg4, 0.8);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-#workspaces button.focused,
-#workspaces button.active {
-  background: @purple;
-  color: @bg0;
-  box-shadow: 0 2px 8px alpha(@purple, 0.35);
-}
-
-#workspaces button.urgent {
-  background: @red;
-  color: @bg0;
-}
-
-#workspaces {
-  padding: 4px 8px;
-  background: alpha(@bg0, 0.85);
-  border-radius: 12px;
-  margin: 2px 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-}
-
-#pulseaudio {
-  background: @aqua;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#pulseaudio:hover {
-  background: @blue;
-  color: #1a1b26;
-}
-
-#pulseaudio.muted {
-  background: @red;
-  color: #1a1b26;
-}
-
-#network {
-  background: @green;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#network:hover {
-  background: @yellow;
-  color: #1a1b26;
-}
-
-#network.disconnected {
-  background: @red;
-  color: #1a1b26;
-}
-
-#battery {
-  background: @yellow;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#battery:hover {
-  background: @orange;
-  color: #1a1b26;
-}
-
-#battery.warning {
-  background: @orange;
-  color: #1a1b26;
-}
-
-#battery.critical {
-  background: @red;
-  color: #1a1b26;
-}
-
-#bluetooth {
-  background: @blue;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#bluetooth:hover {
-  background: @purple;
-  color: #1a1b26;
+/* Base style for all pill containers */
+#workspaces, #custom-notification, 
+#clock, #custom-media, #hyprland-submap, 
+#pulseaudio, #cpu, #memory, #battery, #tray, 
+#power-profiles-daemon, #network, #bluetooth {
+    background-color: @surface;
+    color: @fg;
+    border-radius: 12px;
+    padding: 6px 14px;
+    margin: 4px 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #power-profiles-daemon {
-  background: @purple;
-  color: #1a1b26;
-  font-weight: 800;
+    padding: 6px 12px 6px 16px;
 }
 
-#power-profiles-daemon:hover {
-  background: @blue;
-  color: #1a1b26;
-}
-
-#cpu {
-  background: @orange;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#cpu:hover {
-  background: @red;
-  color: #1a1b26;
-}
-
-#memory {
-  background: @purple;
-  color: #1a1b26;
-  font-weight: 800;
-}
-
-#memory:hover {
-  background: @blue;
-  color: #1a1b26;
-}
 
 #custom-notification {
-  background: alpha(@bg3, 0.55);
+    color: @aqua;
 }
 
-#custom-notification:hover {
-  background: alpha(@purple, 0.8);
-  color: @bg0;
+/* Workspaces */
+#workspaces {
+    padding: 2px 2px;
 }
 
+#workspaces button {
+    color: @surface_light;
+    border-radius: 8px;
+    padding: 4px 6px 4px 10px;
+    margin: 3px 3px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    background-color: @purple;
+    color: @bg0;
+    box-shadow: 0 0 6px rgba(187, 154, 247, 0.5);
+}
+
+#workspaces button:hover {
+    background-color: @surface_light;
+    color: @fg;
+}
+
+/* Center Clock Component */
+#clock {
+    background-color: @surface;
+    color: @blue;
+    font-size: 14px;
+    padding: 6px 24px;
+}
+
+#clock:hover {
+    color: @aqua;
+}
+
+/* Right Components */
 #tray {
-  /* Inherits base styles */
-}
-
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background: @red;
-  border-radius: 8px;
-}
-
-#hyprland-submap {
-  background: alpha(@red, 0.8);
-  color: @bg0;
-  font-weight: bold;
+    padding: 6px 12px;
 }
 
 #custom-media {
-  background: @purple;
-  color: #1a1b26;
-  font-weight: 800;
+    color: @purple;
 }
 
-#custom-media:hover {
-  background: @blue;
-  color: #1a1b26;
+#pulseaudio {
+    color: @aqua;
 }
 
+#battery {
+    color: @green;
+}
+
+#battery.charging {
+    color: @active;
+}
+
+#battery.warning {
+    color: @orange;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#cpu {
+    color: @red;
+}
+
+#memory {
+    color: @blue;
+}
+
+#power-profiles-daemon {
+    color: @yellow;
+}
+
+/* Tooltips */
 tooltip {
-  background: alpha(@bg0, 0.95);
-  border: 2px solid @blue;
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background: @bg0;
+    border: 2px solid @purple;
+    border-radius: 8px;
 }
-
 tooltip label {
-  color: @fg;
-  font-size: 14px;
+    color: @fg;
 }
