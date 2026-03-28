@@ -1,7 +1,9 @@
 {
   "position": "top",
-  "margin-top": 0,
-  "modules-left": ["hyprland/workspaces"],
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+  "modules-left": ["custom/arch", "hyprland/workspaces"],
   "modules-center": ["clock"],
   "modules-right": [
     "hyprland/submap",
@@ -167,5 +169,10 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
+  },
+  "custom/arch": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show drun",
   },
 }

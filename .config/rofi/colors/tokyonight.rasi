@@ -1,0 +1,30 @@
+/**
+ * Tokyo Night Theme Colors for Rofi
+ * Based on https://github.com/folke/tokyonight.nvim
+ */
+
+* {
+    bg0:     #1a1b26;
+    bg1:     #24283b;
+    bg2:     #15161e;
+    bg3:     #414868;
+    bg4:     #565f89;
+
+    fg:      #c0caf5;
+    fg-dark: #a9b1d6;
+
+    red:     #f7768e;
+    orange:  #ff9e64;
+    yellow:  #e0af68;
+    green:   #9ece6a;
+    aqua:    #7dcfff;
+    blue:    #7aa2f7;
+    purple:  #bb9af7;
+
+    background:     @bg0;
+    background-alt: @bg3;
+    foreground:     @fg;
+    selected:       @purple;
+    active:         @green;
+    urgent:         @red;
+}

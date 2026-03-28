@@ -1,0 +1,9 @@
+/* Tokyo Night Colors for SwayNC */
+@define-color background #1a1b26;
+@define-color background-sec #24283b;
+@define-color foreground #c0caf5;
+@define-color color1 #414868; /* Surface */
+@define-color color2 #f7768e; /* Red */
+@define-color color3 #7aa2f7; /* Blue */
+@define-color color5 #7dcfff; /* Cyan */
+@define-color color6 #bb9af7; /* Purple */
