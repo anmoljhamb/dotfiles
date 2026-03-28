@@ -8,14 +8,8 @@
   "margin-right": 10,
   "margin-top": 6,
   "margin-bottom": -10,
-
-  "modules-left": [
-    "power-profiles-daemon",
-    "hyprland/workspaces"
-  ],
-  "modules-center": [
-    "clock"
-  ],
+  "modules-left": ["power-profiles-daemon", "hyprland/workspaces"],
+  "modules-center": ["clock"],
   "modules-right": [
     "custom/media",
     "tray",
@@ -23,7 +17,7 @@
     "memory",
     "pulseaudio",
     "battery",
-    "custom/notification"
+    "custom/notification",
   ],
   "custom/notification": {
     "tooltip": true,
@@ -36,14 +30,14 @@
       "inhibited-notification": "",
       "inhibited-none": "",
       "dnd-inhibited-notification": "",
-      "dnd-inhibited-none": ""
+      "dnd-inhibited-none": "",
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true
+    "escape": true,
   },
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -58,15 +52,15 @@
       "4": "",
       "5": "",
       "active": "",
-      "default": ""
+      "default": "",
     },
     "persistent-workspaces": {
       "1": [],
       "2": [],
       "3": [],
       "4": [],
-      "5": []
-    }
+      "5": [],
+    },
   },
   "clock": {
     "interval": 1,
@@ -74,13 +68,13 @@
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "on-click": "google-chrome-stable --app='https://calendar.google.com/'",
     "calendar": {
-        "mode": "month",
-        "on-scroll": 1
-    }
+      "mode": "month",
+      "on-scroll": 1,
+    },
   },
   "tray": {
-    "icon-size": 18,
-    "spacing": 10
+    "icon-size": 20,
+    "spacing": 10,
   },
   "custom/media": {
     "format": "  {}",
@@ -90,19 +84,19 @@
     "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl previous",
-    "on-scroll-down": "playerctl next"
+    "on-scroll-down": "playerctl next",
   },
   "cpu": {
     "interval": 10,
     "format": "  {usage}%",
     "max-length": 10,
-    "on-click": "kitty --class floating-terminal -e btop"
+    "on-click": "kitty --class floating-terminal -e btop",
   },
   "memory": {
     "interval": 30,
     "format": "  {}%",
     "max-length": 10,
-    "on-click": "kitty --class floating-terminal -e htop"
+    "on-click": "kitty --class floating-terminal -e htop",
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
@@ -115,24 +109,24 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", ""]
+      "default": ["", ""],
     },
     "scroll-step": 5,
     "on-click": "pavucontrol",
-    "ignored-sinks": ["Easy Effects Sink"]
+    "ignored-sinks": ["Easy Effects Sink"],
   },
   "battery": {
     "interval": 10,
     "states": {
       "good": 85,
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "format": "{icon}  {capacity}%",
     "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
+    "format-plugged": "   {capacity}%",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "kitty --class floating-terminal -e btop"
+    "on-click": "kitty --class floating-terminal -e btop",
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -142,7 +136,8 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": ""
-    }
-  }
+      "power-saver": "",
+    },
+  },
 }
+

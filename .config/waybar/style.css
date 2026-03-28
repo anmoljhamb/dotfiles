@@ -13,130 +13,153 @@
 @define-color active #2ac3de;
 
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "CaskaydiaCove Nerd Font", "JetBrainsMono Nerd Font";
-    font-weight: 700;
-    font-size: 14px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: 700;
+  font-size: 15px;
+  min-height: 0;
 }
 
 window#waybar {
-    background-color: transparent;
-    color: @fg;
-    /* Removed the border as requested */
+  background-color: transparent;
+  color: @fg;
+  /* Removed the border as requested */
 }
 
-.modules-left, .modules-center, .modules-right {
-    padding: 4px 6px;
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 4px 6px;
 }
 
 /* Base style for all pill containers */
-#workspaces, #custom-notification, 
-#clock, #custom-media, #hyprland-submap, 
-#pulseaudio, #cpu, #memory, #battery, #tray, 
-#power-profiles-daemon, #network, #bluetooth {
-    background-color: @surface;
-    color: @fg;
-    border-radius: 12px;
-    padding: 6px 14px;
-    margin: 4px 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+#workspaces,
+#custom-notification,
+#clock,
+#custom-media,
+#hyprland-submap,
+#pulseaudio,
+#cpu,
+#memory,
+#battery,
+#tray,
+#power-profiles-daemon,
+#network,
+#bluetooth {
+  background-color: @surface;
+  color: @fg;
+  border-radius: 12px;
+  padding: 6px 14px;
+  margin: 4px 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #power-profiles-daemon {
-    padding: 6px 12px 6px 16px;
+  padding: 6px 20px;
 }
 
+#custom-notification,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#custom-media {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 #custom-notification {
-    color: @aqua;
+  color: @aqua;
 }
 
 /* Workspaces */
 #workspaces {
-    padding: 2px 2px;
+  padding: 2px 16px;
 }
 
 #workspaces button {
-    color: @surface_light;
-    border-radius: 8px;
-    padding: 4px 6px 4px 10px;
-    margin: 3px 3px;
-    background-color: transparent;
-    transition: all 0.2s ease;
+  color: @surface_light;
+  border-radius: 8px;
+  padding: 4px 12px;
+  margin: 3px 3px;
+  background-color: transparent;
+  transition: all 0.2s ease;
 }
 
 #workspaces button.active {
-    background-color: @purple;
-    color: @bg0;
-    box-shadow: 0 0 6px rgba(187, 154, 247, 0.5);
+  background-color: @purple;
+  color: @bg0;
+  box-shadow: 0 0 6px rgba(187, 154, 247, 0.5);
 }
 
 #workspaces button:hover {
-    background-color: @surface_light;
-    color: @fg;
+  background-color: @surface_light;
+  color: @fg;
 }
 
 /* Center Clock Component */
 #clock {
-    background-color: @surface;
-    color: @blue;
-    font-size: 14px;
-    padding: 6px 24px;
+  background-color: @surface;
+  color: @blue;
+  padding: 6px 24px;
 }
 
 #clock:hover {
-    color: @aqua;
+  color: @aqua;
 }
 
 /* Right Components */
 #tray {
-    padding: 6px 12px;
+  padding: 6px 12px;
 }
 
 #custom-media {
-    color: @purple;
+  color: @purple;
 }
 
 #pulseaudio {
-    color: @aqua;
+  color: @aqua;
 }
 
 #battery {
-    color: @green;
+  color: @green;
 }
 
 #battery.charging {
-    color: @active;
+  color: @active;
 }
 
 #battery.warning {
-    color: @orange;
+  color: @orange;
 }
 
 #battery.critical {
-    color: @red;
+  color: @red;
 }
 
 #cpu {
-    color: @red;
+  color: @red;
 }
 
 #memory {
-    color: @blue;
+  color: @blue;
 }
 
 #power-profiles-daemon {
-    color: @yellow;
+  color: @yellow;
 }
 
 /* Tooltips */
 tooltip {
-    background: @bg0;
-    border: 2px solid @purple;
-    border-radius: 8px;
+  background: @bg0;
+  border: 2px solid @purple;
+  border-radius: 8px;
 }
+
 tooltip label {
-    color: @fg;
+  color: @fg;
 }
+
